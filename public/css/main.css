@@ -1,0 +1,778 @@
+@charset "UTF-8";
+/*-- For grunt -------------------------------------------------------------------- */
+@import url(../css/bootstrap.css);
+/*
+ * Globals
+ */
+@media (min-width: 48em) {
+  html {
+    font-size: 19px;
+    height: 100%;
+  }
+}
+
+html {
+    font-size: 17px;
+    height: 100%;
+}
+
+body {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  color: #555;
+  overflow-x: hidden;
+  width: 100%;
+  height: 70%;
+  position: relative;
+  font-size: 18px;
+}
+
+
+body:before{
+  background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.6)), no-repeat, url(../images/06.jpg);
+  background-size: cover;
+  content: ' ';
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  will-change: transform;
+  z-index: -1;  
+}
+
+h1, .h1,
+h2, .h2,
+h3, .h3
+h4, .h4,
+h5, .h5,
+h6, .h6 {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: normal;
+  color: #333;
+}
+
+/*
+ * Override Bootstrap's default container.
+ */
+.container {
+  max-width: 60rem;
+}
+
+/*
+ * Navigation ---------------------------------------------------------------
+ */
+.navigation {
+  background: linear-gradient(rgba(66, 139, 202, 0.6), rgba(66, 139, 202, 0.8), rgba(66, 139, 202, 0.9), #428bca);
+  -webkit-box-shadow: inset 0 -0.1rem 0.25rem rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 -0.1rem 0.25rem rgba(0, 0, 0, 0.1);
+  padding-top: 0.3em;
+  padding-bottom: 0.3em;
+  font-size: 1.1rem;
+}
+
+/* Nav links */
+.nav-link {
+  position: relative;
+  padding: 1rem;
+  color: #cdddeb;
+}
+
+.nav-link:hover,
+.nav-link:focus {
+  color: #fff;
+  background-color: transparent;
+}
+
+/* Active state gets a caret at the bottom */
+.nav-link.active {
+  color: #fff;
+}
+
+.nav-link.active:after {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 0;
+  margin-left: -.3rem;
+  vertical-align: middle;
+  content: "";
+  border-right: .3rem solid transparent;
+  border-bottom: .3rem solid;
+  border-left: .3rem solid transparent;
+}
+
+.nav-tabs .nav-link {
+  padding: 0.5em 0.5em;
+}
+
+.nav-tabs .dropdown-menu {
+  margin-left: -1px;
+  margin-right: -1px;
+}
+
+.avatar {
+ /*   margin-top: auto; */
+    border-radius: 5px;
+    width: 50px;
+    height: 50px;
+    border:1px solid lightblue;
+}
+
+.user_nav_item::after {         /* Убираем отступ только стрелочки где регистрация */
+    margin-left: 0em;
+}
+
+
+.btn-md, .btn-group-md > .btn {
+  padding: 0.5rem 1rem;
+  font-size: 1.25rem;
+  border-radius: 0.3rem;
+  margin-bottom: 5px;
+}
+
+.none-decored{
+  color: inherit;
+  text-decoration: none;
+}
+
+a:focus, a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+.dropdown-item:focus, .dropdown-item:hover {
+  color: #4b4d4f;
+  text-decoration: none;
+  background-color: #fff;
+}
+
+.passrecovery{
+  font-size: 0.85em;
+}
+
+.search{
+  margin-top: 3px;
+}
+
+/*
+ * Header -------------------------------------------------------------------
+ */
+.blog-header {
+  padding-top: 1.5rem;
+  padding-bottom: 1rem;
+  border: 1px solid grey;
+  background: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.9)), no-repeat, url(../images/03_pcb.jpg);
+  background-position: 50% 20%;
+}
+
+.blog-title {
+  margin-bottom: 0;
+  font-size: 2rem;
+  font-weight: normal;
+  color: #505050;
+}
+
+.blog-description {
+  font-size: 1.1rem;
+  color: #999;
+}
+
+@media (min-width: 40em) {
+  .blog-title {
+    font-size: 3.5rem;
+  }
+}
+.item-search {
+  padding-left: 10px;
+  padding-top: 4px; 
+  /*  width: 50px;*/
+  font-size: 30px;
+  color: #666;
+  cursor: pointer;
+}
+
+.nav-tabs {
+/*  padding: 0em 0em;*/
+  margin-top: 0px; 
+  cursor: pointer;
+}
+
+.nav-tabs .dropdown-menu{
+  border-top-right-radius: 5;
+  border-top-left-radius: 5;
+}
+
+.user_nav_item{
+    margin-left: 0px;
+}
+
+/*
+ * Sidebar ------------------------------------------------------------------
+ */
+/* Sidebar modules for boxing content */
+.sidebar-module {
+  padding: 1rem;
+  /*margin: 0 -1rem 1rem;*/
+}
+
+.sidebar-module-inset {
+  padding: 1rem;
+  background-color: #f5f5f5;
+  border-radius: .25rem;
+}
+
+.sidebar-module-inset p:last-child,
+.sidebar-module-inset ul:last-child,
+.sidebar-module-inset ol:last-child {
+  margin-bottom: 0;
+}
+
+/* Pagination */
+.blog-pagination {
+  margin-bottom: 4rem;
+}
+
+.blog-pagination > .btn {
+  border-radius: 2rem;
+}
+
+/*
+ * Blog posts ===============================================================
+ */
+.main-field {
+/*  background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.6)), no-repeat, url(../images/06.jpg);
+  background-position: 50%;
+  background-attachment: fixed;
+  */
+}
+
+.reg-field{
+  background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.6)), no-repeat, url(../images/06.jpg);
+  background-position: 50%;
+  height: 80vh;
+  overflow-x: hidden;
+}
+
+.data-field {
+  background-color: white;
+  line-height: 1.3em;
+  text-align: justify;
+}
+
+.blog-post {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.blog-post-title {
+  margin-bottom: .25rem;
+  color: #505050;
+/*  font-size: 1.5rem;  */
+}
+
+.blog-post-meta {
+  margin-bottom: 1.25rem;
+  color: #999;
+}
+
+.image-wrapper {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  font-size: 16px;
+  line-height: 1.2em;
+  
+}
+
+.image-data{
+  width: 80%;
+  margin: auto;
+  text-align: center;
+}
+
+.article-image{
+    max-width: 100%;
+    height: auto;
+}
+
+/*
+ *Profile -------------------------------------------------------------------
+ */
+.profile-field {
+  margin-top: 2rem;
+  margin-left: 2rem;
+  margin-bottom: 4rem;
+}
+
+.profile-title {
+  margin-bottom: .25rem;
+  margin-left: 2rem;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.profile-meta {
+  margin-bottom: 1.25rem;
+  color: #999;
+}
+.btn{
+  padding: 3px;
+}
+
+/*
+ * Footer -------------------------------------------------------------------
+ */
+.blog-footer {
+  padding: 2.5rem 0;
+  color: #444;
+  text-align: center;
+}
+
+.blog-footer p:last-child {
+  margin-bottom: 0;
+}
+
+/*@import '../css/carousel.css';  */
+/*-- For symfony ------------------------------------------------------------------ */
+.main {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  min-width: 100%;
+  min-height: 100vh;
+}
+
+.clearfix:before,
+.clearfix:after {
+  content: "";
+  display: table;
+}
+
+.clearfix:after {
+  clear: both;
+}
+
+/*# sourceMappingURL=main.css.map */
+
+/*=====================================================================================*/
+
+/* Extra markup and styles for table-esque vertical and horizontal centering */
+.site-wrapper {
+  display: table;
+  width: 100%;
+  height: 100%; /* For at least Firefox */
+  min-height: 100%;
+  -webkit-box-shadow: inset 0 0 5rem rgba(0,0,0,.5);
+          box-shadow: inset 0 0 5rem rgba(0,0,0,.5);
+}
+.site-wrapper-inner {
+  display: table-cell;
+  vertical-align: top;
+}
+.cover-container {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+/* Padding for spacing */
+.inner {
+  padding: 2rem;
+}
+
+
+/*
+ * Header
+ */
+
+.masthead {
+  margin-bottom: 2rem;
+}
+
+.masthead-brand {
+  margin-bottom: 0;
+}
+
+.nav-masthead .nav-link {
+  padding: .25rem 0;
+  font-weight: bold;
+  color: rgba(255,255,255,.5);
+  background-color: transparent;
+  border-bottom: .25rem solid transparent;
+}
+
+.nav-masthead .nav-link:hover,
+.nav-masthead .nav-link:focus {
+  border-bottom-color: rgba(255,255,255,.25);
+}
+
+.nav-masthead .nav-link + .nav-link {
+  margin-left: 1rem;
+}
+
+.nav-masthead .active {
+  color: #fff;
+  border-bottom-color: #fff;
+}
+
+@media (min-width: 48em) {
+  .masthead-brand {
+    float: left;
+  }
+  .nav-masthead {
+    float: right;
+  }
+}
+
+
+/*
+ * Cover
+ */
+
+.cover {
+  padding: 0 1.5rem;
+}
+.cover .btn-lg {
+  padding: .75rem 1.25rem;
+  font-weight: bold;
+}
+
+
+/*
+ * Footer
+ */
+
+.mastfoot {
+  color: rgba(255,255,255,.5);
+}
+
+
+/*
+ * Affix and center
+ */
+
+@media (min-width: 40em) {
+  /* Pull out the header and footer */
+  .masthead {
+    position: fixed;
+    top: 0;
+  }
+  .mastfoot {
+    position: fixed;
+    bottom: 0;
+  }
+  /* Start the vertical centering */
+  .site-wrapper-inner {
+    vertical-align: middle;
+  }
+  /* Handle the widths */
+  .masthead,
+  .mastfoot,
+  .cover-container {
+    width: 100%; /* Must be percentage or pixels for horizontal alignment */
+  }
+}
+
+@media (min-width: 62em) {
+  .masthead,
+  .mastfoot,
+  .cover-container {
+    width: 42rem;
+  }
+}
+
+/* === Profile preview ==================================================================== */
+/* Apply these styles only when #preview-pane has
+   been placed within the Jcrop widget */
+.jcrop-holder #preview-pane {
+  display: block;
+  position: absolute;
+  z-index: 2000;
+  top: 10px;
+  right: -235px;
+  padding: 6px;
+  border: 1px rgba(0,0,0,.4) solid;
+  background-color: white;
+
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+
+  -webkit-box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.2);
+  box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* The Javascript code will set the aspect ratio of the crop
+   area based on the size of the thumbnail preview,
+   specified here */
+#preview-pane .preview-container {
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+}
+
+.preview-zone{
+  margin-left: 0.5em; 
+  margin-right: 0.5em; 
+  padding-top: 0.5em;
+/*  width: 100%;  */
+  border: 6px dashed lightgrey;
+  border-radius: 10px;
+  text-align: center;
+
+}
+
+.jcrop-holder{
+/*  margin-left: 4%;
+    margin-right: auto;
+  */
+}
+
+.profile-photo{
+/*  margin: 0,5em;  */
+}
+
+.profile-btn{
+  width: 7em;
+}
+
+#InpProfileSelect, .profile-btn, .addpost-btn, .post-btn, .read-more-btn, .comment-btn
+{
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    border: 1px solid lightgrey;
+    padding: 0.2rem 0.8rem;
+    font-size: 1.1rem;
+    border-radius: 0.25rem; 
+    color: #444;
+
+    background: rgba(255,255,255,1);
+    background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(236,241,243,1) 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(255,255,255,1)), color-stop(100%, rgba(236,241,243,1)));
+    background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(236,241,243,1) 100%);
+    background: -o-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(236,241,243,1) 100%);
+    background: -ms-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(236,241,243,1) 100%);
+    background: linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(236,241,243,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ecf1f3', GradientType=0 );
+}
+
+.read-more-btn{
+  margin-right: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.article-image{
+  max-width: 100%;
+  height: auto;
+}
+
+/*
+#ProfilePhoto{
+    max-width: 100%;
+    height: auto;
+*/
+.registration-container{
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #eee;
+  text-align: center;
+}
+
+.form-signin {
+/*    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto; */
+}
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+    margin-bottom: 10px;
+}
+
+.form-signin-heading{
+    text-align: center;
+}
+
+.form-signin .checkbox {
+    font-weight: normal;
+}
+
+.form-signin .form-control {
+    position: relative;
+    height: auto;
+    -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.form-signin .form-control:focus {
+    z-index: 2;
+}
+
+.form-signin>input:first-child{
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.form-signin input[name="password"] {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.form-signin input[name="password_confirm"] {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.form-signup {
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto; 
+}
+
+.form-signup-message {
+    max-width: 358px;
+    padding: 15px;
+    margin: 0 auto; 
+}
+
+.fa-asterisk{
+  color: rgb(200, 50, 50);
+  font-size: 0.8rem;
+}
+
+.fa-check{
+  color: rgb(200, 50, 50);
+  font-size: 0.8rem;
+}
+
+.btn-chose-new-photo{
+    margin-top: 0.5rem;
+}
+
+.inline-labels{
+    margin-top: 5px; 
+}
+
+
+/* === Add post section ====================================================================== */
+.sel-category{
+	margin-bottom: 1em;	
+    float: left;
+}
+
+.title-input{
+    width: 100%; 
+    margin-left: auto; 
+    margin-right: auto;
+}
+
+.title-box{
+    padding-left: 1em;
+    padding-right: 1em;
+    
+    width:100%; 
+    text-align: center;
+    border: 1px solid lightgrey;
+}
+
+.intro-box{
+	padding: 1em;
+    margin-bottom: 0.5em;
+    width:100%; 
+    border: 1px solid lightgrey;
+}
+
+#categoryOk{
+    margin-right: 14px; 
+    margin-top: 14px;
+}
+
+.preview-area{
+	border: 1px solid lightgrey;
+	margin-bottom: 2em;
+	padding: 0em 1em 1em;
+
+}
+
+/*=== Show articles section ===================================================================*/
+.show-comments{
+    padding-top: 6px;
+    cursor: pointer;
+}
+
+.post-preview-img{
+    width: 100%;
+}
+
+.social-links{
+  margin-left: 30px;
+}
+
+.comments-main{
+    margin-bottom: 1em;
+    background-color: rgba(235, 235, 240, 0.3);
+    padding: 1em 1em 0em;               /* верх, лево/право, низ */
+    border: 1px solid lightgrey;
+    border-radius: 4px;
+}
+
+.comments1{
+/*    margin: 1em;
+    padding: 1em;   
+    padding-bottom: 1em;*/
+    margin-left: 1.8em;
+    background-color: rgba(235, 235, 240, 0.5);
+    border: 1px solid lightgrey;
+    border-radius: 4px;
+}
+
+.comment-author{
+
+    font-weight: bold;
+    display: inline;
+}
+
+.comment-date{
+    margin-left: 2em;
+    font-size: 15px;
+    display: inline;
+}
+
+.comment{
+    margin-bottom: 1em;
+}
+
+.comment-btn{
+    display: inline;
+    margin-right: 1em;
+    margin-bottom: 0.7em;
+}
+
+.repost-notification{
+    margin-left: 1em;
+    font-size: 16px;
+    display: inline;
+    float: left;
+    max-width: 50%;
+    line-height: 1.2em;
+}
+
+.comment-btn{
+  text-align: center;
+}
+
+.comments-link{
+  margin-top: 10px;
+}
+
+/*=== About =================================================================*/
+
+.about{
+  padding: 3em;
+  background-color: #fEfEfE;
+  height: 80vh;
+  overflow-x: hidden;
+}
