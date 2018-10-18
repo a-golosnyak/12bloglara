@@ -30,7 +30,8 @@
         </div>
 
         @include('navigation')
-        @include('profile')
+    {{--    @include('profile') --}} 
+        @include('articles')
 
         <footer class="blog-footer">
             <p>Copyright  © The Blog. All Rights Reserved. </p>
