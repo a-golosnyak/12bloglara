@@ -18,7 +18,7 @@
                         <a class="nav-link disabled" href="#">Контакты</a>
                     </div>
                     <div class="nav-item">
-                        <a class="nav-link " href="about.php">О сайте</a>
+                        <a class="nav-link " href="/about">О сайте</a>
                     </div>
                 </div>
             </div>
