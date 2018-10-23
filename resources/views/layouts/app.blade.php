@@ -10,7 +10,7 @@
         <meta name="author" content="">
         <title>Blog</title>
         <link rel="icon" href="../../favicon.ico">
-        <link href="css/bootstrap.css" rel="stylesheet">
+        <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/mdb.min.css" rel="stylesheet">
         <link href="css/main.css" rel="stylesheet">
         <link rel="stylesheet" href="css/jquery.Jcrop.css" type="text/css" />       
@@ -24,9 +24,24 @@
         
         @include('header')
         @include('navigation')
+        @yield('message')
 
-        @yield('content')
 
+        <div class='main-field style='background-color: lightgrey;'>  
+            <div class='container-fluid ' >
+                <div class='container data-field'>
+                    <div class='row'>
+                        <div class='col-md-8 blog-main'>
+                            @yield('content') 
+                        </div><!-- /.blog-main -->
+                        
+                        @include('sidebar')
+                    </div><!-- /.row -->
+                </div><!-- /.container -->
+            </div>
+        </div>
+
+        
         @include('footer')
 
         <!-- Bootstrap core JavaScript
