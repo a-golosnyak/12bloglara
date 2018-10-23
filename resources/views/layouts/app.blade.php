@@ -21,24 +21,13 @@
     </head>
 
     <body aria-busy="true">
-        <div class="blog-header">
-            <div class="container">
-                <h3 class="blog-title"> 
-                    <a class='none-decored' href="index.php">The Blog</a></h3>
-                <p class="lead blog-description">Блог для людей, интерисующихся электроникой.</p>
-            </div>
-        </div>
-
+        
+        @include('header')
         @include('navigation')
-    {{--    @include('profile') --}} 
-        @include('articles')
 
-        <footer class="blog-footer">
-            <p>Copyright  © The Blog. All Rights Reserved. </p>
-            <p>Запрещено копирование материалов без активной ссылки на этот сайт.</p>
-            <p><a class='none-decored' href="#">Back to top</a>
-            </p>
-        </footer>
+        @yield('content')
+
+        @include('footer')
 
         <!-- Bootstrap core JavaScript
     ================================================== -->
