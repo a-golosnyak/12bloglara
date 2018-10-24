@@ -18,7 +18,7 @@
                                                 <button type='submit' class='read-more-btn'>Читать далее...</button>
                                                 <input type='hidden' name='show' value='$art_id'>
                                <!--       <button class='read-more-btn' onclick='return deletePost(show)'>Изменить</button>   -->
-                                                <button class='read-more-btn' onclick='return deletePost($art_id)'>Удалить</button>
+                                                <button class='read-more-btn' onclick='return deletePost($art_id)'>Удалить</button>";
                                       </form>
                                             <a href='article.php?show=$art_id#commentAnchor' class='show-comments none-decored'>
                                                 <div class='pull-xs-right comments-link'>Комментарии
