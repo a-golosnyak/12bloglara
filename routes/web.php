@@ -26,3 +26,7 @@ Route::get('/article', function () {
 Route::get('/profile', function () {
     return view('profile');
 });
+
+Route::get('/registration', function () {
+    return view('registration');
+});

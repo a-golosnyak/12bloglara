@@ -1,3 +1,4 @@
+<div class='col-md-8 blog-main'>
     <div class='main-field style='background-color: lightgrey;'>  
         <div class='container-fluid ' >
             <div class='container data-field'>
@@ -35,4 +36,5 @@
             </div><!-- /.container -->
         </div>
     </div>
+</div>
 

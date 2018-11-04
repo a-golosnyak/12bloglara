@@ -10,10 +10,10 @@
         <meta name="author" content="">
         <title>Blog</title>
         <link rel="icon" href="../../favicon.ico">
-        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/bootstrap.css" rel="stylesheet">
         <link href="css/mdb.min.css" rel="stylesheet">
         <link href="css/main.css" rel="stylesheet">
-        <link rel="stylesheet" href="css/jquery.Jcrop.css" type="text/css" />       
+        <link rel="stylesheet" href="css/jquery.Jcrop.min.css" type="text/css" />       
         <link href="ckeditor/plugins/codesnippet/lib/highlight/styles/default.css" rel="stylesheet">
         <!-- Это нужно для подсветки кода в статьях ---------------------------------- -->
         <script src="ckeditor/plugins/codesnippet/lib/highlight/highlight.pack.js"></script>
@@ -23,25 +23,19 @@
     <body aria-busy="true">
         
         @include('header')
-        @include('navigation')
-        @yield('message')
+        @include('inc.navigation')
+        @include('inc.message')
 
-
-        <div class='main-field style='background-color: lightgrey;'>  
+        <div class='main-field'>  
             <div class='container-fluid ' >
                 <div class='container data-field'>
-                    <div class='row'>
-                        <div class='col-md-8 blog-main'>
-                            @yield('content') 
-                        </div><!-- /.blog-main -->
-                        
-                        @include('sidebar')
-                    </div><!-- /.row -->
-                </div><!-- /.container -->
+                    <div class='row'>  
+                        @yield('content') 
+                    </div>
+                </div>
             </div>
         </div>
 
-        
         @include('footer')
 
         <!-- Bootstrap core JavaScript
