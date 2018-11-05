@@ -10,7 +10,7 @@
         <meta name="author" content="">
         <title>Blog</title>
         <link rel="icon" href="../../favicon.ico">
-        <link href="css/bootstrap.css" rel="stylesheet">
+        <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/mdb.min.css" rel="stylesheet">
         <link href="css/main.css" rel="stylesheet">
         <link rel="stylesheet" href="css/jquery.Jcrop.min.css" type="text/css" />       
