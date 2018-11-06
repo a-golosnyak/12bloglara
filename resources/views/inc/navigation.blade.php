@@ -151,16 +151,14 @@
                         </a>
                     </div>
                 @else
-                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+                    <a class="nav-link dropdown-toggle m-0 p-0" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
                       aria-expanded="false">
                         <img class='avatar'  src='images/ava/{{ Auth::user()->email }}.jpeg' alt='...'>
                     </a>
-                    <div class="dropdown-menu dropdown-primary dropdown-menu-right text-center" aria-labelledby="navbarDropdownMenuLink">
-                        <div class='dropdown-item'href='#'>{{ Auth::user()->name }}</div>
+                    <div class="dropdown-menu dropdown-primary dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                        <a class='dropdown-item' href='/profile'>Вы вошли как {{ Auth::user()->name }}</a>
                         <div class='dropdown-divider'></div>
-                        <a class='none-decored' href='profile.php'>
-                            <div class='dropdown-item'href='#'>Профиль</div>
-                        </a>
+                        <a class='none-decored dropdown-item' href='/profile'>Профиль</a>
                         <div class='dropdown-divider'></div>
                         <a class="dropdown-item" href="{{ route('logout') }}" 
                         onclick="event.preventDefault();
