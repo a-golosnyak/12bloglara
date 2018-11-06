@@ -1,45 +1,65 @@
-@extends('layouts.app')
+@extends('layouts.main')
 
 @section('content')
 <div class='col-md-12 blog-main'>
     <div class='reg-field'>
         <div class=" registration-container " style="height: 100%;">
-            <form class="form-signin" action="registration.php" method="post" 
+            <form class="form-signin text-center" action="{{ route('register') }}" method="post" 
             onSubmit='return validateRegFormAll(this)'>
+                @csrf
                 <h2 class="form-signin-heading">Регистрация</h2>
                 <div>
-                    <input type="email" name="email" class="form-control form-signup page-item" placeholder="Email" required onblur='checkUser(this)'>
-                    <div id="emailOk" class="page-item">
+                    <input id="email" type="email" name="email" class="form-control form-signup d-inline" placeholder="Email" required onblur='checkUser(this)'>
+                    <div id="emailOk" class="d-inline">
                         <i class="fas fa-asterisk "></i> 
                     </div>
+                    @if ($errors->has('email'))
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $errors->first('email') }}</strong>
+                        </span>
+                    @endif
                 </div>
                 <br>
                 <div>
-                    <input type="password" name="password" id="password" class="form-control form-signup page-item" placeholder="Пароль" required onkeyup="validatePassword(this, password_confirm)">
-                    <div id="pass1Ok" class="page-item">
+                    <input id="password" type="password" name="password" id="password" class="form-control form-signup d-inline" placeholder="Пароль" required onkeyup="validatePassword(this, password_confirm)">
+                    <div id="pass1Ok" class="d-inline">
                         <i class="fas fa-asterisk "></i> 
                     </div>
+                    @if ($errors->has('password'))
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $errors->first('password') }}</strong>
+                        </span>
+                    @endif
                 </div>
                 <div>
-                    <input type="password" name="password_confirm" class="form-control form-signup page-item" placeholder="Повторите пароль" required onkeyup="validatePassword(password, this)">
-                    <div id="pass2Ok" class="page-item">
+                    <input id="password-confirm"  type="password" name="password_confirmation" class="form-control form-signup d-inline" placeholder="Повторите пароль" required onkeyup="validatePassword(password, this)">
+                    <div id="pass2Ok" class="d-inline">
                        <i class="fas fa-asterisk "></i> 
                    </div>
                 </div>
                 <br>
                 <div>
-                    <input type="text" name="screen_name" class="form-control form-signup page-item" placeholder="Имя" required onkeyup = "validateName(this)">
-                    <div id="nameOk" class="page-item">
+                    <input id="name" type="text" name="name" class="form-control form-signup d-inline" placeholder="Имя" required onkeyup = "validateName(this)">
+                    <div id="nameOk" class="d-inline">
                         <i class="fas fa-asterisk "></i> 
+                    </div>
+                    @if ($errors->has('name'))
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $errors->first('name') }}</strong>
+                        </span>
+                    @endif
+                </div>
+                <br>
+
+                <div>
+                    <button type="submit" class="btn btn-lg btn-primary btn-block form-control form-signup d-inline" >Зарегистрироваться</button>
+                    <div id="nameOk" class="d-inline ">
+                        <i class="fas fa-asterisk opacity-0"></i> 
                     </div>
                 </div>
                 <br>
-                <div>
-                    <button type="submit" class="btn btn-lg btn-primary btn-block form-control form-signup page-item" >Зарегистрироваться</button>
-                    <i class="fas fa-asterisk " style="color: #eee"></i> 
-                </div>
             </form>
-        </div> <!-- /container -->
+        </div> <!-- /container style="color: #eee" -->
     </div>
 </div>
 @endsection
