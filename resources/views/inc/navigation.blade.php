@@ -156,15 +156,21 @@
                         <img class='avatar'  src='images/ava/{{ Auth::user()->email }}.jpeg' alt='...'>
                     </a>
                     <div class="dropdown-menu dropdown-primary dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                        <a class='dropdown-item' href='/profile'>Вы вошли как {{ Auth::user()->name }}</a>
+                        <div class="dropdown-item">
+                            <a class='dropdown-item' href='/profile'>Вы вошли как {{ Auth::user()->name }}</a>
+                        </div>
                         <div class='dropdown-divider'></div>
-                        <a class='none-decored dropdown-item' href='/profile'>Профиль</a>
+                        <div class="dropdown-item">
+                            <a class='none-decored ' href='/profile'>Профиль</a>
+                        </div>
                         <div class='dropdown-divider'></div>
-                        <a class="dropdown-item" href="{{ route('logout') }}" 
-                        onclick="event.preventDefault();
-                                document.getElementById('logout-form').submit();">
+                        <div class='dropdown-item'>
+                            <a class="dropdown-item" href="{{ route('logout') }}" 
+                                                    onclick="event.preventDefault();
+                                                    document.getElementById('logout-form').submit();">
                                 Выход
-                        </a>
+                            </a>
+                        </div>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             @csrf
                         </form>

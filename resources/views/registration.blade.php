@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
-<div class='col-md-12 blog-main'>
+<div class=' blog-main'>
     <div class='reg-field'>
         <div class=" registration-container " style="height: 100%;">
             <form class="form-signin text-center" action="{{ route('register') }}" method="post" 
