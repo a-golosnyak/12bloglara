@@ -12,8 +12,8 @@
                     <span>Написать пост?</span>
                 </div>
                 <div class='col-sm-5'></div>
-                <a href='addpost.php'>
-                    <div class='col-sm-3' >
+                <a class='col-sm-3' href='/addpost'>
+                    <div>
                         <button type='submit' class='profile-btn' style='text-align: center;'>Написать!</button>
                     </div>
                 </a>
@@ -31,11 +31,11 @@
             </div>
             <hr>
             <div class='row' >
-                <div class='col-sm-6 pull-xs-left'>
+                <div class='col-sm-4 float-left'>
                     <span>Профиль создан</span>
                 </div>
-                <div class='pull-xs-right' >
-                    <span class='profile-meta '>$pl_creation_date</span>
+                <div class='float-right ml-auto' >
+                    <span class='profile-meta' >$pl_creation_date</span>
                 </div>
             </div> 
             <hr>
@@ -44,8 +44,8 @@
                     <label for='name'>Имя</label>
                 </div>
                 <div class='col-sm-5'>
-                    <input type='name' id='name' name='name' placeholder=$pl_screen_name required onkeyup = 'validateName(this)' size='18'>
-                    <div id='nameOk' class='page-item'>
+                    <input class="d-inline" type='name' id='name' name='name' placeholder=$pl_screen_name required onkeyup = 'validateName(this)' size='18'>
+                    <div id='nameOk' class='page-item d-inline'>
                         <i class='fas fa-asterisk'></i>
                     </div>
                 </div>
@@ -59,8 +59,8 @@
                     <label for='inputEmail'>Электронная почта</label>
                 </div>
                 <div class='col-sm-5'>
-                    <input type='email' id='inputEmail' name='email' placeholder=$pl_usermail required onblur='checkUser(this)' size='18'>
-                    <div id='emailOk' class='page-item' >
+                    <input class="d-inline" type='email' id='inputEmail' name='email' placeholder=$pl_usermail required onblur='checkUser(this)' size='18'>
+                    <div id='emailOk' class='d-inline' >
                         <i class='fas fa-asterisk'></i>
                     </div>
                 </div>
@@ -78,14 +78,14 @@
                         </div>
                         <div class='col-sm-5'>
                             <div>
-                                <input type='password' name='password'  placeholder='Пароль' required onkeyup='validatePassword(this, password_confirm)' size='18'>
-                                <div id='pass1Ok' class='page-item' style="top: 100px; "> 
+                                <input class="d-inline" type='password' name='password'  placeholder='Пароль' required onkeyup='validatePassword(this, password_confirm)' size='18'>
+                                <div id='pass1Ok' class='page-item d-inline' style="top: 100px; "> 
                                     <i class='fas fa-asterisk'></i>
                                 </div>
                             </div>
 
-                            <input type='password' name='password_confirm'  placeholder='Повторите пароль'  required onkeyup='validatePassword(password, this)' size='18'>
-                            <div id='pass2Ok' class='page-item'>
+                            <input class="d-inline" type='password' name='password_confirm'  placeholder='Повторите пароль'  required onkeyup='validatePassword(password, this)' size='18'>
+                            <div id='pass2Ok' class='page-item d-inline'>
                                 <i class='fas fa-asterisk'></i>
                             </div>
                         </div>
