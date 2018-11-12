@@ -153,7 +153,7 @@
                 @else
                     <a class="nav-link dropdown-toggle m-0 p-0" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
                       aria-expanded="false">
-                        <img class='avatar'  src='images/ava/{{ Auth::user()->email }}.jpeg' alt='...'>
+                        <img class='avatar' src="{{asset('images/ava/' . Auth::user()->email. '.jpeg') }}" alt='...'>
                     </a>
                     <div class="dropdown-menu dropdown-primary dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                         <div class="dropdown-item">
@@ -161,7 +161,7 @@
                         </div>
                         <div class='dropdown-divider'></div>
                         <div class="dropdown-item">
-                            <a class='none-decored ' href='/profile'>Профиль</a>
+                            <a class='none-decored ' href='/profile/{{ Auth::user()->id }}'>Профиль</a>
                         </div>
                         <div class='dropdown-divider'></div>
                         <div class='dropdown-item'>

@@ -10,19 +10,19 @@
         <meta name="author" content="">
         <title>Blog</title>
         <link rel="icon" href="../../favicon.ico">
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="css/mdb.min.css" rel="stylesheet">
-        <link href="css/main.css" rel="stylesheet">
-        <link rel="stylesheet" href="css/jquery.Jcrop.min.css" type="text/css" />       
-        <link href="ckeditor/plugins/codesnippet/lib/highlight/styles/default.css" rel="stylesheet">
+        <link href="{{URL::asset('css/bootstrap.min.css')}}" rel="stylesheet">
+        <link href="{{URL::asset('css/mdb.min.css')}}" rel="stylesheet">
+        <link href="{{URL::asset('css/main.css')}}" rel="stylesheet">
+        <link href="{{URL::asset('css/jquery.Jcrop.min.css')}}" rel="stylesheet">
+        <link href="{{URL::asset('ckeditor/plugins/codesnippet/lib/highlight/styles/default.css')}}" rel="stylesheet">     
         <!-- Это нужно для подсветки кода в статьях ---------------------------------- -->
-        <script src="ckeditor/plugins/codesnippet/lib/highlight/highlight.pack.js"></script>
+        <script src={{URL::asset('ckeditor/plugins/codesnippet/lib/highlight/highlight.pack.js')}}></script>
         <script>hljs.initHighlightingOnLoad();</script>
     </head>
 
     <body aria-busy="true">
         
-        @include('header')
+        @include('inc.header')
         @include('inc.navigation')
         @include('inc.message')
 
@@ -40,13 +40,13 @@
 
         <!-- Bootstrap core JavaScript
     ================================================== -->
-    <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script type="text/javascript" src="js/popper.min.js"></script>
-    <script type="text/javascript" src="js/bootstrap.js"></script>
-    <script type="text/javascript" src="js/mdb.min.js"></script>
-    <script type="text/javascript" src="js/crop.js"></script>
-    <script type="text/javascript" src="js/javascript.js"></script>
-    <script type="text/javascript" src="js/jquery.Jcrop.min.js"></script>
+    <script type="text/javascript" src="{{URL::asset('js/jquery.min.js')}}"></script>
+    <script type="text/javascript" src="{{URL::asset('js/popper.min.js')}}"></script>
+    <script type="text/javascript" src="{{URL::asset('js/bootstrap.js')}}"></script>
+    <script type="text/javascript" src="{{URL::asset('js/mdb.min.js')}}"></script>
+    <script type="text/javascript" src="{{URL::asset('js/crop.js')}}"></script>
+    <script type="text/javascript" src="{{URL::asset('js/javascript.js')}}"></script>
+    <script type="text/javascript" src="{{URL::asset('js/jquery.Jcrop.min.js')}}"></script>
 
     <div class="hiddendiv common"></div>
 

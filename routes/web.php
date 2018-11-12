@@ -23,9 +23,10 @@ Route::get('/article', function () {
     return view('article');
 });
 
-Route::get('/profile', function () {
-    return view('profile');
-});
+Route::get('/profile/{id}', 'ProfileController@getUser');
+Route::get('/addpost/{id}', 'PostController@editPost');
+Route::get('/addpost', 		'PostController@addPost');
+
 /*
 Route::get('/login', function () {
     return view('registration');
@@ -38,12 +39,3 @@ Route::get('/registration', function () {
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/', function () {
-    return view('home');
-});
-Route::get('/', function () {
-    return view('home');
-});
-Route::get('/', function () {
-    return view('home');
-});

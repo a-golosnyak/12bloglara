@@ -4,7 +4,7 @@
 @section('content')  
     <div class='col-md-8 blog-main'>
         <div class='profile-field ' >
-            <h3 class='form-signin-heading profile-title'>Ваш профиль <b>$usermail</b></h3> 
+            <h3 class='form-signin-heading profile-title'>Ваш профиль <b>{{ Auth::user()->name }}</b></h3> 
              <!--style='border: 1px solid grey;' -->
             <br>
             <div class='row' >
@@ -35,7 +35,7 @@
                     <span>Профиль создан</span>
                 </div>
                 <div class='float-right ml-auto' >
-                    <span class='profile-meta' >$pl_creation_date</span>
+                    <span class='profile-meta' >{{ \Carbon\Carbon::parse($user->created_at)->format('Y-m-d H:i')}}</span>
                 </div>
             </div> 
             <hr>
@@ -44,7 +44,7 @@
                     <label for='name'>Имя</label>
                 </div>
                 <div class='col-sm-5'>
-                    <input class="d-inline" type='name' id='name' name='name' placeholder=$pl_screen_name required onkeyup = 'validateName(this)' size='18'>
+                    <input class="d-inline" type='name' id='name' name='name' placeholder={{ Auth::user()->name }} required onkeyup = 'validateName(this)' size='18'>
                     <div id='nameOk' class='page-item d-inline'>
                         <i class='fas fa-asterisk'></i>
                     </div>
@@ -59,7 +59,7 @@
                     <label for='inputEmail'>Электронная почта</label>
                 </div>
                 <div class='col-sm-5'>
-                    <input class="d-inline" type='email' id='inputEmail' name='email' placeholder=$pl_usermail required onblur='checkUser(this)' size='18'>
+                    <input class="d-inline" type='email' id='inputEmail' name='email' placeholder={{ Auth::user()->email }} required onblur='checkUser(this)' size='18'>
                     <div id='emailOk' class='d-inline' >
                         <i class='fas fa-asterisk'></i>
                     </div>
@@ -96,10 +96,10 @@
             </form>
             <hr>
             <br>
-            <div class="row preview-zone">
-                <form class="form-signin" method= 'post' action='profile.php' enctype='multipart/form-data'>
+            <div class="row preview-zone ">
+                <form class="form-signin text-center mx-auto" method= 'post' action='profile.php' enctype='multipart/form-data'>
                     <h5 class="photo-item">Фото профиля</h5>
-                    <img class='crop jcrop-holder' src='images/ava/$usermail.jpeg' id='ProfilePhoto'  />
+                    <img class='crop jcrop-holder' src='{{asset('images/ava/'. Auth::user()->email .'.jpeg') }}' id='ProfilePhoto'  />
                     <br>
                     <label for="InpProfilePhoto" >
                         <span class='btn btn-md btn-chose-new-photo' id="InpProfileSelect" >Загрузить новую картинку</span>
