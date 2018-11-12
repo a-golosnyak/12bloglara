@@ -36,7 +36,10 @@
             </div>
         </div>
 
-        @include('footer')
+        @section('footer')
+            @include('footer')
+        @show
+        
 
         <!-- Bootstrap core JavaScript
     ================================================== -->

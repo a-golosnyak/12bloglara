@@ -1,9 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
-<div class=' blog-main'>
-    <div class='reg-field'>
-        <div class=" registration-container " style="height: 100%;">
+<div class=' blog-main brown lighten-5 w-100 py-5'>
             <form class="form-signin text-center" action="{{ route('register') }}" method="post" 
             onSubmit='return validateRegFormAll(this)'>
                 @csrf
@@ -59,9 +57,14 @@
                 </div>
                 <br>
             </form>
-        </div> <!-- /container style="color: #eee" -->
-    </div>
+            <br class="my-5">
+            <br class="my-5">
+            <br class="my-5">
+            <br class="my-5">
 </div>
+@endsection
+
+@section('footer')
 @endsection
 
 

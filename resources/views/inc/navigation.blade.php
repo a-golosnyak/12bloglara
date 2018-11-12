@@ -1,72 +1,3 @@
-
-<!--div class="navigation">
-    <div class="container nav">
-        <div class="nav nav-tabs float-left ">
-            <div class="nav-item">
-                <div class="nav-link">
-                    <a class='none-decored' href="index.php">Главная</a>
-                </div>
-            </div>
-            <div class="nav-item dropdown">
-                <div class="nav-link dropdown-toggle" id="getCategory" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" onclick="GetCategory();">Рубрика</div>
-                <div class="dropdown-menu dropdown-menu-left"  id="Categories" >
-                </div>
-            </div>
-            <div class="nav-item">
-                <a class="nav-link disabled" href="#">Контакты</a>
-            </div>
-            <div class="nav-item">
-                <a class="nav-link " href="/about">О сайте</a>
-            </div>
-        </div>
- 
-        <div class="nav-tabs float-right ">
-            <form class=" nav-item" >
-                <input class="form-control search .d-inline" type="search" placeholder="Найти" aria-label="Search" size="15">
-                <span class="item-search nav-item .d-inline" ><i class="fab fa-sistrix"></i></span>
-            </form>
-        </div>
-
-        <div class="nav nav-tabs float-right">
-            <div class="nav-item dropdown " style="vertical-align: right;">
-                <div class='nav-link dropdown-toggle' data-toggle='dropdown' href='#' role='button' aria-haspopup='true' aria-expanded='false'>Вход</div>
-                <div class='dropdown-menu dropdown-menu-right'>
-                    <form class='form-signin' method='post' action='index.php'>
-                        <div class='dropdown-item' href='#'>
-                            <input type='email' name='usermail' maxlength='30' size='20' class='form-control' placeholder='Email address' required autofocus>
-                        </div>
-
-                        <div class='dropdown-item' href='#'>
-                            <input type='password' name='pass' class='form-control' size='40' placeholder='Password' required>
-                        </div>
-                        <div class='dropdown-item text-xs-center' href='#'>
-                            <div class='checkbox '>
-                                <div>
-                                    <input type='checkbox' name='remember'> Запомнить меня  
-                                </div>
-                                <a class='passrecovery' href='passrecovery.php'>  Забыли пароль?</a>
-                            </div>
-
-                        </div>
-                        <div class='dropdown-item' href='#'>
-                            <button class='btn btn-lg btn-primary btn-block' type='submit'>Вход </button>
-                        </div>
-                    </form>
-                    <div class='dropdown-divider'></div>
-                    <a class='none-decored' href='/registration'>
-                        <div class='dropdown-item' href='#'>
-                            <button class='btn btn-md btn-primary btn-block' type='submit'>
-                                Регистрация
-                            </button>
-                        </div> 
-                    </a>
-                </div>   
-            </div>
-        </div> 
-    </div>
-</div-->
-
-
 <nav class="navigation navbar navbar-expand-md">
     <div class="container ">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -75,7 +6,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item  ">
-                    <a class="nav-link" href="#">Главная </a>
+                    <a class="nav-link" href="/">Главная </a>
                 </li>
                 <li class="nav-item">
                     <li class="nav-item dropdown ">
@@ -134,7 +65,7 @@
                             </div>
 
                             <div class='dropdown-item' href='#'>
-                                <button class='btn btn-lg btn-primary btn-block' type='submit'>Вход </button>
+                                <button class='btn btn-md btn-primary btn-block' type='submit'>Вход </button>
                             </div>
                         </form>
                         <div class='dropdown-item text-center my-0 py-0' href='#'>
@@ -144,7 +75,7 @@
                         <div class='dropdown-divider'></div>
                         <a class='none-decored w-100' href='/registration'>
                             <div class='dropdown-item text-xs-center' href='#'>
-                                <button class='btn btn-lg btn-primary btn-block text-xs-center' type='submit'>
+                                <button class='btn btn-md btn-primary btn-block text-xs-center' type='submit'>
                                     Регистрация
                                 </button>
                             </div> 
@@ -156,20 +87,12 @@
                         <img class='avatar' src="{{asset('images/ava/' . Auth::user()->email. '.jpeg') }}" alt='...'>
                     </a>
                     <div class="dropdown-menu dropdown-primary dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                        <div class="dropdown-item">
-                            <a class='dropdown-item' href='/profile'>Вы вошли как {{ Auth::user()->name }}</a>
-                        </div>
+                        <a class='dropdown-item' href='/profile'>Вы вошли как {{ Auth::user()->name }}</a>
+                        <a class=' dropdown-item none-decored ' href='/profile/{{ Auth::user()->id }}'>Профиль</a>
                         <div class='dropdown-divider'></div>
-                        <div class="dropdown-item">
-                            <a class='none-decored ' href='/profile/{{ Auth::user()->id }}'>Профиль</a>
-                        </div>
-                        <div class='dropdown-divider'></div>
-                        <div class='dropdown-item'>
                             <a class="dropdown-item" href="{{ route('logout') }}" 
                                                     onclick="event.preventDefault();
-                                                    document.getElementById('logout-form').submit();">
-                                Выход
-                            </a>
+                                                    document.getElementById('logout-form').submit();">Выход</a>
                         </div>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             @csrf

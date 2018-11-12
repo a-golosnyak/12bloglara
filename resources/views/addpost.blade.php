@@ -13,15 +13,10 @@
                     <p>
                         <h5 class="sel-category">Категория:</h5>
                         <select class="sel-category" name="category" style="float: left;">
-                            <!-- <option value="">Выберите категорию</option> -->
-                            <?php
-                            foreach ($category as $value)
-                            {
-                                echo "<option value=". $value['id'] . ">";
-                                echo ($value['category_name']);
-                                echo "</option>";
-                            }
-                            ?>
+                            @foreach ($category as $value)
+                                <option value="{{ $value->id }}">{{ $value->name }}</option>
+                            @endforeach
+                           
                         </select>
                     </p>
                     <p>
