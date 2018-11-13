@@ -5,19 +5,20 @@
     <div class='col-md-8 blog-main'>
         <script src="ckeditor/ckeditor.js"></script>      <!-- Текстовый редактор для поств -->
         <div class='profile-field ' >
-          
            <h3 class='form-signin-heading profile-title'>Создание поста от <b>$usermail</b></h3>
                 <br>
-            <form>
+                {!! Form::open(['url' => 'createad/submit']) !!}
                 <div class="preview-area">
                     <p>
                         <h5 class="sel-category">Категория:</h5>
                         <select class="sel-category" name="category" style="float: left;">
-                            @foreach ($category as $value)
-                                <option value="{{ $value->id }}">{{ $value->name }}</option>
+                            @foreach ($categories as $category)
+                                <option value="{{ $category->id }}">{{ $category->name }}</option>
                             @endforeach
-                           
                         </select>
+
+                        {{  Form::select('animal', $categories) }}
+
                     </p>
                     <p>
                         <!-- <p><input type="text" name="" rows=4 style="width: 70%;"></p> -->
@@ -56,7 +57,7 @@
                 </div>
                 <br>
                 <button  class='addpost-btn' onclick="return TimeToSubmitPost(category, art_title, art_intro )" style='text-align: center;'>Опубликовать</button>
-            </form>   
+            {!! Form::close() !!}  
         </div>
     </div><!-- /.blog-main -->
     @include('inc.sidebar')

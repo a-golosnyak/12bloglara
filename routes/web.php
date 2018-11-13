@@ -11,21 +11,17 @@
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
-
-Route::get('/about', function () {
-    return view('about');
-});
 
 Route::get('/article', function () {
     return view('article');
 });
 
 Route::get('/profile/{id}', 'ProfileController@getUser');
+Route::get('/', 			'PostController@getPosts');
 Route::get('/addpost/{id}', 'PostController@editPost');
 Route::get('/addpost', 		'PostController@addPost');
+Route::get('/about', 		'HomeController@about');
+Route::get('/{id}', 		'PostController@getPost');
 
 /*
 Route::get('/login', function () {

@@ -10,15 +10,14 @@
                 </li>
                 <li class="nav-item">
                     <li class="nav-item dropdown ">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
-                      aria-expanded="false">Рубрики</a>
-                    <div class="dropdown-menu dropdown-primary dropdown-menu-left" aria-labelledby="navbarDropdownMenuLink">
-                      <a class="dropdown-item" href="#">Микроконтроллеры STM32</a>
-                      <a class="dropdown-item" href="#">Программирование Linux</a>
-                      <a class="dropdown-item" href="#">Электроника</a>
-                      <a class="dropdown-item" href="">Разное</a>
-                    </div>
-                </li>
+                        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+                          aria-expanded="false">Рубрики</a>
+                        <div class="dropdown-menu dropdown-primary dropdown-menu-left" aria-labelledby="navbarDropdownMenuLink">
+                            @foreach ($categories as $category)
+                                <a class="dropdown-item" href="#">{{ $category->name }}</a>
+                            @endforeach
+                        </div>
+                    </li>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link disabled" href="#">Контакты</a>

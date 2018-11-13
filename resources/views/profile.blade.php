@@ -35,7 +35,7 @@
                     <span>Профиль создан</span>
                 </div>
                 <div class='float-right ml-auto' >
-                    <span class='profile-meta' >{{ \Carbon\Carbon::parse($user->created_at)->format('Y-m-d H:i')}}</span>
+                    <span class='profile-meta mr-4' >{{ \Carbon\Carbon::parse($user->created_at)->format('Y-m-d H:i')}}</span>
                 </div>
             </div> 
             <hr>
