@@ -11,12 +11,6 @@
                 <div class="preview-area">
                     <p>
                         <h5 class="sel-category">Категория:</h5>
-                        <select class="sel-category" name="category" style="float: left;">
-                            @foreach ($categories as $category)
-                                <option value="{{ $category->id }}">{{ $category->name }}</option>
-                            @endforeach
-                        </select>
-
                         {{  Form::select('animal', $categories) }}
 
                     </p>
@@ -30,6 +24,9 @@
                         <!-- <p><input type="text" name="" rows=4 style="width: 70%;"></p> -->
                         <div class="intro-input">
                             <textarea class="intro-box" id="art_intro" name="art_intro"  rows='5' maxlength='1200' placeholder="Превью статьи. Попробуйте уложиться в 1200 - символов."></textarea>
+
+                            {{ Form::textarea('art_intro', '', ['class'=>'intro-box']) }}
+
                         </div>
                     </p>
                     <input type="file"  onchange="loadFile(event)">

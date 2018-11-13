@@ -9,7 +9,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
         <title>Blog</title>
-        <link rel="icon" href="../../favicon.ico">
+        <link rel="icon" href="favicon.ico">
         <link href="{{URL::asset('css/bootstrap.min.css')}}" rel="stylesheet">
         <link href="{{URL::asset('css/mdb.min.css')}}" rel="stylesheet">
         <link href="{{URL::asset('css/main.css')}}" rel="stylesheet">

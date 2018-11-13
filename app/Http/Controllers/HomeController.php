@@ -29,7 +29,7 @@ class HomeController extends Controller
 
     public function about()
     {
-        $categories = Category::all();
+        $categories = Category::pluck('name', 'id');
 
         return view('about', ['categories' => $categories]);
     }

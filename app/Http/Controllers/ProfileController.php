@@ -11,7 +11,7 @@ class ProfileController extends Controller
 	public function getUser($id)
 	{
 		$user = User::where('id', $id)->get();
-		$categories = Category::all();
+		$categories = Category::pluck('name', 'id');
 
 	    return view('profile', 	[	'user'=>$user[0],
 									'categories' => $categories] );

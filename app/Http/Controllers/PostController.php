@@ -11,7 +11,7 @@ class PostController extends Controller
 {
     public function getPosts()
     {
-        $categories = Category::all();
+        $categories = Category::pluck('name', 'id');
         $posts = Post::all();
 /*
         echo "<pre>";
@@ -26,8 +26,8 @@ class PostController extends Controller
 
     public function addPost()
     {
-		$categories = Category::all();	
-        
+		$categories = Category::pluck('name', 'id');	
+		
     	return view('addpost', ['categories' => $categories]);
     }
 
