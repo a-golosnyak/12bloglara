@@ -53,10 +53,7 @@
                     </script>
                 </div>
                 <br>
-                {{ Form::submit('Опубликовать', ['class'=>'addpost-btn',
-                                                'onclick'=>"return TimeToSubmitPost(category, post_title, post_intro )",
-                                                    ])}}
-                {{ Form::submit('Click Me!') }}
+                {{ Form::submit('Опубликовать', ['class'=>'addpost-btn']) }}
 
             {!! Form::close() !!}  
         </div>

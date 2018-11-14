@@ -12,7 +12,7 @@ class PostController extends Controller
     public function getPosts()
     {
         $categories = Category::pluck('name', 'id');
-        $posts = Post::all();
+        $posts = Post::orderBy('id', 'desc')->get();
 /*
         echo "<pre>";
         echo "asd";

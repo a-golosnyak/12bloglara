@@ -86,7 +86,7 @@
                         <img class='avatar' src="{{asset('images/ava/' . Auth::user()->email. '.jpeg') }}" alt='...'>
                     </a>
                     <div class="dropdown-menu dropdown-primary dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                        <a class='dropdown-item' href='/profile'>Вы вошли как {{ Auth::user()->name }}</a>
+                        <a class='dropdown-item' href='/profile/{{ Auth::user()->id }}'>Вы вошли как {{ Auth::user()->name }}</a>
                         <a class=' dropdown-item none-decored ' href='/profile/{{ Auth::user()->id }}'>Профиль</a>
                         <div class='dropdown-divider'></div>
                             <a class="dropdown-item" href="{{ route('logout') }}" 
