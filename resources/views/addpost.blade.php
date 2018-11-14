@@ -3,37 +3,37 @@
 
 @section('content')  
     <div class='col-md-8 blog-main'>
-        <script src="ckeditor/ckeditor.js"></script>      <!-- Текстовый редактор для поств -->
+        <script src="ckeditor/ckeditor.js"></script>      <!-- Текстовый редактор для постов -->
         <div class='profile-field ' >
-           <h3 class='form-signin-heading profile-title'>Создание поста от <b>$usermail</b></h3>
-                <br>
-                {!! Form::open(['url' => 'createad/submit']) !!}
+            <h3 class='form-signin-heading profile-title'>Создание поста от <b>{{ Auth::user()->name }}</b></h3>
+            <br>
+            {!! Form::open(['url' => '/addpost/submit', 'files'=>'true']) !!}
                 <div class="preview-area">
                     <p>
-                        <h5 class="sel-category">Категория:</h5>
-                        {{  Form::select('animal', $categories) }}
-
+                        <h5 class="sel-category float-left">Категория:</h5>
+                        {{  Form::select('category', $categories) }}
                     </p>
                     <p>
-                        <!-- <p><input type="text" name="" rows=4 style="width: 70%;"></p> -->
-                        <div class="title-input">
-                            <textarea class="title-box" id="art_title" name="art_title"  rows='3' maxlength='220' placeholder="Заголовок. Максимальная длинна 220 - символов."></textarea>
-                        </div>
+                        {{ Form::textarea('post_title', '', ['id'=>"post_title",
+                                                                'class'=>'title-box', 
+                                                                'maxlength'=>'220', 
+                                                                'rows'=>'3',
+                                                                'placeholder'=>"Заголовок. Максимальная длинна 220 - символов."]) }} 
                     </p>
                     <p>
-                        <!-- <p><input type="text" name="" rows=4 style="width: 70%;"></p> -->
-                        <div class="intro-input">
-                            <textarea class="intro-box" id="art_intro" name="art_intro"  rows='5' maxlength='1200' placeholder="Превью статьи. Попробуйте уложиться в 1200 - символов."></textarea>
-
-                            {{ Form::textarea('art_intro', '', ['class'=>'intro-box']) }}
-
-                        </div>
+                        {{ Form::textarea('post_intro', '', ['id'=>"post_intro",
+                                                                'class'=>'intro-box', 
+                                                                'maxlength'=>'1200', 
+                                                                'rows'=>'5',
+                                                                'placeholder'=>"Превью статьи. Попробуйте уложиться в 1200 - символов."]) }}     
                     </p>
-                    <input type="file"  onchange="loadFile(event)">
+                    {{ Form::hidden('author', Auth::user()->id, ['class'=>'form-control'])}}
+                    <!--input type="file"  onchange="loadFile(event)"-->
+                    {{ Form::file('image', ['id'=>'post-file'] ) }}
                     <br>
                     <img class="w-100" id="output" style="display: none; margin-top: 1em;">
                     <script>
-                        var loadFile = function(event) {
+                        document.getElementById("post-file").onchange = function() {
                             var output = document.getElementById('output');
                             output.style.display = 'block';
                             output.src = URL.createObjectURL(event.target.files[0]);
@@ -53,7 +53,11 @@
                     </script>
                 </div>
                 <br>
-                <button  class='addpost-btn' onclick="return TimeToSubmitPost(category, art_title, art_intro )" style='text-align: center;'>Опубликовать</button>
+                {{ Form::submit('Опубликовать', ['class'=>'addpost-btn',
+                                                'onclick'=>"return TimeToSubmitPost(category, post_title, post_intro )",
+                                                    ])}}
+                {{ Form::submit('Click Me!') }}
+
             {!! Form::close() !!}  
         </div>
     </div><!-- /.blog-main -->

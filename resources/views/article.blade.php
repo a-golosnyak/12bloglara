@@ -5,11 +5,11 @@
                 <a class=' none-decored' href='article.php?show=$art_id'>
                     <h2 class='blog-post-title'>{{ $post->title }}</h2>
                 </a>
-                <p class='blog-post-meta'>{{ $post->pub_date }} автор {{ $post->screen_name }}<a class='none-decored' href='#'></a>
+                <p class='blog-post-meta'>{{ $post->created_at }} автор {{ $post->screen_name }}<a class='none-decored' href='#'></a>
                 </p>
                 <div style='display: none;'>{{ $post->art_id }}</div>
                 <p>{{ $post->art_intro }}</p>
-                <p><img class='post-preview-img' src='$art_intro_img'></p>
+                <p><img class='post-preview-img' src={{ $post->img }}></p>
                 <br>
                 <div class='post-footer'>
                     <form class='pull-xs-left ' action='article.php' method='get'>

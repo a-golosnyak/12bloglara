@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Category;
 
 class RegisterController extends Controller
 {
@@ -68,5 +69,12 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+    }
+
+    public function reg()
+    {
+        $categories = Category::pluck('name', 'id');
+
+        return view('registration', ['categories' => $categories]);
     }
 }

@@ -190,7 +190,7 @@ function validateName(field)
     }
 }
 //====== addpost.php ==============================================================================
-function TimeToSubmitPost(category, art_title, art_intro)
+function TimeToSubmitPost(category, post_title, post_intro)
 {  
     if(category.value=='')
     {
@@ -200,7 +200,7 @@ function TimeToSubmitPost(category, art_title, art_intro)
 
         return false;
     }
-    if(art_title.value == '')
+    if(post_title.value == '')
     {
         document.getElementsByClassName('alert')[0].style.display = 'block';
         document.getElementsByClassName('alert')[0].className = 'alert alert-warning';
@@ -208,7 +208,7 @@ function TimeToSubmitPost(category, art_title, art_intro)
         
         return false; 
     }
-    if(art_intro.value == '')
+    if(post_intro.value == '')
     {
         document.getElementsByClassName('alert')[0].style.display = 'block';
         document.getElementsByClassName('alert')[0].className = 'alert alert-warning';
@@ -222,28 +222,28 @@ function TimeToSubmitPost(category, art_title, art_intro)
 */
     var data = CKEDITOR.instances.postBody.getData();               // Достаем данные из Цкедитора
         
-    sendPost(category, art_title, art_intro, data);                 // Отправляем все значения по Ajax.
+    sendPost(category, post_title, post_intro, data);                 // Отправляем все значения по Ajax.
 
     CKEDITOR.instances.postBody.setData("Начните вводить пост.");   // Сбрасываем все к исходному виду
-    document.getElementById('art_title').value = "";
-    document.getElementById('art_intro').value = "";
+    document.getElementById('post_title').value = "";
+    document.getElementById('post_intro').value = "";
     return false;                                                   // Форму сабмитить и отправялть не нужно.    
 }
 
 //--- Ajax ------------------------------------------------------------
 //=== articles.php === delpost.php ==============================================================
-function sendPost(category, art_title, art_intro, post)
+function sendPost(category, post_title, post_intro, post)
 {
     var data = new FormData();
     data.append('category', category.value); 
-    data.append('art_title', art_title.value); 
-    data.append('art_intro', art_intro.value); 
+    data.append('post_title', post_title.value); 
+    data.append('post_intro', post_intro.value); 
     data.append('post-body', post); 
     data.append('image', $('input[type=file]')[0].files[0]); 
 
 /*  params  = "category=" + category.value;
-    params  += "&art_title=" + art_title.value;
-    params  += "&art_intro=" + art_intro.value;
+    params  += "&post_title=" + post_title.value;
+    params  += "&post_intro=" + post_intro.value;
     params  += "&post-body=" + post;
 */
     request = new ajaxRequest()
@@ -264,12 +264,12 @@ function sendPost(category, art_title, art_intro, post)
     request.send(data)
 }
 
-function deletePost(art_id)
+function deletePost(post_id)
 {
-//    alert(art_id);
+//    alert(post_id);
 
     var data = new FormData();
-    data.append('art_id', art_id); 
+    data.append('post_id', post_id); 
 
     request = new ajaxRequest()
     request.open("POST", "ajax/delpost.php", true)
@@ -290,11 +290,11 @@ function deletePost(art_id)
 }
 
 //=== article.php === getcomment.php ==============================================================
-function TimeToSendComment(art_id, parent_comment_id, comment_body)
+function TimeToSendComment(post_id, parent_comment_id, comment_body)
 {
-    if((art_id.value=='') || (parent_comment_id.value=='') || (comment_body.value==''))
+    if((post_id.value=='') || (parent_comment_id.value=='') || (comment_body.value==''))
     {
-    //  alert("alert!" + art_id.value +' '+ parent_comment_id.value +' '+           comment_body.value);
+    //  alert("alert!" + post_id.value +' '+ parent_comment_id.value +' '+           comment_body.value);
         document.getElementsByClassName('alert')[0].style.display = 'block';
         document.getElementsByClassName('alert')[0].className = 'alert alert-warning';
         document.getElementById('ErrorMessage').innerHTML = "Введите пожалуйста комментарий";
@@ -307,15 +307,15 @@ function TimeToSendComment(art_id, parent_comment_id, comment_body)
         document.getElementById('ErrorMessage').innerHTML = "Комментарий должен быть больше трех символов";
         return false;
     }
-    sendComment(art_id, parent_comment_id, comment_body);
+    sendComment(post_id, parent_comment_id, comment_body);
 
     return false;
 }
 
-function sendComment(art_id, parent_comment_id, comment_body)
+function sendComment(post_id, parent_comment_id, comment_body)
 {
     var data = new FormData();
-    data.append('post_id', art_id.value); 
+    data.append('post_id', post_id.value); 
     data.append('parent_comment_id', parent_comment_id.value); 
     data.append('comment_body', comment_body.value); 
 
