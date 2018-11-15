@@ -13,14 +13,18 @@ class PostController extends Controller
     {
         $categories = Category::pluck('name', 'id');
         $posts = Post::orderBy('id', 'desc')->get();
+
+        $author = Post::find(1);
+
+        echo $author->post['author_id'];
 /*
         echo "<pre>";
-        echo "asd";
-        print_r($posts);
+        print_r($author);
         echo "</pre>";
 */
-        return view('home', [   'categories' => $categories,
+/*        return view('home', [   'categories' => $categories,
                                 'posts' => $posts]);
+  */
     }
 
 

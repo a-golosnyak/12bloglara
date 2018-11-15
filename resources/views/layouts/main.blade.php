@@ -21,7 +21,6 @@
     </head>
 
     <body aria-busy="true">
-        
         @include('inc.header')
         @include('inc.navigation')
         @include('inc.message')
@@ -41,8 +40,7 @@
         @show
         
 
-        <!-- Bootstrap core JavaScript
-    ================================================== -->
+        <!-- Bootstrap core JavaScript ================================================== -->
     <script type="text/javascript" src="{{URL::asset('js/jquery.min.js')}}"></script>
     <script type="text/javascript" src="{{URL::asset('js/popper.min.js')}}"></script>
     <script type="text/javascript" src="{{URL::asset('js/bootstrap.js')}}"></script>
