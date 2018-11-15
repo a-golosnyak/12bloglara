@@ -5,7 +5,7 @@
                 <a class=' none-decored' href='article.php?show=$art_id'>
                     <h2 class='blog-post-title'>{{ $post->title }}</h2>
                 </a>
-                <p class='blog-post-meta'>{{ \Carbon\Carbon::parse($post->created_at)->format('Y-m-d H:i') }} автор {{ $post->screen_name }}<a class='none-decored' href='#'></a>
+                <p class='blog-post-meta'>{{ \Carbon\Carbon::parse($post->created_at)->format('Y-m-d H:i') }} автор {{ $post->user->name }}<a class='none-decored' href='#'></a>
                 </p>
                 <div style='display: none;'>{{ $post->art_id }}</div>
                 <p>{{ $post->intro }}</p>

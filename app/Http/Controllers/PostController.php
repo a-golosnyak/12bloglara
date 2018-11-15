@@ -6,25 +6,24 @@ use Illuminate\Http\Request;
 use App\Category;
 use DB;
 use App\Post;
+use App\User;
 
 class PostController extends Controller
 {
     public function getPosts()
     {
         $categories = Category::pluck('name', 'id');
-        $posts = Post::orderBy('id', 'desc')->get();
+      	$posts = Post::orderBy('id', 'desc')->get();
 
-        $author = Post::find(1);
+		echo $posts[0]->user->name;
 
-        echo $author->post['author_id'];
-/*
-        echo "<pre>";
-        print_r($author);
-        echo "</pre>";
-*/
-/*        return view('home', [   'categories' => $categories,
+/*      echo "<pre>";
+        print_r($posts);
+        echo "</pre>";		*/
+
+        return view('home', [   'categories' => $categories,
                                 'posts' => $posts]);
-  */
+  
     }
 
 
@@ -66,7 +65,7 @@ class PostController extends Controller
         }
 
         $post = new Post();
-        $post->author_id = $request->input('author');
+        $post->user_id = $request->input('author');
         $post->category_id = $request->input('category');
         $post->title = $request->input('post_title');
         $post->img = $imageName;
