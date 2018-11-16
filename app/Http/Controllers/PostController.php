@@ -10,6 +10,14 @@ use App\User;
 
 class PostController extends Controller
 {
+
+    public function aboutSite()
+    {
+        $categories = Category::pluck('name', 'id')->get();
+
+        return view('about', ['categories' => $categories]);
+    }
+
     public function getPosts()
     {
         $categories = Category::pluck('name', 'id');

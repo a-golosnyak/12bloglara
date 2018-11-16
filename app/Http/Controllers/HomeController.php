@@ -27,10 +27,5 @@ class HomeController extends Controller
         return view('/');
     }
 
-    public function aboutSite()
-    {
-        $categories = Category::pluck('name', 'id');
 
-        return view('about', ['categories' => $categories]);
-    }
 }
