@@ -62,10 +62,6 @@ h6, .h6 {
  * Navigation ---------------------------------------------------------------
  */
 .navigation {
-/*  background: linear-gradient(rgba(66, 139, 202, 0.6), 
-                                rgba(66, 139, 202, 0.8), 
-                                rgba(66, 139, 202, 0.9), #428bca);*/
-
     background: linear-gradient(rgba(22, 83, 245, 0.7), 
                                 rgba(22, 83, 245, 0.8), 
                                 rgba(22, 83, 245, 0.9),
@@ -87,11 +83,10 @@ h6, .h6 {
 }
 
 .avatar {
- /*   margin-top: auto; */
     border-radius: 5px;
     width: 50px;
     height: 50px;
-    border:1px solid lightblue;
+    border:1px solid #DDF;
 }
 
 .user_nav_item::after {         /* Убираем отступ только стрелочки где регистрация */

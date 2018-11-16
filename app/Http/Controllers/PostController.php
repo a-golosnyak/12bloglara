@@ -15,8 +15,7 @@ class PostController extends Controller
         $categories = Category::pluck('name', 'id');
       	$posts = Post::orderBy('id', 'desc')->get();
 
-		echo $posts[0]->user->name;
-
+//		echo $posts[0]->user->name;
 /*      echo "<pre>";
         print_r($posts);
         echo "</pre>";		*/
@@ -25,6 +24,17 @@ class PostController extends Controller
                                 'posts' => $posts]);
   
     }
+
+    public function getPost($id)
+    {
+        $categories = Category::pluck('name', 'id');
+        $posts = Post::where('id', $id)->get();
+
+        return view('article', [   'categories' => $categories,
+                                    'post' => $posts[0]]);
+  
+    }
+
 
 
     public function addPost()

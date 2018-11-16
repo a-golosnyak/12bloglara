@@ -3,6 +3,6 @@
 
 
 @section('content')
-    @include('article')
+    @include('articles')
     @include('inc.sidebar')
 @endsection

@@ -12,12 +12,12 @@
 */
 
 Route::get ('/profile/{id}', 	'ProfileController@getUser');
-//Route::get ('/{id}', 			'PostController@getPost');
+Route::get ('/{id}', 			'PostController@getPost');
 Route::get ('/', 				'PostController@getPosts');
 Route::get ('/addpost/{id}', 	'PostController@editPost');
 Route::get ('/addpost', 		'PostController@addPost');
 Route::post('/addpost/submit',	'PostController@submit');
-Route::get ('/about', 			'HomeController@about');
+Route::get ('/about', 			'HomeController@aboutSite');
 /*
 Route::get('/login', function () {
     return view('registration');
