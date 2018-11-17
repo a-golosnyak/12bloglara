@@ -12,14 +12,16 @@
                 <p><img class='post-preview-img' src={{ $post->img }}></p>
                 <br>
                 <div class='post-footer'>
-                    <form class='pull-xs-left ' action='article.php' method='get'>
-                        <button type='submit' class='read-more-btn'>Читать далее...</button>
-                        <input type='hidden' name='show' value='$art_id'>
-                        <button class='read-more-btn' onclick='return deletePost(show)'>Изменить</button>  
-                        <button class='read-more-btn' onclick='return deletePost($art_id)'>Удалить</button>
-                    </form>
-                    <a href='article.php?show=$art_id#commentAnchor' class='show-comments none-decored'>
-                        <div class='pull-xs-right comments-link'>Комментарии</div>
+                    <a href="/delete/{{$post->id}}" class="float-left"><button class="comment-btn">Читать далее...</button></a>
+                    @guest
+                    @else
+                        @if (Auth::user()->name == $post->user->name)
+                        <a href="/delete/{{$post->id}}" class="float-left"><button class="comment-btn">Изменить</button></a>
+                        <a href="/edit/{{$post->id}}" class="float-left"><button class="comment-btn">Удалить</button></a>
+                        @endif
+                    @endguest
+                    <a href='/{{$post->id}}#commentAnchor' class='cursor-pointer none-decored float-right mr-2'>
+                        <div class='comments-link'>Комментарии</div>
                     </a>
                 </div>
                 <br style='clear: both;'>

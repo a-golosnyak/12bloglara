@@ -675,7 +675,6 @@ a:focus, a:hover {
 
 /*=== Show articles section ===================================================================*/
 .show-comments{
-    padding-top: 6px;
     cursor: pointer;
 }
 

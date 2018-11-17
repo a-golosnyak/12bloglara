@@ -10,14 +10,6 @@ use App\User;
 
 class PostController extends Controller
 {
-
-    public function aboutSite()
-    {
-        $categories = Category::pluck('name', 'id')->get();
-
-        return view('about', ['categories' => $categories]);
-    }
-
     public function getPosts()
     {
         $categories = Category::pluck('name', 'id');
@@ -30,7 +22,6 @@ class PostController extends Controller
 
         return view('home', [   'categories' => $categories,
                                 'posts' => $posts]);
-  
     }
 
     public function getPost($id)
@@ -40,10 +31,7 @@ class PostController extends Controller
 
         return view('article', [   'categories' => $categories,
                                     'post' => $posts[0]]);
-  
     }
-
-
 
     public function addPost()
     {
@@ -62,16 +50,13 @@ class PostController extends Controller
             'post_title' => 'required|max:220',
             'post_intro' => 'required|max:1200',
             'image' => 'required',
-            'post-body' => 'required'            
+            'post_body' => 'required'            
         ]);
 
         if ($request->file('image')->isValid()) {
             $path = $request->image->path();
-            echo "<pre>";
-            echo "$path";
-            echo "</pre>";
             $art_title_trnslt = self::translit($request->input('post_title'));
-            $tmp = substr($art_title_trnslt, 0, 5);     // substr делает ошибку с кирилическим текстом.
+            $tmp = substr($art_title_trnslt, 0, 5);                             // substr делает ошибку с кирилическим текстом.
             $imageName = '../images/posts/'. 
                             date("Y-m-d_His") .'_'. 
                             $tmp .'_'. mt_rand(0, 1000) . '.' .
@@ -79,7 +64,7 @@ class PostController extends Controller
             $request->image->move(public_path('images/posts'), $imageName);
         }
         else{
-            echo 'File invalid';
+            return redirect("/")->with('error', 'Картинка не распознана.');
         }
 
         $post = new Post();
@@ -88,7 +73,7 @@ class PostController extends Controller
         $post->title = $request->input('post_title');
         $post->img = $imageName;
         $post->intro = $request->input('post_intro');
-        $post->body  = $request->input('post-body');  
+        $post->body  = strip_tags($request->input('post_body'));  
 
         $post->save();
 
@@ -99,6 +84,13 @@ class PostController extends Controller
     public function editPost()
     {
     	
+    }
+
+    public function aboutSite()
+    {
+        $categories = Category::pluck('name', 'id');
+
+        return view('about', ['categories' => $categories]);
     }
 
     function translit($str) 

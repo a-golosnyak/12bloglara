@@ -160,8 +160,8 @@ function validateEmail(field)
 
 function validatePassword(pass1, pass2) 
 {
-    if( ((pass1 != "") && (pass1.value.length > 2)) &&
-        ((pass2 != "") && (pass2.value.length > 2)) &&
+    if( ((pass1 != "") && (pass1.value.length > 6)) &&
+        ((pass2 != "") && (pass2.value.length > 6)) &&
          (pass1.value == pass2.value))
     {
         document.getElementById('pass1Ok').innerHTML = "<i class='fas fa-check' style='color: rgb(50, 200, 50); font-size: 0.7rem;'> ";
@@ -222,7 +222,7 @@ function TimeToSubmitPost(category, post_title, post_intro)
 */
     var data = CKEDITOR.instances.postBody.getData();               // Достаем данные из Цкедитора
         
-    sendPost(category, post_title, post_intro, data);                 // Отправляем все значения по Ajax.
+//    sendPost(category, post_title, post_intro, data);                 // Отправляем все значения по Ajax.
 
     CKEDITOR.instances.postBody.setData("Начните вводить пост.");   // Сбрасываем все к исходному виду
     document.getElementById('post_title').value = "";

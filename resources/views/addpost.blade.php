@@ -11,7 +11,7 @@
                 <div class="preview-area">
                     <p>
                         <h5 class="sel-category float-left">Категория:</h5>
-                        {{  Form::select('category', $categories) }}
+                        {{ Form::select('category', $categories, ['id'=>"post_category"]) }}
                     </p>
                     <p>
                         {{ Form::textarea('post_title', '', ['id'=>"post_title",
@@ -27,8 +27,7 @@
                                                                 'rows'=>'5',
                                                                 'placeholder'=>"Превью статьи. Попробуйте уложиться в 1200 - символов."]) }}     
                     </p>
-                    {{ Form::hidden('author', Auth::user()->id, ['class'=>'form-control'])}}
-                    <!--input type="file"  onchange="loadFile(event)"-->
+                    {{ Form::hidden('author', Auth::user()->id, ['class'=>'form-control']) }}
                     {{ Form::file('image', ['id'=>'post-file'] ) }}
                     <br>
                     <img class="w-100" id="output" style="display: none; margin-top: 1em;">
@@ -42,10 +41,13 @@
                 </div>
             
                 <div id="area" >
-                    <textarea name="post-body" id="postBody" rows="40" cols="80">
+                    {{ Form::textarea('post_body', '', ['id'=>"postBody",
+                                                        'rows'=>'40',
+                                                        'cols'=>'80',
+                                                        'placeholder'=>"Начните вводить пост."]) }} 
+                    <!--textarea name="post-body" id="postBody" rows="40" cols="80">
                         Начните вводить пост.
-                    </textarea>
-
+                    </textarea-->
                     <script>
                         CKEDITOR.replace('postBody');
                         CKEDITOR.config.extraPlugins  = 'codesnippet';
@@ -53,8 +55,7 @@
                     </script>
                 </div>
                 <br>
-                {{ Form::submit('Опубликовать', ['class'=>'addpost-btn']) }}
-
+                {{ Form::submit('Опубликовать', ['id'=>"post_submit", 'class'=>'addpost-btn']) }}
             {!! Form::close() !!}  
         </div>
     </div><!-- /.blog-main -->

@@ -12,11 +12,19 @@
                 </p>
                 <div style='display: none;'>{{ $post->art_id }}</div>
                 <p>{{ $post->intro }}</p>
-                <p><img class='post-preview-img' src={{ $post->img }}></p>
-                <br>
+                <p><img class='post-preview-img' src={{ $post->img }}></p>        
                 {{ $post->body }}
                 <br>
                 <br>
+                @guest
+                @else
+                    @if (Auth::user()->name == $post->user->name)
+                    <a href="/delete/{{$post->id}}"><button class="comment-btn pull-xs-right">Изменить</button></a>
+                    <a href="/edit/{{$post->id}}"><button class="comment-btn pull-xs-right">Удалить</button></a>
+                    <br>
+                    <br>
+                    @endif
+                @endguest
                 <div id='commentAnchor' class='social-links'>
                     <div class='row'>
                         <div class='pull-xs-left'>
@@ -62,7 +70,8 @@
                                 <div class='comment-date'>$pub_date</div>
                             </div>
                             <div>$comment_body</div>
-                            <br>
+                            <br>                          
+
                             <button class='comment-btn'  onclick=ShowReplyInput('$replyId','$author_screen_name')>Ответить</button>  
                             <button  class='comment-btn pull-xs-right' onclick=deleteComment('$parent_comment_id')>Удалить</button>
                             <button  class='comment-btn pull-xs-right' onclick=editComment('$parent_comment_id')>Изменить</button>
