@@ -47,6 +47,14 @@
                         <br>
                     </div>
                 @else
+
+                {!! Form::open(['url' => 'addcomment/submit']) !!}
+                    {{ Form::textarea('description', '', ['class'=>'form-control', 'placeholder'=>'Tipe ad here']) }}
+                    {{ Form::hidden('author', Auth::user()->id, ['class'=>'form-control']) }}
+                    <br>
+                    {{ Form::submit('Добавить комментарий', ['class'=>'comment-btn']) }}
+                {!! Form::close() !!}
+
                     <form id='$replyId' style='display: block;'>
                         <div class='title-input'>
                             <textarea class='intro-box' id='' name='comment_body'  rows='5' maxlength='1000' placeholder='Комментарий''></textarea>

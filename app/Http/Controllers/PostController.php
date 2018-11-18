@@ -7,6 +7,7 @@ use App\Category;
 use DB;
 use App\Post;
 use App\User;
+use App\Comment;
 
 class PostController extends Controller
 {
@@ -28,9 +29,11 @@ class PostController extends Controller
     {
         $categories = Category::pluck('name', 'id');
         $posts = Post::where('id', $id)->get();
+        $comments = Comment::all();;
 
         return view('article', [   'categories' => $categories,
-                                    'post' => $posts[0]]);
+                                    'post' => $posts[0],
+                                    'comments' => $comments]);
     }
 
     public function addPost()

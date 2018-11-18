@@ -27,7 +27,7 @@
                                                                 'rows'=>'5',
                                                                 'placeholder'=>"Превью статьи. Попробуйте уложиться в 1200 - символов."]) }}     
                     </p>
-                    {{ Form::hidden('author', Auth::user()->id, ['class'=>'form-control']) }}
+                    {{ Form::hidden('author', Auth::user()->id) }}
                     {{ Form::file('image', ['id'=>'post-file'] ) }}
                     <br>
                     <img class="w-100" id="output" style="display: none; margin-top: 1em;">
