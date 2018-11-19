@@ -13,14 +13,14 @@
                 <div style='display: none;'>{{ $post->art_id }}</div>
                 <p>{{ $post->intro }}</p>
                 <p><img class='post-preview-img' src={{ $post->img }}></p>        
-                {{ $post->body }}
+                <p>{!! $post->body !!}</p>
                 <br>
                 <br>
                 @guest
                 @else
                     @if (Auth::user()->name == $post->user->name)
-                    <a href="/delete/{{$post->id}}"><button class="comment-btn pull-xs-right">Изменить</button></a>
-                    <a href="/edit/{{$post->id}}"><button class="comment-btn pull-xs-right">Удалить</button></a>
+                    <a href='/addpost/{{$post->id}}'><button class="comment-btn pull-xs-right">Изменить</button></a>
+                    <a href="/delpost/{{$post->id}}"><button class="comment-btn pull-xs-right">Удалить</button></a>
                     <br>
                     <br>
                     @endif

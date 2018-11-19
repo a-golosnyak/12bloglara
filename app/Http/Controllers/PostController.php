@@ -8,6 +8,7 @@ use DB;
 use App\Post;
 use App\User;
 use App\Comment;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -103,7 +104,34 @@ class PostController extends Controller
     public function editPost()
     {
     	
+        $posts = Post::where('id', $id)->get();
+
+        if(Auth::user()->name == $posts[0]->user)
+        {
+            $ad = Ad::where('id', $id)->delete();
+            return redirect("/")->with('status', 'Ad deleted');
+        }
+        else
+        {
+            abort(403);
+        }
     }
+
+    public function deletePost($id)
+    {
+        $posts = Post::where('id', $id)->get();
+
+        if(Auth::user()->email == $posts[0]->user->email)
+        {
+            $posts = Post::where('id', $id)->delete();
+            return redirect("/")->with('status', 'Ad deleted');
+        }
+        else
+        {
+            abort(403);
+        }
+    }
+
 
     public function aboutSite()
     {
