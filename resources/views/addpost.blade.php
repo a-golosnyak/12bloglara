@@ -41,13 +41,13 @@
                 </div>
             
                 <div id="area" >
-                    {{ Form::textarea('post_body', '', ['id'=>"postBody",
+                    {{-- Form::textarea('post_body', '', ['id'=>"postBody",
                                                         'rows'=>'40',
                                                         'cols'=>'80',
-                                                        'placeholder'=>"Начните вводить пост."]) }} 
-                    <!--textarea name="post-body" id="postBody" rows="40" cols="80">
+                                                        'placeholder'=>"Начните вводить пост."]) --}} 
+                    <textarea name="post_body" id="postBody" rows="40" cols="80">
                         Начните вводить пост.
-                    </textarea-->
+                    </textarea>
                     <script>
                         CKEDITOR.replace('postBody');
                         CKEDITOR.config.extraPlugins  = 'codesnippet';

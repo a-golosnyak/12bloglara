@@ -12,7 +12,7 @@
                 <p><img class='post-preview-img' src={{ $post->img }}></p>
                 <br>
                 <div class='post-footer'>
-                    <a href="/delete/{{$post->id}}" class="float-left"><button class="comment-btn">Читать далее...</button></a>
+                    <a href="/{{$post->id}}" class="float-left"><button class="comment-btn">Читать далее...</button></a>
                     @guest
                     @else
                         @if (Auth::user()->name == $post->user->name)

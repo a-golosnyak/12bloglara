@@ -47,99 +47,134 @@
                         <br>
                     </div>
                 @else
-
-                {!! Form::open(['url' => 'addcomment/submit']) !!}
-                    {{ Form::textarea('description', '', ['class'=>'form-control', 'placeholder'=>'Tipe ad here']) }}
-                    {{ Form::hidden('author', Auth::user()->id, ['class'=>'form-control']) }}
+                {!! Form::open(['url' => '/addcomment/submit']) !!}
+                    {{ Form::textarea('body', '', ['class'=>'form-control',
+                                                        'rows'=>'5', 
+                                                        'maxlength'=>1000,
+                                                        'placeholder'=>'Комментарий']) }}
+                    {{ Form::hidden('post_id', $post->id) }}
+                    {{ Form::hidden('user_id', Auth::user()->id) }}
+                    {{ Form::hidden('parent_comment_id', 0) }}
                     <br>
                     {{ Form::submit('Добавить комментарий', ['class'=>'comment-btn']) }}
                 {!! Form::close() !!}
-
-                    <form id='$replyId' style='display: block;'>
-                        <div class='title-input'>
-                            <textarea class='intro-box' id='' name='comment_body'  rows='5' maxlength='1000' placeholder='Комментарий''></textarea>
-                        </div>
-                        <input id='' type='hidden' name='art_id' value='$art_id'>
-                        <input id='' type='hidden' name='parent_comment_id' value='0'>
-                        <button  class='comment-btn pull-xs-right'  onclick = 'return TimeToSendComment(art_id,  parent_comment_id, comment_body)'>Добавить комментарий</button>
-                                    <div style='clear: both;'></div>
-
-                        <div style='clear: both;'></div>
-                    </form>
                 @endguest
-                <div class='comments-main'>
-                    <div class='row comment'>
-                        <div class='col-sm-1'>
-                            <img class='avatar'  src='images/ava/$author_mail.jpeg' alt='...'>
-                        </div>
-                        <div class='col-sm-10 comments1' >
-                            <div style='margin-bottom: 0.2em;'>
-                                <div class='comment-author'>$author_screen_name</div>
-                                <div class='comment-date'>$pub_date</div>
+
+                @foreach($comments as $basic_comment)
+                    @php 
+                        $replyId = 'reply_' . $basic_comment->id
+                    @endphp
+
+                    <div class='comments-main'>
+                        <div class='row comment'>
+                            <div class='col-sm-1'>
+                                <img class='avatar'  src='images/ava/{{ $basic_comment->user->email }}.jpeg' alt='...'>
                             </div>
-                            <div>$comment_body</div>
-                            <br>                          
-
-                            <button class='comment-btn'  onclick=ShowReplyInput('$replyId','$author_screen_name')>Ответить</button>  
-                            <button  class='comment-btn pull-xs-right' onclick=deleteComment('$parent_comment_id')>Удалить</button>
-                            <button  class='comment-btn pull-xs-right' onclick=editComment('$parent_comment_id')>Изменить</button>
-
-                            <form id='$replyId' style='display: none;'>
-                                <textarea class='intro-box' id='' name='comment_body'  rows='5' maxlength='1000' placeholder='Комментарий''></textarea>
-                                <input id='' type='hidden' name='art_id' value='$art_id'>
-                                <input id='' type='hidden' name='parent_comment_id' value='$parent_comment_id'>
-                                <button  class='comment-btn pull-xs-right' onclick = 'return TimeToSendComment(art_id,  parent_comment_id, comment_body)'>Добавить комментарий</button>
-                            <div style='clear: both;'></div>
-                            </form>
-
-                            <div class='row '>
-                                <div class='col-md-1'>
-                                    <img class='avatar'  src='images/ava/$author_mail.jpeg' alt='...'>
+                            <div class='col-sm-10 comments1' >
+                                <div style='margin-bottom: 0.2em;'>
+                                    <div class='comment-author'>{{ $basic_comment->user->name }}</div>
+                                    <div class='comment-date'>{{ \Carbon\Carbon::parse($basic_comment->created_at)->format('Y-m-d H:i') }}</div>
                                 </div>
-                                <div class='col-md-10 comments1 '>
-                                    <div style='margin-bottom: 0.2em;'>
-                                        <div class='comment-author'>$author_screen_name</div>
-                                         <div class='comment-date'>$pub_date</div>
-                                    </div>
-                                    <div>$comment_body</div>
-                                    <br>
-                                    <button  class='comment-btn' onclick=ShowReplyInput('$replyId','$author_screen_name')>Ответить</button>
-                                    <button  class='comment-btn pull-xs-right' onclick=deleteComment('$parent_comment_id')>Удалить</button> 
-                                    <button  class='comment-btn pull-xs-right' onclick=editComment('$comment_id')>Изменить</button>
-                                    <form id='$replyId' style='display: none;'>
-                                            <textarea class='intro-box' id='' name='comment_body'  rows='5' maxlength='1000' placeholder='Комментарий'' value='xxx'></textarea>
-                                            <input id='' type='hidden' name='art_id' value='$art_id'>
-                                            <input id='' type='hidden' name='parent_comment_id' value='$parent_comment_id'>
-                                            <button  class='comment-btn pull-xs-right' onclick = 'return TimeToSendComment(art_id,  parent_comment_id, comment_body)'>Добавить комментарий</button>
+                                <div>{{ $basic_comment->body }}</div>
+                                <br>                          
+                                @guest
+                                @else
+                                    <button class='comment-btn'  onclick=ShowReplyInput('{{$replyId}}','{{ $basic_comment->user->name }}')>Ответить</button>  
+                                    @if (Auth::user()->name == $post->user->name)
+                                        <button  class='comment-btn pull-xs-right' onclick=deleteComment('$parent_comment_id')>Удалить</button>
+                                        <button  class='comment-btn pull-xs-right' onclick=editComment('$parent_comment_id')>Изменить</button>
+                                    @endif
+                                    {!! Form::open(['url' => '/addcomment/submit',
+                                                    'id'=> $replyId,
+                                                    'style'=>"display: none"]) !!}
+                                        {{ Form::textarea('body', '', [ 'class'=>'intro-box',
+                                                                        'rows'=>'5', 
+                                                                        'maxlength'=>1000,
+                                                                        'placeholder'=>'Комментарий']) }}
+                                        {{ Form::hidden('post_id', $post->id) }}
+                                        {{ Form::hidden('user_id', Auth::user()->id) }}
+                                        {{ Form::hidden('parent_comment_id', $basic_comment->id) }}
+                                        <br>
+                                        {{ Form::submit('Добавить комментарий', ['class'=>'comment-btn']) }}
+                                    {!! Form::close() !!}
+                                @endguest
 
-                                            <div style='clear: both;'></div>
-                                    </form> 
+                                @foreach($nested_comments[$basic_comment->id] as $nested_comment)
+                                    @foreach ($nested_comment as $comment)
+                                        @php 
+                                            $replyId = 'reply_' . $comment->id 
+                                        @endphp
+                                        <br>  
+                                        <div class='row '>
+                                            <div class='col-md-1'>
+                                                <img class='avatar'  src='images/ava/{{ $comment->user->email }}.jpeg' alt='...'>
+                                            </div>
+                                            <div class='col-md-10 comments1 '>
+                                                <div style='margin-bottom: 0.2em;'>
+                                                    <div class='comment-author'>{{ $comment->user->name }}</div>
+                                                     <div class='comment-date'>{{ \Carbon\Carbon::parse($comment->created_at)->format('Y-m-d H:i') }}</div>
+                                                </div>
+                                                <div>{{ $comment->body }}</div>
+                                                <br>
+                                                @guest
+                                                @else
+                                                    <button  class='comment-btn' onclick=ShowReplyInput('{{$replyId}}','{{ $comment->user->name }}')>Ответить</button>
+                                                    @if (Auth::user()->name == $post->user->name)
+                                                        <button  class='comment-btn pull-xs-right' onclick=deleteComment('$parent_comment_id')>Удалить</button> 
+                                                        <button  class='comment-btn pull-xs-right' onclick=editComment('$comment_id')>Изменить</button>
+                                                    @endif
+                                                    {!! Form::open(['url' => '/addcomment/submit',
+                                                                            'id'=> $replyId,
+                                                                            'style'=>"display: none"]) !!}
+                                                        {{ Form::textarea('body', '', [ 'class'=>'intro-box',
+                                                                                        'rows'=>'5', 
+                                                                                        'maxlength'=>1000,
+                                                                                        'placeholder'=>'Комментарий']) }}
+                                                        {{ Form::hidden('post_id', $post->id) }}
+                                                        {{ Form::hidden('user_id', Auth::user()->id) }}
+                                                        {{ Form::hidden('parent_comment_id', $basic_comment->id) }}
+                                                        <br>
+                                                        {{ Form::submit('Добавить комментарий', ['class'=>'comment-btn']) }}
+                                                    {!! Form::close() !!}
 
-                                    <script type="text/javascript">
-                                        //--- Принимаем строку со значением идентификатора -----------------------
-                                        function ShowReplyInput(elem, name)   
-                                        {
-                                            elem2 = '#'+elem+' > textarea';
-                                            commentForm = document.getElementById(elem);
+                                                    <form id='{{ $replyId }}' style='display: none;'>
+                                                            <textarea class='intro-box' id='' name='body'  rows='5' maxlength='1000' placeholder='Комментарий' value='xxx'></textarea>
+                                                            <input id='' type='hidden' name='post_id' value='$art_id'>
+                                                            <input id='' type='hidden' name='parent_comment_id' value='$parent_comment_id'>
+                                                            <button  class='comment-btn pull-xs-right' onclick = 'return TimeToSendComment(art_id,  parent_comment_id, comment_body)'>Добавить комментарий</button>
 
-                                            if(commentForm.style.display == "block")
-                                                commentForm.style.display = "none";
-                                            else
-                                                commentForm.style.display = "block";
-
-                                            document.querySelectorAll(elem2)[0].value = name+','+' ';
-
-                                        }
-                                        //------------------------------------------------------------------------
-                                    </script> 
-                
-                                <br>
-                                </div>  
+                                                            <div style='clear: both;'></div>
+                                                    </form> 
+                                                    <br>
+                                                 @endguest                         
+                                            
+                                            </div>  
+                                        </div>
+                                        <br>
+                                    @endforeach
+                                @endforeach 
                             </div>
-                            <br>
                         </div>
-                    </div>
-                </div> 
+                    </div> 
+                @endforeach
+
+                <script type="text/javascript">
+                //--- Принимаем строку со значением идентификатора -----------------------
+                function ShowReplyInput(elem, name)   
+                {
+                    elem2 = '#'+elem+' > textarea';
+                    commentForm = document.getElementById(elem);
+
+                    if(commentForm.style.display == "block")
+                        commentForm.style.display = "none";
+                    else
+                        commentForm.style.display = "block";
+
+                    document.querySelectorAll(elem2)[0].value = name+','+' ';
+
+                }
+                //------------------------------------------------------------------------
+            </script> 
             </div>
         </div>
     </div>
