@@ -73,8 +73,9 @@ class PostController extends Controller
 
         if(Auth::user()->email == $posts[0]->user->email)
         {
-            return view('addpost', ['categories' => $categories,
-                                    'action'=>"/addpost/$id",
+            return view('addpost', ['post_id'=>$id,
+                                    'categories' => $categories,
+                                    'action'=>"/addpost/update",
                                     'post_title' => $posts[0]->title,
                                     'post_intro' => $posts[0]->intro,
                                     'image' => $posts[0]->img,
@@ -89,12 +90,54 @@ class PostController extends Controller
     public function updatePost(Request $request)
     {
         $categories = Category::pluck('name', 'id'); 
-        $posts = Post::where('id', $id)->get();   
         
+        $this->validate($request, [
+            'id'=>'required',
+            'author' => 'required',
+            'category' => 'required',
+            'post_title' => 'required|max:220',
+            'post_intro' => 'required|max:1200',
+            'post_image' => '',
+            'post_body' => 'required'            
+        ]);
+
+        $post = new Post();
+        $post->id = $request->input('id');
+
+        $posts = Post::where('id', $post->id)->get(); 
+
         if(Auth::user()->email == $posts[0]->user->email)
         {
-            $posts = Post::where('id', $id)->delete();
-            return redirect("/")->with('status', 'Пост удален.');
+             if (null !== $request->input('post_image')) {
+                $path = $request->post_image->path();
+                $art_title_trnslt = self::translit($request->input('post_title'));
+                $tmp = substr($art_title_trnslt, 0, 5);                             // substr делает ошибку с кирилическим текстом.
+                $imageName = '../images/posts/'. 
+                            date("Y-m-d_His") .'_'. 
+                            $tmp .'_'. mt_rand(0, 1000) . '.' .
+                            $request->post_image->getClientOriginalExtension();
+                $request->post_image->move(public_path('images/posts'), $imageName);
+            }
+            else{
+                return redirect("/")->with('error', 'Картинка не распознана.');
+            }
+
+            $post->user_id = $request->input('author');
+            $post->category_id = $request->input('category');
+            $post->title = $request->input('post_title');
+            $post->img = $imageName;
+            $post->intro = $request->input('post_intro'); 
+            $post->body  = $request->input('post_body');
+
+            Post::where('id', $post->id)
+             ->update(['user_id'        =>$post->user_id,
+                        'category_id'   =>$post->category_id,
+                        'title'         =>$post->title,
+                        'intro'         =>$post->intro,
+                        'img'           =>$post->img,
+                        'body'          =>$post->body]);
+
+            return redirect("/")->with('status', 'Ad updated');
         }
         else
         {
@@ -122,15 +165,15 @@ class PostController extends Controller
     public function submit(Request $request)
     {
 //        $categories = Category::pluck('name', 'id');    
-        $post = new Post();
-        $post->body  = $request->input('post_body'); 
-
+        
+    
         $this->validate($request, [
             'author' => 'required',
             'category' => 'required',
             'post_title' => 'required|max:220',
             'post_intro' => 'required|max:1200',
-            'post_image' => 'required'           
+            'post_image' => 'required',
+            'post_body' => 'required'            
         ]);
 
         if ($request->file('post_image')->isValid()) {
@@ -147,12 +190,13 @@ class PostController extends Controller
             return redirect("/")->with('error', 'Картинка не распознана.');
         }
 
-        
+        $post = new Post();
         $post->user_id = $request->input('author');
         $post->category_id = $request->input('category');
         $post->title = $request->input('post_title');
         $post->img = $imageName;
         $post->intro = $request->input('post_intro'); 
+        $post->body  = $request->input('post_body'); 
         $post->save();
 
         return redirect("/")->with('status', 'Пост получен и готовится к публикации.');

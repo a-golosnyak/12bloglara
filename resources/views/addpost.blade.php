@@ -3,7 +3,7 @@
 
 @section('content')  
     <div class='col-md-8 blog-main'>
-        <script src="ckeditor/ckeditor.js"></script>      <!-- Текстовый редактор для постов -->
+        <script type="text/javascript" src="{{URL::asset('ckeditor/ckeditor.js')}}"></script> <!-- Текстовый редактор для постов -->
         <div class='profile-field ' >
             <h3 class='form-signin-heading profile-title'>Создание поста от <b>{{ Auth::user()->name }}</b></h3>
             <br>
@@ -27,6 +27,7 @@
                                                                 'rows'=>'5',
                                                                 'placeholder'=>"Превью статьи. Попробуйте уложиться в 1200 - символов."]) }}     
                     </p>
+                    {{ Form::hidden('id', $post_id) }}
                     {{ Form::hidden('author', Auth::user()->id) }}
                     {{ Form::file('post_image', ['id'=>'post-file'] ) }}
                     <br>
@@ -36,6 +37,7 @@
                     @else
                         <img class="w-100 mt-1" id="output" style="display: none;">
                     @endif
+
                     <script>
                         document.getElementById("post-file").onchange = function() {
                             var output = document.getElementById('output');
@@ -46,13 +48,13 @@
                 </div>
             
                 <div id="area" >
-                    {{-- Form::textarea('post_body', '', ['id'=>"postBody",
+                    {{ Form::textarea('post_body', $body, ['id'=>"postBody",
                                                         'rows'=>'40',
-                                                        'cols'=>'80',
-                                                        'placeholder'=>"Начните вводить пост."]) --}} 
-                    <textarea name="post_body" id="postBody" rows="40" cols="80">
+                                                        'cols'=>'80']) }} 
+                {{--    <textarea name="post_body" id="postBody" rows="40" cols="80">
                         {!! $body !!}
-                    </textarea>
+                    </textarea> --}}
+
                     <script>
                         CKEDITOR.replace('postBody');
                         CKEDITOR.config.extraPlugins  = 'codesnippet';
