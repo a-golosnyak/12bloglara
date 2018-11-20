@@ -13,13 +13,13 @@
                 <br>
                 <div class='post-footer'>
                     <a href="/{{$post->id}}" class="float-left"><button class="comment-btn">Читать далее...</button></a>
-                    @guest
+                {{--    @guest
                     @else
                         @if (Auth::user()->name == $post->user->name)
                         <a href="/delete/{{$post->id}}" class="float-left"><button class="comment-btn">Изменить</button></a>
-                        <a href="/edit/{{$post->id}}" class="float-left"><button class="comment-btn">Удалить</button></a>
+                        <a href="/delpost/{{$post->id}}" class="float-left"><button class="comment-btn">Удалить</button></a>
                         @endif
-                    @endguest
+                    @endguest   --}}
                     <a href='/{{$post->id}}#commentAnchor' class='cursor-pointer none-decored float-right mr-2'>
                         <div class='comments-link'>Комментарии</div>
                     </a>

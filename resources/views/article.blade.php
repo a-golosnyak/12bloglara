@@ -19,7 +19,7 @@
                 @guest
                 @else
                     @if (Auth::user()->name == $post->user->name)
-                    <a href='/addpost/{{$post->id}}'><button class="comment-btn pull-xs-right">Изменить</button></a>
+                    <a href='/addpost/{{$post->id}} '><button class="comment-btn pull-xs-right">Изменить</button></a>
                     <a href="/delpost/{{$post->id}}"><button class="comment-btn pull-xs-right">Удалить</button></a>
                     <br>
                     <br>

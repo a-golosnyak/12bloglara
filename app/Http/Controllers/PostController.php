@@ -58,7 +58,65 @@ class PostController extends Controller
     {
 		$categories = Category::pluck('name', 'id');	
 		
-    	return view('addpost', ['categories' => $categories]);
+    	return view('addpost', ['categories' => $categories,
+                                'action'=>'/addpost/submit',
+                                'post_title' =>'',
+                                'post_intro' =>'',
+                                'image' =>'',
+                                'body' =>'']);
+    }
+
+    public function editPost($id)
+    { 
+        $categories = Category::pluck('name', 'id'); 
+        $posts = Post::where('id', $id)->get();   
+
+        if(Auth::user()->email == $posts[0]->user->email)
+        {
+            return view('addpost', ['categories' => $categories,
+                                    'action'=>"/addpost/$id",
+                                    'post_title' => $posts[0]->title,
+                                    'post_intro' => $posts[0]->intro,
+                                    'image' => $posts[0]->img,
+                                    'body' => $posts[0]->body]);
+        }
+        else
+        {
+            abort(403);
+        }
+    }
+
+    public function updatePost(Request $request)
+    {
+        $categories = Category::pluck('name', 'id'); 
+        $posts = Post::where('id', $id)->get();   
+        
+        if(Auth::user()->email == $posts[0]->user->email)
+        {
+            $posts = Post::where('id', $id)->delete();
+            return redirect("/")->with('status', 'Пост удален.');
+        }
+        else
+        {
+            abort(403);
+        }
+        
+        return view('addpost', ['categories' => $categories]);
+    }
+
+    public function deletePost($id)
+    {
+        $posts = Post::where('id', $id)->get();
+
+        if(Auth::user()->email == $posts[0]->user->email)
+        {
+            $posts = Post::where('id', $id)->delete();
+            return redirect("/")->with('status', 'Пост удален.');
+        }
+        else
+        {
+            abort(403);
+        }
     }
 
     public function submit(Request $request)
@@ -72,18 +130,18 @@ class PostController extends Controller
             'category' => 'required',
             'post_title' => 'required|max:220',
             'post_intro' => 'required|max:1200',
-            'image' => 'required'           
+            'post_image' => 'required'           
         ]);
 
-        if ($request->file('image')->isValid()) {
-            $path = $request->image->path();
+        if ($request->file('post_image')->isValid()) {
+            $path = $request->post_image->path();
             $art_title_trnslt = self::translit($request->input('post_title'));
             $tmp = substr($art_title_trnslt, 0, 5);                             // substr делает ошибку с кирилическим текстом.
             $imageName = '../images/posts/'. 
                             date("Y-m-d_His") .'_'. 
                             $tmp .'_'. mt_rand(0, 1000) . '.' .
-                            $request->image->getClientOriginalExtension();
-            $request->image->move(public_path('images/posts'), $imageName);
+                            $request->post_image->getClientOriginalExtension();
+            $request->post_image->move(public_path('images/posts'), $imageName);
         }
         else{
             return redirect("/")->with('error', 'Картинка не распознана.');
@@ -100,37 +158,6 @@ class PostController extends Controller
         return redirect("/")->with('status', 'Пост получен и готовится к публикации.');
     }
 
-
-    public function editPost()
-    {
-    	
-        $posts = Post::where('id', $id)->get();
-
-        if(Auth::user()->name == $posts[0]->user)
-        {
-            $ad = Ad::where('id', $id)->delete();
-            return redirect("/")->with('status', 'Ad deleted');
-        }
-        else
-        {
-            abort(403);
-        }
-    }
-
-    public function deletePost($id)
-    {
-        $posts = Post::where('id', $id)->get();
-
-        if(Auth::user()->email == $posts[0]->user->email)
-        {
-            $posts = Post::where('id', $id)->delete();
-            return redirect("/")->with('status', 'Ad deleted');
-        }
-        else
-        {
-            abort(403);
-        }
-    }
 
 
     public function aboutSite()
