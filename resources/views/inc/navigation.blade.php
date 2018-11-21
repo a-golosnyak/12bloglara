@@ -14,7 +14,7 @@
                           aria-expanded="false">Рубрики</a>
                         <div class="dropdown-menu dropdown-primary dropdown-menu-left" aria-labelledby="navbarDropdownMenuLink">
                             @foreach ($categories as $category)
-                                <a class="dropdown-item" href="#">{{ $category }}</a>
+                                <a class="dropdown-item" href="/categoty/{{$loop->index + 1}}">{{ $category }}</a>
                             @endforeach
                         </div>
                     </li>

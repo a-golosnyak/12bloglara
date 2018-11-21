@@ -12,18 +12,22 @@ use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
-    public function getPosts()
+    public function getPosts($id=0)
     {
         $categories = Category::pluck('name', 'id');
-      	$posts = Post::orderBy('id', 'desc')->get();
 
-//		echo $posts[0]->user->name;
-/*      echo "<pre>";
-        print_r($posts);
-        echo "</pre>";		*/
+        if($id == 0)
+          	$posts = Post::orderBy('id', 'desc')->paginate(7);
+        else
+            $posts = Post::where('category_id', $id)->orderBy('id', 'desc')->paginate(7);
 
+//		echo $id;
+/*        echo "<pre>";
+        print_r($categories);
+        echo "</pre>";		
+*/
         return view('home', [   'categories' => $categories,
-                                'posts' => $posts]);
+                                'posts' => $posts]);                              
     }
 
     public function getPost($id)
@@ -36,18 +40,7 @@ class PostController extends Controller
         foreach ($comments as $comment) {
             $nested_comments[$comment->id][] = Comment::where('parent_comment_id', $comment->id)->get();
         }
-/*        
-        echo "<pre>";
-        foreach ($comments as $comment) {
-            foreach($nested_comments[$comment->id] as $nested_comment){            
-                foreach ($nested_comment as $var) {
-                    echo $var->id;
-                    echo "<br>" ;
-                }
-            }
-        }   
-        echo "</pre>";      
-*/
+
         return view('article', [   'categories' => $categories,
                                     'post' => $posts[0],
                                     'comments' => $comments,
@@ -59,6 +52,7 @@ class PostController extends Controller
 		$categories = Category::pluck('name', 'id');	
 		
     	return view('addpost', ['categories' => $categories,
+                                'post_id'=>'',
                                 'action'=>'/addpost/submit',
                                 'post_title' =>'',
                                 'post_intro' =>'',
@@ -73,8 +67,8 @@ class PostController extends Controller
 
         if(Auth::user()->email == $posts[0]->user->email)
         {
-            return view('addpost', ['post_id'=>$id,
-                                    'categories' => $categories,
+            return view('addpost', ['categories' => $categories,
+                                    'post_id'=>$id,
                                     'action'=>"/addpost/update",
                                     'post_title' => $posts[0]->title,
                                     'post_intro' => $posts[0]->intro,
@@ -89,7 +83,7 @@ class PostController extends Controller
 
     public function updatePost(Request $request)
     {
-        $categories = Category::pluck('name', 'id'); 
+//        $categories = Category::pluck('name', 'id');                  // ???
         
         $this->validate($request, [
             'id'=>'required',
@@ -97,18 +91,24 @@ class PostController extends Controller
             'category' => 'required',
             'post_title' => 'required|max:220',
             'post_intro' => 'required|max:1200',
-            'post_image' => '',
+            'post_image' => 'max:10000',
             'post_body' => 'required'            
         ]);
 
         $post = new Post();
         $post->id = $request->input('id');
+        $post->user_id = $request->input('author');
+        $post->category_id = $request->input('category');
+        $post->title = $request->input('post_title');   
+        $post->intro = $request->input('post_intro'); 
+        $post->body  = $request->input('post_body');
 
         $posts = Post::where('id', $post->id)->get(); 
 
         if(Auth::user()->email == $posts[0]->user->email)
         {
-             if (null !== $request->input('post_image')) {
+            if ($request->hasFile('post_image')) 
+            {
                 $path = $request->post_image->path();
                 $art_title_trnslt = self::translit($request->input('post_title'));
                 $tmp = substr($art_title_trnslt, 0, 5);                             // substr делает ошибку с кирилическим текстом.
@@ -117,34 +117,34 @@ class PostController extends Controller
                             $tmp .'_'. mt_rand(0, 1000) . '.' .
                             $request->post_image->getClientOriginalExtension();
                 $request->post_image->move(public_path('images/posts'), $imageName);
-            }
-            else{
-                return redirect("/")->with('error', 'Картинка не распознана.');
-            }
+                $post->img = $imageName;
 
-            $post->user_id = $request->input('author');
-            $post->category_id = $request->input('category');
-            $post->title = $request->input('post_title');
-            $post->img = $imageName;
-            $post->intro = $request->input('post_intro'); 
-            $post->body  = $request->input('post_body');
-
-            Post::where('id', $post->id)
-             ->update(['user_id'        =>$post->user_id,
+                Post::where('id', $post->id)
+                ->update(['user_id'     =>$post->user_id,
                         'category_id'   =>$post->category_id,
                         'title'         =>$post->title,
                         'intro'         =>$post->intro,
-                        'img'           =>$post->img,
+                        'img'           =>$post->img, 
                         'body'          =>$post->body]);
 
-            return redirect("/")->with('status', 'Ad updated');
+                return redirect("/$post->id")->with('status', 'Пост обновлен.');
+            }
+            else
+            {
+                Post::where('id', $post->id)
+                ->update(['user_id'        =>$post->user_id,
+                        'category_id'   =>$post->category_id,
+                        'title'         =>$post->title,
+                        'intro'         =>$post->intro,
+                        'body'          =>$post->body]);
+
+                return redirect("/$post->id")->with('status', 'Пост обновленю Картинка - нет.');
+            }
         }
         else
         {
             abort(403);
         }
-        
-        return view('addpost', ['categories' => $categories]);
     }
 
     public function deletePost($id)
@@ -166,7 +166,6 @@ class PostController extends Controller
     {
 //        $categories = Category::pluck('name', 'id');    
         
-    
         $this->validate($request, [
             'author' => 'required',
             'category' => 'required',
@@ -219,3 +218,38 @@ class PostController extends Controller
     }
 
 }
+
+
+
+
+
+
+
+
+/*        
+        echo "<pre>";
+        foreach ($comments as $comment) {
+            foreach($nested_comments[$comment->id] as $nested_comment){            
+                foreach ($nested_comment as $var) {
+                    echo $var->id;
+                    echo "<br>" ;
+                }
+            }
+        }   
+        echo "</pre>";  
+
+
+
+
+
+*/
+
+
+
+
+
+
+
+
+
+

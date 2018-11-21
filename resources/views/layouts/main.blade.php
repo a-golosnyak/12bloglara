@@ -8,6 +8,7 @@
          <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
         <meta name="description" content="">
         <meta name="author" content="">
+        {{-- <meta name="csrf-token" content="{{ csrf_token() }}"> --}}
         <title>Blog</title>
         <link rel="icon" href="{{URL::asset('favicon.ico')}}">
         <link href="{{URL::asset('css/bootstrap.min.css')}}" rel="stylesheet">

@@ -14,6 +14,10 @@
 4. .env file database settings
 5. php artisan migrate
 
+6. 	php.ini:
+	post_max_size = 12M
+	upload_max_filesize 10M
+
 //---------------------------------------------------------------------------------------------
 
 	Must be done for executing project on Linux server.

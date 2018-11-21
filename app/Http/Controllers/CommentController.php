@@ -6,10 +6,11 @@ use Illuminate\Http\Request;
 use App\Category;
 use App\Comment;
 use App\Post;
+use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
-      public function submit(Request $request)
+    public function submit(Request $request)
     {
         $categories = Category::pluck('name', 'id');    
 
@@ -32,5 +33,32 @@ class CommentController extends Controller
         echo "</pre>";
 */
         return redirect("/$comment->post_id")->with('status', 'Комментарий добавлен');
+    }
+
+    public function delComment(Request $request)
+    {
+        $this->validate($request, [
+            'id' => 'required'
+        ]);
+
+        $id = $request->input('id');
+
+        $comment = Comment::where('id', $id)->get();
+
+        if(Auth::user()->name == $comment[0]->user->name)
+        {
+//            $ad = Ad::where('id', $id)->delete();
+            $comment = Comment::where('id', $id)->delete();
+
+            return response('ok', 200)
+                  ->header('Content-Type', 'text/plain');
+//            return redirect("/")->with('status', 'Ad deleted');
+        }
+        else
+        {
+            return response('err', 403)
+                  ->header('Content-Type', 'text/plain');
+//            abort(403);
+        }
     }
 }

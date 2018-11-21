@@ -28,6 +28,7 @@
                 <hr>
                 <br>
             @endforeach
+            {{ $posts->links() }}
         </div>
     </div>
 </div>

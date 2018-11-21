@@ -14,8 +14,8 @@
                 <p>{{ $post->intro }}</p>
                 <p><img class='post-preview-img' src={{ $post->img }}></p>        
                 <p>{!! $post->body !!}</p>
-                <br>
-                <br>
+                
+                <hr>
                 @guest
                 @else
                     @if (Auth::user()->name == $post->user->name)
@@ -71,18 +71,18 @@
                                 <img class='avatar'  src='images/ava/{{ $basic_comment->user->email }}.jpeg' alt='...'>
                             </div>
                             <div class='col-sm-10 comments1' >
-                                <div style='margin-bottom: 0.2em;'>
+                                <div class='mt-2'>
                                     <div class='comment-author'>{{ $basic_comment->user->name }}</div>
-                                    <div class='comment-date'>{{ \Carbon\Carbon::parse($basic_comment->created_at)->format('Y-m-d H:i') }}</div>
+                                    <div class='comment-date'>{{ \Carbon\Carbon::parse($basic_comment->created_at)->format('Y-m-d H:i') }} id:{{$basic_comment->id}}</div>
                                 </div>
-                                <div>{{ $basic_comment->body }}</div>
+                                <div class='mt-2'>{{ $basic_comment->body }}</div>
                                 <br>                          
                                 @guest
                                 @else
                                     <button class='comment-btn'  onclick=ShowReplyInput('{{$replyId}}','{{ $basic_comment->user->name }}')>Ответить</button>  
-                                    @if (Auth::user()->name == $post->user->name)
-                                        <button  class='comment-btn pull-xs-right' onclick=deleteComment('$parent_comment_id')>Удалить</button>
-                                        <button  class='comment-btn pull-xs-right' onclick=editComment('$parent_comment_id')>Изменить</button>
+                                    @if (Auth::user()->name == $basic_comment->user->name)
+                                        <button  class='comment-btn pull-xs-right' onclick=editComment('{{$basic_comment->id}}')>Изменить</button>
+                                        <button  class='comment-btn pull-xs-right' onclick=deleteComment('{{$basic_comment->id}}')>Удалить</button>
                                     @endif
                                     {!! Form::open(['url' => '/addcomment/submit',
                                                     'id'=> $replyId,
@@ -98,30 +98,32 @@
                                         {{ Form::submit('Добавить комментарий', ['class'=>'comment-btn']) }}
                                     {!! Form::close() !!}
                                 @endguest
-
+                                <br>  
+                                
                                 @foreach($nested_comments[$basic_comment->id] as $nested_comment)
                                     @foreach ($nested_comment as $comment)
                                         @php 
                                             $replyId = 'reply_' . $comment->id 
                                         @endphp
-                                        <br>  
+                                        
+                                        <br>
                                         <div class='row '>
                                             <div class='col-md-1'>
                                                 <img class='avatar'  src='images/ava/{{ $comment->user->email }}.jpeg' alt='...'>
                                             </div>
                                             <div class='col-md-10 comments1 '>
-                                                <div style='margin-bottom: 0.2em;'>
+                                                <div class='mt-2'>
                                                     <div class='comment-author'>{{ $comment->user->name }}</div>
-                                                     <div class='comment-date'>{{ \Carbon\Carbon::parse($comment->created_at)->format('Y-m-d H:i') }}</div>
+                                                     <div class='comment-date'>{{ \Carbon\Carbon::parse($comment->created_at)->format('Y-m-d H:i') }} id:{{$comment->id}}</div>
                                                 </div>
-                                                <div>{{ $comment->body }}</div>
+                                                <div class="mt-2">{{ $comment->body }}</div>
                                                 <br>
                                                 @guest
                                                 @else
-                                                    <button  class='comment-btn' onclick=ShowReplyInput('{{$replyId}}','{{ $comment->user->name }}')>Ответить</button>
-                                                    @if (Auth::user()->name == $post->user->name)
-                                                        <button  class='comment-btn pull-xs-right' onclick=deleteComment('$parent_comment_id')>Удалить</button> 
-                                                        <button  class='comment-btn pull-xs-right' onclick=editComment('$comment_id')>Изменить</button>
+                                                    <button  class='comment-btn' onclick=ShowReplyInput('{{ $replyId }}','{{ $comment->user->name }}')>Ответить</button>
+                                                    @if (Auth::user()->name == $comment->user->name)
+                                                        <button  class='comment-btn pull-xs-right' onclick="ShowEditInput('{{ $replyId }}', '{{$comment->id}}')">Изменить</button>
+                                                        <button  class='comment-btn pull-xs-right' onclick="deleteComment('{{$comment->id}}', '{!! csrf_token() !!}')">Удалить</button>
                                                     @endif
                                                     {!! Form::open(['url' => '/addcomment/submit',
                                                                             'id'=> $replyId,
@@ -171,6 +173,23 @@
                         commentForm.style.display = "block";
 
                     document.querySelectorAll(elem2)[0].value = name+','+' ';
+
+                }
+
+                function ShowEditInput(elem, name)   
+                {
+                    elem2 = '#'+elem+' > textarea';
+                    commentForm = document.getElementById(elem);
+
+                    if(commentForm.style.display == "block")
+                        commentForm.style.display = "none";
+                    else
+                        commentForm.style.display = "block";
+
+                    commentForm2 = document.querySelectorAll(elem2)[0];
+                    alert(commentForm2);
+
+                    document.querySelectorAll(elem2)[0].value = '1';
 
                 }
                 //------------------------------------------------------------------------

@@ -30,6 +30,7 @@
                     {{ Form::hidden('id', $post_id) }}
                     {{ Form::hidden('author', Auth::user()->id) }}
                     {{ Form::file('post_image', ['id'=>'post-file'] ) }}
+                    <span class="float-right">Размер до 10Мб</span>
                     <br>
                     
                     @if(isset($image))

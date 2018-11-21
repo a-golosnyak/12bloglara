@@ -335,14 +335,15 @@ function sendComment(post_id, parent_comment_id, comment_body)
     request.send(data);
 }
 
-function deleteComment(comment_id)
+function deleteComment(comment_id, csrf_token)
 {
-//  alert(comment_id);
+//    alert(comment_id);
     var data = new FormData();
-    data.append('comment_id', comment_id); 
+    data.append('id', comment_id); 
+    data.append('_token', csrf_token); 
 
     request = new ajaxRequest()
-    request.open("POST", "ajax/delcomment.php", true)
+    request.open("POST", "/delcomment", true)
 
     request.onreadystatechange = function()
     {
@@ -350,7 +351,7 @@ function deleteComment(comment_id)
             if (this.status == 200)
                 if (this.responseText != null)
                 {
-                    //alert(this.responseText);
+                //    alert(this.responseText);
                     location.reload();
                 }
     }
