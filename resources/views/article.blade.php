@@ -62,7 +62,8 @@
 
                 @foreach($comments as $basic_comment)
                     @php 
-                        $replyId = 'reply_' . $basic_comment->id
+                        $replyId = 'reply_' . $basic_comment->id;
+                        $commentId = 'comment_' . $basic_comment->id;
                     @endphp
 
                     <div class='comments-main'>
@@ -75,13 +76,13 @@
                                     <div class='comment-author'>{{ $basic_comment->user->name }}</div>
                                     <div class='comment-date'>{{ \Carbon\Carbon::parse($basic_comment->created_at)->format('Y-m-d H:i') }} id:{{$basic_comment->id}}</div>
                                 </div>
-                                <div class='mt-2'>{{ $basic_comment->body }}</div>
+                                <div id={{ $commentId }} class='mt-2'>{{ $basic_comment->body }}</div>
                                 <br>                          
                                 @guest
                                 @else
                                     <button class='comment-btn'  onclick=ShowReplyInput('{{$replyId}}','{{ $basic_comment->user->name }}')>Ответить</button>  
                                     @if (Auth::user()->name == $basic_comment->user->name)
-                                        <button  class='comment-btn pull-xs-right' onclick=editComment('{{$basic_comment->id}}')>Изменить</button>
+                                        <button  class='comment-btn pull-xs-right' onclick="ShowEditInput('{{ $replyId }}', '{{ $commentId }}')">Изменить</button>
                                         <button  class='comment-btn pull-xs-right' onclick=deleteComment('{{$basic_comment->id}}')>Удалить</button>
                                     @endif
                                     {!! Form::open(['url' => '/addcomment/submit',
@@ -103,7 +104,8 @@
                                 @foreach($nested_comments[$basic_comment->id] as $nested_comment)
                                     @foreach ($nested_comment as $comment)
                                         @php 
-                                            $replyId = 'reply_' . $comment->id 
+                                            $replyId = 'reply_' . $comment->id;
+                                            $commentId = 'comment_' .$comment->id;  
                                         @endphp
                                         
                                         <br>
@@ -116,13 +118,13 @@
                                                     <div class='comment-author'>{{ $comment->user->name }}</div>
                                                      <div class='comment-date'>{{ \Carbon\Carbon::parse($comment->created_at)->format('Y-m-d H:i') }} id:{{$comment->id}}</div>
                                                 </div>
-                                                <div class="mt-2">{{ $comment->body }}</div>
+                                                <div id={{ $commentId }} class="mt-2">{{ $comment->body }}</div>
                                                 <br>
                                                 @guest
                                                 @else
                                                     <button  class='comment-btn' onclick=ShowReplyInput('{{ $replyId }}','{{ $comment->user->name }}')>Ответить</button>
                                                     @if (Auth::user()->name == $comment->user->name)
-                                                        <button  class='comment-btn pull-xs-right' onclick="ShowEditInput('{{ $replyId }}', '{{$comment->id}}')">Изменить</button>
+                                                        <button  class='comment-btn pull-xs-right' onclick="ShowEditInput('{{ $replyId }}', '{{ $commentId }}')">Изменить</button>
                                                         <button  class='comment-btn pull-xs-right' onclick="deleteComment('{{$comment->id}}', '{!! csrf_token() !!}')">Удалить</button>
                                                     @endif
                                                     {!! Form::open(['url' => '/addcomment/submit',
@@ -139,14 +141,14 @@
                                                         {{ Form::submit('Добавить комментарий', ['class'=>'comment-btn']) }}
                                                     {!! Form::close() !!}
 
-                                                    <form id='{{ $replyId }}' style='display: none;'>
+                                                    <!--form id='{{ $replyId }}' style='display: none;'>
                                                             <textarea class='intro-box' id='' name='body'  rows='5' maxlength='1000' placeholder='Комментарий' value='xxx'></textarea>
                                                             <input id='' type='hidden' name='post_id' value='$art_id'>
                                                             <input id='' type='hidden' name='parent_comment_id' value='$parent_comment_id'>
                                                             <button  class='comment-btn pull-xs-right' onclick = 'return TimeToSendComment(art_id,  parent_comment_id, comment_body)'>Добавить комментарий</button>
 
                                                             <div style='clear: both;'></div>
-                                                    </form> 
+                                                    </form--> 
                                                     <br>
                                                  @endguest                         
                                             
@@ -173,10 +175,9 @@
                         commentForm.style.display = "block";
 
                     document.querySelectorAll(elem2)[0].value = name+','+' ';
-
                 }
 
-                function ShowEditInput(elem, name)   
+                function ShowEditInput(elem, comment)   
                 {
                     elem2 = '#'+elem+' > textarea';
                     commentForm = document.getElementById(elem);
@@ -186,11 +187,7 @@
                     else
                         commentForm.style.display = "block";
 
-                    commentForm2 = document.querySelectorAll(elem2)[0];
-                    alert(commentForm2);
-
-                    document.querySelectorAll(elem2)[0].value = '1';
-
+                    document.querySelectorAll(elem2)[0].value = document.getElementById(comment).innerHTML;
                 }
                 //------------------------------------------------------------------------
             </script> 
