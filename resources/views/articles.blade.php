@@ -27,6 +27,7 @@
                 <br style='clear: both;'>
                 <hr>
                 <br>
+                <br>
             @endforeach
             {{ $posts->links() }}
         </div>

@@ -138,7 +138,7 @@ class PostController extends Controller
                         'intro'         =>$post->intro,
                         'body'          =>$post->body]);
 
-                return redirect("/$post->id")->with('status', 'Пост обновленю Картинка - нет.');
+                return redirect("/$post->id")->with('status', 'Пост обновлен. Картинка - нет.');
             }
         }
         else

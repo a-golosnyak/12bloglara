@@ -35,6 +35,46 @@ class CommentController extends Controller
         return redirect("/$comment->post_id")->with('status', 'Комментарий добавлен');
     }
 
+    public function editComment(Request $request)
+    {
+        $this->validate($request, [
+            'id' => 'required',
+            'body' => 'required|max:1000'       
+        ]);
+
+        $id = $request->input('id');
+        $comment = Comment::where('id', $id)->get();
+
+/*        $comment = new Comment();
+        $comment->id = $request->input('id');
+        $comment->body = $request->input('body');
+*/            
+        return response("$comment->id" . " " . "$comment->body", 200)
+                  ->header('Content-Type', 'text/plain');
+
+        if(Auth::user()->name == $commentSafe[0]->user->name)
+        {
+
+        }
+/*            $comment = new Comment();
+            $comment->id = $request->input('id');
+            $comment->body = $request->input('body');
+
+            $comment = Comment::where('id', $id)->update();
+
+            return response("$comment->id" . " " . "$comment->body", 200)
+                  ->header('Content-Type', 'text/plain');
+*/
+/*            return response('ok', 200)
+                  ->header('Content-Type', 'text/plain');   */
+/*        }
+        else
+        {
+            return response('err', 403)
+                  ->header('Content-Type', 'text/plain');
+        }   */  
+    }
+
     public function delComment(Request $request)
     {
         $this->validate($request, [
@@ -47,18 +87,15 @@ class CommentController extends Controller
 
         if(Auth::user()->name == $comment[0]->user->name)
         {
-//            $ad = Ad::where('id', $id)->delete();
             $comment = Comment::where('id', $id)->delete();
 
             return response('ok', 200)
                   ->header('Content-Type', 'text/plain');
-//            return redirect("/")->with('status', 'Ad deleted');
         }
         else
         {
             return response('err', 403)
                   ->header('Content-Type', 'text/plain');
-//            abort(403);
         }
     }
 }

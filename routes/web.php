@@ -22,6 +22,7 @@ Route::post('/addpost/submit',		'PostController@submit');
 Route::get('/delpost/{id}',			'PostController@deletePost');
 
 Route::post ('/addcomment/submit',	'CommentController@submit');
+Route::post ('/editcomment',		'CommentController@editComment');
 Route::post ('/delcomment',			'CommentController@delComment');
 
 Route::get ('/{id}', 			'PostController@getPost');		// last

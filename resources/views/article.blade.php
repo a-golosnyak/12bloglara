@@ -124,7 +124,7 @@
                                                 @else
                                                     <button  class='comment-btn' onclick=ShowReplyInput('{{ $replyId }}','{{ $comment->user->name }}')>Ответить</button>
                                                     @if (Auth::user()->name == $comment->user->name)
-                                                        <button  class='comment-btn pull-xs-right' onclick="ShowEditInput('{{ $replyId }}', '{{ $commentId }}')">Изменить</button>
+                                                        <button  class='comment-btn pull-xs-right' onclick="ShowEditInput('{{ $replyId }}', '{{ $commentId }}', '{{$comment->id}}', '{!! csrf_token() !!}' )">Изменить</button>
                                                         <button  class='comment-btn pull-xs-right' onclick="deleteComment('{{$comment->id}}', '{!! csrf_token() !!}')">Удалить</button>
                                                     @endif
                                                     {!! Form::open(['url' => '/addcomment/submit',
@@ -137,6 +137,7 @@
                                                         {{ Form::hidden('post_id', $post->id) }}
                                                         {{ Form::hidden('user_id', Auth::user()->id) }}
                                                         {{ Form::hidden('parent_comment_id', $basic_comment->id) }}
+                                                        {{ Form::hidden('comment_id', $comment->id) }}
                                                         <br>
                                                         {{ Form::submit('Добавить комментарий', ['class'=>'comment-btn']) }}
                                                     {!! Form::close() !!}
@@ -166,20 +167,23 @@
                 //--- Принимаем строку со значением идентификатора -----------------------
                 function ShowReplyInput(elem, name)   
                 {
-                    elem2 = '#'+elem+' > textarea';
+                    textArea = '#'+elem+' > textarea';
+                    buttonSubmit = '#'+elem+' :last-child';
                     commentForm = document.getElementById(elem);
+                    document.querySelectorAll(buttonSubmit)[0].value = 'Добавить комментарий';
 
                     if(commentForm.style.display == "block")
                         commentForm.style.display = "none";
                     else
                         commentForm.style.display = "block";
 
-                    document.querySelectorAll(elem2)[0].value = name+','+' ';
+                    document.querySelectorAll(textArea)[0].value = name+','+' ';
                 }
 
-                function ShowEditInput(elem, comment)   
+                function ShowEditInput(elem, comment, comment_id, csrf_token)   
                 {
-                    elem2 = '#'+elem+' > textarea';
+                    textArea = '#'+elem+' > textarea';
+                    buttonSubmit = '#'+elem+' :last-child';
                     commentForm = document.getElementById(elem);
 
                     if(commentForm.style.display == "block")
@@ -187,8 +191,42 @@
                     else
                         commentForm.style.display = "block";
 
-                    document.querySelectorAll(elem2)[0].value = document.getElementById(comment).innerHTML;
+                    // Манимауляции с текмтовым полем, куда вводим то, что будет отправляться.
+                    document.querySelectorAll(textArea)[0].value = document.getElementById(comment).innerHTML;  
+                    // Манимауляции с кнопкой Submit
+                    btn = document.querySelectorAll(buttonSubmit)[0];
+                    btn.value = 'Сохранить комментарий';
+
+                    btn.onclick = function(){   // Функция отправляет Ajax запрос с обновленными данными. 
+                        token = document.querySelectorAll               ('#'+elem+' :nth-child(1)')[0].value;
+                        body = document.querySelectorAll                ('#'+elem+' :nth-child(2)')[0].value;
+                        comment_id = document.querySelectorAll          ('#'+elem+' :nth-child(6)')[0].value;
+                        submit = document.querySelectorAll              ('#'+elem+' :nth-child(8)')[0].value;
+
+//                      alert( post_id.value );
+                        var data = new FormData();
+                        data.append('id', comment_id); 
+                        data.append('body', body); 
+                        data.append('_token', csrf_token); 
+
+                        request = new ajaxRequest()
+                        request.open("POST", "/editcomment", true)
+
+                        request.onreadystatechange = function()
+                        {
+                            if (this.readyState == 4)
+                                if (this.status == 200)
+                                    if (this.responseText != null)
+                                    {
+                                        alert(this.responseText);
+                                    //    location.reload();
+                                    }
+                        }
+                        request.send(data);     
+                        return false;
+                    }
                 }
+
                 //------------------------------------------------------------------------
             </script> 
             </div>
