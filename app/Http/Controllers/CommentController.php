@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Category;
-use App\Comment;
+use DB;
 use App\Post;
+use App\User;
+use App\Comment;
 use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
@@ -43,36 +45,27 @@ class CommentController extends Controller
         ]);
 
         $id = $request->input('id');
+
+        $comment = new Comment();
         $comment = Comment::where('id', $id)->get();
-
-/*        $comment = new Comment();
-        $comment->id = $request->input('id');
-        $comment->body = $request->input('body');
-*/            
-        return response("$comment->id" . " " . "$comment->body", 200)
-                  ->header('Content-Type', 'text/plain');
-
-        if(Auth::user()->name == $commentSafe[0]->user->name)
+        
+        if(Auth::user()->name == $comment[0]->user->name)
         {
-
-        }
-/*            $comment = new Comment();
             $comment->id = $request->input('id');
             $comment->body = $request->input('body');
 
-            $comment = Comment::where('id', $id)->update();
+            Comment::where('id', $comment->id)->update([
+                            'id' => $comment->id,
+                            'body'=> $comment->body]);
 
             return response("$comment->id" . " " . "$comment->body", 200)
                   ->header('Content-Type', 'text/plain');
-*/
-/*            return response('ok', 200)
-                  ->header('Content-Type', 'text/plain');   */
-/*        }
+        }
         else
         {
             return response('err', 403)
                   ->header('Content-Type', 'text/plain');
-        }   */  
+        }   
     }
 
     public function delComment(Request $request)

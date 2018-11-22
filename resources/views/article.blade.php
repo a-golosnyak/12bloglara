@@ -82,7 +82,7 @@
                                 @else
                                     <button class='comment-btn'  onclick=ShowReplyInput('{{$replyId}}','{{ $basic_comment->user->name }}')>Ответить</button>  
                                     @if (Auth::user()->name == $basic_comment->user->name)
-                                        <button  class='comment-btn pull-xs-right' onclick="ShowEditInput('{{ $replyId }}', '{{ $commentId }}')">Изменить</button>
+                                        <button  class='comment-btn pull-xs-right' onclick="ShowEditInput('{{ $replyId }}', '{{ $commentId }}', '{{$basic_comment->id}}', '{!! csrf_token() !!}')">Изменить</button>
                                         <button  class='comment-btn pull-xs-right' onclick=deleteComment('{{$basic_comment->id}}')>Удалить</button>
                                     @endif
                                     {!! Form::open(['url' => '/addcomment/submit',
@@ -95,6 +95,7 @@
                                         {{ Form::hidden('post_id', $post->id) }}
                                         {{ Form::hidden('user_id', Auth::user()->id) }}
                                         {{ Form::hidden('parent_comment_id', $basic_comment->id) }}
+                                        {{ Form::hidden('comment_id', $basic_comment->id) }}
                                         <br>
                                         {{ Form::submit('Добавить комментарий', ['class'=>'comment-btn']) }}
                                     {!! Form::close() !!}
@@ -198,10 +199,10 @@
                     btn.value = 'Сохранить комментарий';
 
                     btn.onclick = function(){   // Функция отправляет Ajax запрос с обновленными данными. 
-                        token = document.querySelectorAll               ('#'+elem+' :nth-child(1)')[0].value;
-                        body = document.querySelectorAll                ('#'+elem+' :nth-child(2)')[0].value;
-                        comment_id = document.querySelectorAll          ('#'+elem+' :nth-child(6)')[0].value;
-                        submit = document.querySelectorAll              ('#'+elem+' :nth-child(8)')[0].value;
+                        token = document.querySelectorAll     ('#'+elem+' :nth-child(1)')[0].value;
+                        body = document.querySelectorAll      ('#'+elem+' :nth-child(2)')[0].value;
+                        comment_id = document.querySelectorAll('#'+elem+' :nth-child(6)')[0].value;
+                        submit = document.querySelectorAll    ('#'+elem+' :nth-child(8)')[0].value;
 
 //                      alert( post_id.value );
                         var data = new FormData();
@@ -218,15 +219,14 @@
                                 if (this.status == 200)
                                     if (this.responseText != null)
                                     {
-                                        alert(this.responseText);
-                                    //    location.reload();
+                                    //    alert(this.responseText);
+                                        location.reload();
                                     }
                         }
                         request.send(data);     
                         return false;
                     }
                 }
-
                 //------------------------------------------------------------------------
             </script> 
             </div>
