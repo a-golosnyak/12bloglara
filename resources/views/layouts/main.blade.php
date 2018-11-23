@@ -26,7 +26,7 @@
         @include('inc.navigation')
         @include('inc.message')
 
-        <div class='main-field'>  
+        <div class='main-field '>  
             <div class='container-fluid ' >
                 <div class='container data-field'>
                     <div class='row'>  

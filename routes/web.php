@@ -25,6 +25,8 @@ Route::post ('/addcomment/submit',	'CommentController@submit');
 Route::post ('/editcomment',		'CommentController@editComment');
 Route::post ('/delcomment',			'CommentController@delComment');
 
+Route::post ('/checkuser', 			'ProfileController@checkUser');
+
 Route::get ('/{id}', 			'PostController@getPost');		// last
 
 Auth::routes();

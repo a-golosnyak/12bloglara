@@ -55,7 +55,7 @@ h6, .h6 {
  * Override Bootstrap's default container.
  */
 .container {
-  max-width: 60rem;
+  max-width: 70rem;
 }
 
 /*
@@ -137,15 +137,16 @@ a:focus, a:hover {
   padding-top: 1.5rem;
   padding-bottom: 1rem;
   border: 1px solid grey;
-  background: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.9)), no-repeat, url(../images/03_pcb.jpg);
-  background-position: 50% 20%;
+  background: linear-gradient(rgba(255, 255, 255, 0.6), 
+                              rgba(255, 255, 255, 0.8)), no-repeat, url(../images/03_pcb.jpg);
+  background-position: 50% 10%;
 }
 
 .blog-title {
   margin-bottom: 0;
   font-size: 2rem;
   font-weight: normal;
-  color: #505050;
+  color: #404040;
 }
 
 .blog-description {

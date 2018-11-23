@@ -7,7 +7,7 @@
             @csrf
             <h2 class="form-signin-heading">Регистрация</h2>
             <div>
-                <input id="email" type="email" name="email" class="form-control form-signup d-inline" placeholder="Email" required onblur='checkUser(this)'>
+                <input id="email" type="email" name="email" class="form-control form-signup d-inline" placeholder="Email" required onblur="checkUser(this, '{!! csrf_token() !!}')">
                 <div id="emailOk" class="d-inline">
                     <i class="fas fa-asterisk "></i> 
                 </div>
@@ -57,14 +57,11 @@
             </div>
             <br>
         </form>
-        <br class="my-5">
-        <br class="my-5">
-        <br class="my-5">
-        <br class="my-5">
+        <div class="my-5 py-5"></div>
     </div>
 @endsection
 
-@section('footer')
-@endsection
+{{--@section('footer')
+@endsection--}}
 
 

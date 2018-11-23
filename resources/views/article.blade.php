@@ -3,8 +3,8 @@
 
 @section('content')
     <div class='col-md-8 blog-main '>
-        <div class='blog-post'>  
-            <div class='container-fluid' >   
+        <div class='blog-post '>  
+            <div class='container-fluid p-4' >   
                 <a class=' none-decored' href=''>
                     <h2 class='blog-post-title'>{{ $post->title }}</h2>
                 </a>

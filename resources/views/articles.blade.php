@@ -1,6 +1,6 @@
 <div class='col-md-8 blog-main '>
     <div class='blog-post'>  
-        <div class='container-fluid' >
+        <div class='container-fluid p-4' >
             @foreach ($posts as $post)    
                 <a class=' none-decored' href='/{{$post->id}}'>
                     <h2 class='blog-post-title'>{{ $post->title }}</h2>

@@ -85,14 +85,18 @@ function validateRegFormAll(form)
 }
 
 
-function checkUser(email)
+function checkUser(email, csrf_token)
 {
+//  alert(comment_id);
     if(validateEmail(email.value) == "")    /*(email.value.length > 5)*/
     {
-        params  = "email=" + email.value
+        var data = new FormData();
+        data.append('email', email.value); 
+        data.append('_token', csrf_token); 
+
         request = new ajaxRequest()
-        request.open("POST", "ajax/checkuser.php", true)
-        request.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
+        request.open("POST", "/checkuser", true)
+    //    request.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
 
         request.onreadystatechange = function()
         {
@@ -100,7 +104,7 @@ function checkUser(email)
                 if (this.status == 200)
                     if (this.responseText != null)
                     {
-                        if(this.responseText == 'exists')
+                        if(this.responseText == 'absend')
                         {
                             document.getElementById('emailOk').innerHTML = "<i class='fas fa-times' style='color: rgb(200, 50, 50); font-size: 0.8rem;'> ";
                             checkUserFlag = 'error';
@@ -112,12 +116,14 @@ function checkUser(email)
                         }
                     }
         }
-        request.send(params);
+        request.send(data); 
     }
     else
     {
         document.getElementById('emailOk').innerHTML = "<i class='fas fa-asterisk'></i> ";
     }
+
+    return false;
 }
 
 function ajaxRequest()
@@ -160,8 +166,8 @@ function validateEmail(field)
 
 function validatePassword(pass1, pass2) 
 {
-    if( ((pass1 != "") && (pass1.value.length > 6)) &&
-        ((pass2 != "") && (pass2.value.length > 6)) &&
+    if( ((pass1 != "") && (pass1.value.length > 5)) &&
+        ((pass2 != "") && (pass2.value.length > 5)) &&
          (pass1.value == pass2.value))
     {
         document.getElementById('pass1Ok').innerHTML = "<i class='fas fa-check' style='color: rgb(50, 200, 50); font-size: 0.7rem;'> ";
