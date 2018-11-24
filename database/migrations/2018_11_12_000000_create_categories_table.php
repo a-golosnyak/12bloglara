@@ -21,7 +21,7 @@ class CreateCategoriesTable extends Migration
         DB::update("INSERT INTO categories SET name='Микроконтроллеры STM32'");
         DB::update("INSERT INTO categories SET name='Программирование Linux'");
         DB::update("INSERT INTO categories SET name='Электроника'");
-        DB::update("INSERT INTO categories SET name='Заметки WEB-разработчика'");
+        DB::update("INSERT INTO categories SET name='WEB-разработка'");
         DB::update("INSERT INTO categories SET name='Разное'");
         
     }

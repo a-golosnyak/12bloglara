@@ -11,9 +11,11 @@
 |
 */
 Route::get ('/registration', 		'Auth\RegisterController@reg');
-Route::get ('/about', 				'PostController@aboutSite');
-Route::get ('/profile/{id}', 		'ProfileController@getUser');
+Route::get ('/about', 				'HomeController@aboutSite');
+Route::get ('/contacts', 			'HomeController@contacts');
+Route::get ('/profile/{id}', 		'UserController@getUser');
 Route::get ('/', 					'PostController@getPosts');
+Route::get ('/ofuser/{id}', 		'PostController@getPosts');
 Route::get ('/categoty/{id}', 		'PostController@getPosts');
 Route::get ('/addpost', 			'PostController@addPost');
 Route::get ('/addpost/{id}', 		'PostController@editPost');
@@ -25,9 +27,12 @@ Route::post ('/addcomment/submit',	'CommentController@submit');
 Route::post ('/editcomment',		'CommentController@editComment');
 Route::post ('/delcomment',			'CommentController@delComment');
 
-Route::post ('/checkuser', 			'ProfileController@checkUser');
+Route::post ('/checkuser', 			'UserController@checkUser');
+Route::post ('/setname', 			'UserController@setName');
+Route::post ('/setemail', 			'UserController@setEmail');
+Route::post ('/setpassword', 		'UserController@setPassword');
 
-Route::get ('/{id}', 			'PostController@getPost');		// last
+Route::get ('/{id}', 				'PostController@getPost');		// last
 
 Auth::routes();
 

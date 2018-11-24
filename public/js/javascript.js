@@ -25,7 +25,7 @@ function validateRecoveryForm(form)
 
     if(result == '')
     {
-        return true;    
+        return true;     
     }
     return false;
 }
@@ -84,7 +84,6 @@ function validateRegFormAll(form)
     return false;
 }
 
-
 function checkUser(email, csrf_token)
 {
 //  alert(comment_id);
@@ -104,7 +103,8 @@ function checkUser(email, csrf_token)
                 if (this.status == 200)
                     if (this.responseText != null)
                     {
-                        if(this.responseText == 'absend')
+//                        alert(this.responseText);
+                        if(this.responseText == 'exists')
                         {
                             document.getElementById('emailOk').innerHTML = "<i class='fas fa-times' style='color: rgb(200, 50, 50); font-size: 0.8rem;'> ";
                             checkUserFlag = 'error';
@@ -172,13 +172,13 @@ function validatePassword(pass1, pass2)
     {
         document.getElementById('pass1Ok').innerHTML = "<i class='fas fa-check' style='color: rgb(50, 200, 50); font-size: 0.7rem;'> ";
         document.getElementById('pass2Ok').innerHTML = "<i class='fas fa-check' style='color: rgb(50, 200, 50); font-size: 0.7rem;'> ";
-        return '';  // means Ok
+        return true;  // means Ok
     }
     else
     {
         document.getElementById('pass1Ok').innerHTML = "<i class='fas fa-times' style='color: rgb(200, 50, 50); font-size: 0.9rem;'> ";
         document.getElementById('pass2Ok').innerHTML = "<i class='fas fa-times' style='color: rgb(200, 50, 50); font-size: 0.9rem;'> ";
-        return 'error';
+        return false;
     }  
 }
 

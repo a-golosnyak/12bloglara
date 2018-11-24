@@ -30,6 +30,15 @@ class PostController extends Controller
                                 'posts' => $posts]);                              
     }
 
+    public function getPostsOfUser($id=0)
+    {
+        $categories = Category::pluck('name', 'id');
+        $posts = Post::where('user_id', $id)->orderBy('id', 'desc')->paginate(7);
+        
+        return view('home', [   'categories' => $categories,
+                                'posts' => $posts]);                              
+    }
+
     public function getPost($id)
     {
         $categories = Category::pluck('name', 'id');
@@ -201,14 +210,6 @@ class PostController extends Controller
         return redirect("/")->with('status', 'Пост получен и готовится к публикации.');
     }
 
-
-
-    public function aboutSite()
-    {
-        $categories = Category::pluck('name', 'id');
-
-        return view('about', ['categories' => $categories]);
-    }
 
     function translit($str) 
     {

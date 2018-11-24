@@ -24,7 +24,7 @@
                     <span>Все мои статьи</span>
                 </div>
                 <div class='col-sm-5'></div>
-                <form class='col-sm-3' action='articles.php' method='get'>
+                <form class='col-sm-3' action='/ofuser/{{ Auth::user()->id }}' method='get'>
                     <input type='hidden' name='show' value='user_articles'>
                     <button type='submit' class='profile-btn' style='text-align: center;'>Посмотерть</button>
                 </form>
@@ -35,11 +35,12 @@
                     <span>Профиль создан</span>
                 </div>
                 <div class='float-right ml-auto' >
-                    <span class='profile-meta mr-4' >{{ \Carbon\Carbon::parse($user->created_at)->format('Y-m-d H:i')}}</span>
+                    <span class='profile-meta mr-5' >{{ \Carbon\Carbon::parse($user->created_at)->format('Y-m-d H:i')}}</span>
                 </div>
             </div> 
             <hr>
-            <form class='row form-signin' action='profile.php' method='post'>
+            <form class='row form-signin' action='/setname' method='post'>
+                @csrf
                 <div class='col-sm-4'>
                     <label for='name'>Имя</label>
                 </div>
@@ -54,23 +55,24 @@
                 </div>
             </form>
             <hr>
-            <form class='row form-signin' action='profile.php' method='post'>
+            <form class='row form-signin' action='/setemail' method='post'>
+                @csrf
                 <div class='col-sm-4'>
                     <label for='inputEmail'>Электронная почта</label>
                 </div>
                 <div class='col-sm-5'>
-                    <input class="d-inline" type='email' id='inputEmail' name='email' placeholder={{ Auth::user()->email }} required onblur='checkUser(this)' size='18'>
+                    <input class="d-inline" type='email' id='inputEmail' name='email' placeholder={{ Auth::user()->email }} required onblur="checkUser(this, '{!! csrf_token() !!}')" size='18'>
                     <div id='emailOk' class='d-inline' >
                         <i class='fas fa-asterisk'></i>
                     </div>
                 </div>
                 <div class='col-sm-3' >
-                    <button type='submit ' class='profile-btn disabled' >Применить</button>
+                    <button type='submit' class='profile-btn disabled' >Применить</button>
                 </div>
             </form>
             <hr>
-
-            <form class='form-signin' action='profile.php' method='post'>
+            <form class='form-signin' action='/setpassword' method='post' onsubmit="validatePassword(password, password_confirm)">
+                @csrf
                 <div class='row'>
                         <div class='col-sm-4'>
                             <p>Пароль</p>

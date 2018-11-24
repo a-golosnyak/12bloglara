@@ -747,8 +747,6 @@ a:focus, a:hover {
 /*=== About =================================================================*/
 
 .about{
-  padding: 3em;
   background-color: #fEfEfE;
-  height: 80vh;
   overflow-x: hidden;
 }

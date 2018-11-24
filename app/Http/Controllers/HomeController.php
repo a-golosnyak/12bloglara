@@ -28,4 +28,19 @@ class HomeController extends Controller
     }
 
 
+    public function contacts()
+    {
+        $categories = Category::pluck('name', 'id');
+
+        return view('contacts', ['categories' => $categories]);
+    }
+
+
+    public function aboutSite()
+    {
+        $categories = Category::pluck('name', 'id');
+
+        return view('about', ['categories' => $categories]);
+    }
+
 }

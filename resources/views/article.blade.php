@@ -32,10 +32,24 @@
                             <img src='/images/000078_social_3d_cubs1_vk.png'>
                             </a>
                         </div>
-                        <br>
+                        <div class='pull-xs-left'>
+                            <a href='' class='social-fb' target='_blank'>
+                            <img src='/images/000078_social_3d_cubs1_fb.png'>
+                            </a>
+                        </div>
+                        <div class='pull-xs-left'>
+                            <a href='' class='social-ok' target='_blank'>
+                                <img src='/images/000078_social_3d_cubs1_ok.png'>
+                            </a>
+                        </div>
+                        <div class='pull-xs-left'>
+                            <a href=''>
+                                <img src='/images/000078_social_3d_cubs1_linkedin.png'>
+                            </a>
+                        </div>
                         <span class='repost-notification'>Если Вам понравилась или была полезной эта статья, можно сделать репост в социальные сети.
                         </span>
-
+                        <br>
                     </div>
                 </div>
                 <br>
@@ -142,15 +156,6 @@
                                                         <br>
                                                         {{ Form::submit('Добавить комментарий', ['class'=>'comment-btn']) }}
                                                     {!! Form::close() !!}
-
-                                                    <!--form id='{{ $replyId }}' style='display: none;'>
-                                                            <textarea class='intro-box' id='' name='body'  rows='5' maxlength='1000' placeholder='Комментарий' value='xxx'></textarea>
-                                                            <input id='' type='hidden' name='post_id' value='$art_id'>
-                                                            <input id='' type='hidden' name='parent_comment_id' value='$parent_comment_id'>
-                                                            <button  class='comment-btn pull-xs-right' onclick = 'return TimeToSendComment(art_id,  parent_comment_id, comment_body)'>Добавить комментарий</button>
-
-                                                            <div style='clear: both;'></div>
-                                                    </form--> 
                                                     <br>
                                                  @endguest                         
                                             
@@ -196,7 +201,7 @@
                     document.querySelectorAll(textArea)[0].value = document.getElementById(comment).innerHTML;  
                     // Манимауляции с кнопкой Submit
                     btn = document.querySelectorAll(buttonSubmit)[0];
-                    btn.value = 'Сохранить комментарий';
+                    btn.value = 'Сохранить изменения';
 
                     btn.onclick = function(){   // Функция отправляет Ajax запрос с обновленными данными. 
                         token = document.querySelectorAll     ('#'+elem+' :nth-child(1)')[0].value;

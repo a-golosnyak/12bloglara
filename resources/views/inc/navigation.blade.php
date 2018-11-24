@@ -20,7 +20,7 @@
                     </li>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link disabled" href="#">Контакты</a>
+                    <a class="nav-link" href="/contacts">Контакты</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/about">О сайте</a>
