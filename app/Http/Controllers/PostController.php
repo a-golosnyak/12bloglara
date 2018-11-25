@@ -12,6 +12,22 @@ use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
+
+    public function contacts()
+    {
+        $categories = Category::pluck('name', 'id');
+
+        return view('contacts', ['categories' => $categories]);
+    }
+
+
+    public function aboutSite()
+    {
+        $categories = Category::pluck('name', 'id');
+
+        return view('about', ['categories' => $categories]);
+    }
+
     public function getPosts($id=0)
     {
         $categories = Category::pluck('name', 'id');

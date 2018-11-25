@@ -10,9 +10,10 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+
 Route::get ('/registration', 		'Auth\RegisterController@reg');
-Route::get ('/about', 				'HomeController@aboutSite');
-Route::get ('/contacts', 			'HomeController@contacts');
+
 Route::get ('/profile/{id}', 		'UserController@getUser');
 Route::get ('/', 					'PostController@getPosts');
 Route::get ('/ofuser/{id}', 		'PostController@getPosts');
@@ -31,6 +32,10 @@ Route::post ('/checkuser', 			'UserController@checkUser');
 Route::post ('/setname', 			'UserController@setName');
 Route::post ('/setemail', 			'UserController@setEmail');
 Route::post ('/setpassword', 		'UserController@setPassword');
+
+//This functions don't work in HomeController. Maybe __construct() -> this->middleware('auth'); is the reason
+Route::get ('/about', 				'PostController@aboutSite');	
+Route::get ('/contacts', 			'PostController@contacts');
 
 Route::get ('/{id}', 				'PostController@getPost');		// last
 

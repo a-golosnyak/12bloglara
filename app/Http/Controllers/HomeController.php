@@ -4,9 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Category;
+use Illuminate\Support\Facades\Auth;
+
+use DB;
+use App\Post;
+use App\User;
+use App\Comment;
 
 class HomeController extends Controller
-{
+{    
     /**
      * Create a new controller instance.
      *
@@ -27,20 +33,5 @@ class HomeController extends Controller
         return view('/');
     }
 
-
-    public function contacts()
-    {
-        $categories = Category::pluck('name', 'id');
-
-        return view('contacts', ['categories' => $categories]);
-    }
-
-
-    public function aboutSite()
-    {
-        $categories = Category::pluck('name', 'id');
-
-        return view('about', ['categories' => $categories]);
-    }
 
 }
