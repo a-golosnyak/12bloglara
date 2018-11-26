@@ -11,7 +11,6 @@
 |
 */
 
-
 Route::get ('/registration', 		'Auth\RegisterController@reg');
 
 Route::get ('/profile/{id}', 		'UserController@getUser');

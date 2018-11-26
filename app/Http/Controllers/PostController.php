@@ -20,7 +20,6 @@ class PostController extends Controller
         return view('contacts', ['categories' => $categories]);
     }
 
-
     public function aboutSite()
     {
         $categories = Category::pluck('name', 'id');
@@ -39,11 +38,11 @@ class PostController extends Controller
 
 //		echo $id;
 /*        echo "<pre>";
-        print_r($categories);
+        print_r($posts);
         echo "</pre>";		
 */
         return view('home', [   'categories' => $categories,
-                                'posts' => $posts]);                              
+                                'posts' => $posts]);                             
     }
 
     public function getPostsOfUser($id=0)

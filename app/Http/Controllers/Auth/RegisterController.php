@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use App\Category;
+use Illuminate\Http\Request;
+use Illuminate\Auth\Events\Registered;
 
 class RegisterController extends Controller
 {
@@ -76,5 +78,32 @@ class RegisterController extends Controller
         $categories = Category::pluck('name', 'id');
 
         return view('registration', ['categories' => $categories]);
+    }
+
+    /**
+     * Handle a registration request for the application. REDEFINED method !!!!
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function register(Request $request)
+    {
+        $this->validator($request->all())->validate();
+
+        event(new Registered($user = $this->create($request->all())));
+
+        $file = "images/ava/Guest.jpg";
+        $newFile = "images/ava/$user->email.jpeg";
+
+        //--- Присваеваем новому профилю стандартную картпинку --------------------------------
+        if (copy($file, $newFile))          // Делаем копию файла        
+            $status = "Ok";
+        else
+            $status = "err01";
+
+        $this->guard()->login($user);
+
+        return $this->registered($request, $user)
+                        ?: redirect($this->redirectPath());
     }
 }

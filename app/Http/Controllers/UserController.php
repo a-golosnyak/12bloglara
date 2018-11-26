@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Category;
 use Illuminate\Support\Facades\Auth;
+use Hash;
 
 class UserController extends Controller
 {
@@ -92,14 +93,25 @@ class UserController extends Controller
 	public function setPassword(Request $request)
 	{
 	    $this->validate($request, [
-            'password' => 'required|min:6'
+            'password' => 'required|min:6',
+            'password_confirm' => 'required|min:6'
         ]);
 
 		$password = $request->input('password');
+		$password_confirm = $request->input('password_confirm');
 
-        User::where('id', Auth::user()->id)
+		if(strcmp($password, $password_confirm) == 0)
+        {
+        	$password = Hash::make($password);
+
+        	User::where('id', Auth::user()->id)
                 ->update(['password'=>$password]);
 
-        return redirect("/profile/". Auth::user()->id)->with('status', 'Пароль обновлен.');
+        	return redirect("/profile/". Auth::user()->id)->with('status', 'Пароль обновлен.');
+        }
+        else
+        {
+        	return redirect("/profile/". Auth::user()->id)->with('error', 'Введенные пароли не совпадают.');
+        }
 	}
 }
