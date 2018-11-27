@@ -6,7 +6,7 @@
 		    <div class='container-fluid ' >
 		        <div class='container data-field'>
 		            <div class='row about mx-4' style="font-family: Roboto; font-size: 1.05em;">
-		                <p>На данный момент c автором можно связаяться по адресу электронной почты:</p>
+		                <p>На данный момент c автором можно связаться по адресу электронной почты:</p>
 		                <p>razrabotka.ua@gmail.com</p>
 		            </div>
 		        </div>

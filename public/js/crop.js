@@ -59,7 +59,7 @@ $("input[type=file]").on("change", function(){      // Это событие, к
         data.append('file', blobFile);                // Это имя файла уходит в запросе.
 
         $.ajax({
-            url: "ajax/croprequest.php",
+            url: "/setimage",
             data: data,
             cache: false,
             processData: false, 

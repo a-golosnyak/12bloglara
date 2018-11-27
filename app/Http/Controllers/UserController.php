@@ -114,4 +114,10 @@ class UserController extends Controller
         	return redirect("/profile/". Auth::user()->id)->with('error', 'Введенные пароли не совпадают.');
         }
 	}
+
+	public function setImage(Request $request)
+	{
+		return response('ok', 200)
+	                  ->header('Content-Type', 'text/plain');
+	}
 }

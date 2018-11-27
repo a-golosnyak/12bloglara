@@ -99,7 +99,7 @@
             <hr>
             <br>
             <div class="row preview-zone ">
-                <form class="form-signin text-center mx-auto" method= 'post' action='profile.php' enctype='multipart/form-data'>
+                <form class="form-signin text-center mx-auto" method= 'post' action='/setimage' enctype='multipart/form-data'>
                     <h5 class="photo-item">Фото профиля</h5>
                     <img class='crop jcrop-holder' src='{{asset('images/ava/'. Auth::user()->email .'.jpeg') }}' id='ProfilePhoto'  />
                     <br>
@@ -108,9 +108,10 @@
                         <input type="file" id="InpProfilePhoto" style="display:none" aria-hidden="true">
                     </label>
 
-                    <button class="btn btn-md btn-danger" id="PhotoCancel"crop style="display: none" href='profile.php'>Отмена</button>
+                    <button class="profile-btn mb-2 mr-3" id="PhotoCancel"crop style="display: none" href='profile.php'>Отмена</button>
 
-                    <button type="submit" class="profile-btn btn-md btn-primary" id="PhotoSubmit" style="display:none">Загрузить</button>  
+                    <button type="submit" class="profile-btn mb-2" id="PhotoSubmit" style="display:none">Загрузить</button>  
+                    <br class="mb-3">
                 </form>
             </div> 
             <!-- This is the form that our event handler fills      DEBUG SECTION ***   -->

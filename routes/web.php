@@ -24,13 +24,18 @@ Route::post('/addpost/submit',		'PostController@submit');
 Route::get('/delpost/{id}',			'PostController@deletePost');
 
 Route::post ('/addcomment/submit',	'CommentController@submit');
+
+//--- Ajax-----------------------------------------------------------------
 Route::post ('/editcomment',		'CommentController@editComment');
 Route::post ('/delcomment',			'CommentController@delComment');
-
 Route::post ('/checkuser', 			'UserController@checkUser');
+Route::post ('/setimage', 			'UserController@setImage');
+//-------------------------------------------------------------------------
+
 Route::post ('/setname', 			'UserController@setName');
 Route::post ('/setemail', 			'UserController@setEmail');
 Route::post ('/setpassword', 		'UserController@setPassword');
+
 
 //This functions don't work in HomeController. Maybe __construct() -> this->middleware('auth'); is the reason
 Route::get ('/about', 				'PostController@aboutSite');	
