@@ -74,8 +74,6 @@ class UserController extends Controller
 		$file = "images/ava/" . Auth::user()->email . ".jpeg";
         $newFile = "images/ava/$email.jpeg";
 
-		
-
         if (copy($file, $newFile))          // Делаем копию файла        
             $status = "Email обновлен.";
         else
