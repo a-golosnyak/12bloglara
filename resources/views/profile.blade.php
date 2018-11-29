@@ -99,7 +99,7 @@
             <hr>
             <br>
             <div class="row preview-zone ">
-                <form class="form-signin text-center mx-auto" method= 'post' action='/setimage' enctype='multipart/form-data'>
+                <form class="form-signin text-center mx-auto" method= 'post' action='' enctype='multipart/form-data'>
                     <h5 class="photo-item">Фото профиля</h5>
                     <img class='crop jcrop-holder' src='{{asset('images/ava/'. Auth::user()->email .'.jpeg') }}' id='ProfilePhoto'  />
                     <br>

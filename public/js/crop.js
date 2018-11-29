@@ -56,8 +56,7 @@ $("input[type=file]").on("change", function(){      // Это событие, к
     }).done(function(imgDataURI) {
         var data = new FormData();
         var blobFile = dataURItoBlob(imgDataURI);
-        data.append('file', blobFile);                // Это имя файла уходит в запросе.
-
+        data.append('ava_image', blobFile);                // Это имя файла уходит в запросе.
         $.ajax({
             url: "/setimage",
             data: data,
@@ -66,6 +65,7 @@ $("input[type=file]").on("change", function(){      // Это событие, к
             contentType: false,   
             type: 'POST',
             response: 'text',
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
             success: function(response) {
                 // Если все ОК
                 // alert("Success! " + " " + response);

@@ -115,7 +115,18 @@ class UserController extends Controller
 
 	public function setImage(Request $request)
 	{
-		return response('ok', 200)
+		$this->validate($request, [
+            'ava_image' => 'required'      
+        ]);
+
+		if ($request->file('ava_image')->isValid()) {
+			$imageName = '../images/ava/'. Auth::user()->email . '.' . 'jpeg';
+			$request->ava_image->move(public_path('images/ava'), $imageName);
+
+			return response('ok', 200)->header('Content-Type', 'text/plain');
+
+	    }
+	    return response('error', 200)
 	                  ->header('Content-Type', 'text/plain');
 	}
 }

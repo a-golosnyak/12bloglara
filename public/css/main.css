@@ -749,3 +749,80 @@ a:focus, a:hover {
   background-color: #fEfEfE;
   overflow-x: hidden;
 }
+
+/*=== Buttons ===============================================================*/
+.button{
+  width:98px;
+  height:30px;
+  background-color:#0096ff;
+  border-radius: 7px;
+  position:absolute;
+  left:1px;
+  top:1px;
+  z-index:6;
+  user-select: none;
+  cursor: pointer;
+}
+.button2{
+  width:100px;
+  height:30px;
+  background-color:#85cdff;
+  border-radius: 7px;
+  position:absolute;
+  left:0px;
+  top:-2px;
+  z-index:5;
+}
+.button3{
+  width:100px;
+  height:30px;
+  background-color:#0a6db1;
+  border-radius: 7px;
+  position:absolute;
+  left:40px;
+  top:51px;
+  z-index:4;
+  box-shadow: 0px 30px 4px rgba(000,000,100,0.1);
+}
+.button3:active{
+  top:57px;
+  box-shadow: 0px 15px 2px rgba(000,000,100,0.1);
+  transition: 0.1s;
+}
+.button4{
+  width:100px;
+  height:30px;
+  background-color:#085183;
+  border-radius: 7px;
+  position:absolute;
+  left:40px;
+  top:60px;
+  box-shadow: 0px 1px 5px #000;
+  z-index:3
+}
+.button5{
+  width:106px;
+  height:36px;
+  background-color:#515151;
+  border-radius: 12px;
+  position:absolute;
+  left:34px;
+  top:54px;
+  z-index:2;
+  border: medium solid white;
+}
+.button6{
+  width:112px;
+  height:36px;
+  background-color:#b8b8b8;
+  border-radius: 12px;
+  position:absolute;
+  left:34px;
+  top:64px;
+  z-index:1;
+  box-shadow: 0px 1px 8px rgba(180,180,180,1);
+
+}
+
+
+/*============================================================================*/
