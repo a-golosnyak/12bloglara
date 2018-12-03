@@ -26,7 +26,7 @@
             <div class="button-touch6"></div>
         </div-->
         <hr>
-        <div id="redBtn" class="button-nottouch-main animated  shadow" onmouseup="redBtnPushed();">
+        <div id="redBtn" class="button-nottouch-main animated  shadow" onclick="redBtnPushed();">
             <div class="button-nottouch3">
                 <div class="button-nottouch2">
                     <div class="button-nottouch">
@@ -81,7 +81,7 @@
 //            redBtn.classList.add("rubberBand");
 //            redBtn.style.display = "none";
 
-            $('#fun-with').addClass('animated fadeOutRight faster');    // hinge
+            $('#fun-with').addClass('animated hinge');
         }
     </script>
 </div>
