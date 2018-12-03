@@ -26,7 +26,7 @@
             <div class="button-touch6"></div>
         </div-->
         <hr>
-        <div id="redBtn" class="button-nottouch-main animated  shadow" onclick="redBtnPushed();">
+        <div id="redBtn" class="button-nottouch-main animated  shadow" onmouseup="redBtnPushed();">
             <div class="button-nottouch3">
                 <div class="button-nottouch2">
                     <div class="button-nottouch">
