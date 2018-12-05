@@ -5,28 +5,8 @@
     </div>
 
     <div class="sidebar-module mt-0 pt-0">
-        <!--div class="button-touch-main">
-            <div class="button-touch3">
-                <div class="button-touch2">
-                    <div class="button-touch">
-                        <div style="font-family:Arial, Helvetica, sans-serif; width:100px; text-align:center; position:absolute; left: 0px; top: 7px; z-index:8; color: #09568c;">
-                            <b>Click me</b>
-                        </div>
-                        <div style="font-family:Arial, Helvetica, sans-serif; width:100px; text-align:center; position:absolute; left: 0px; top: 6px; z-index:7; color: #043455;">
-                            <b>Click me</b>
-                        </div>
-                        <div style="font-family:Arial, Helvetica, sans-serif; width:100px; text-align:center; position:absolute; left: 0px; top: 8px; z-index:7; color: #85cdff">
-                            <b>Click me</b>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="button-touch4"></div>
-            <div class="button-touch5"></div>
-            <div class="button-touch6"></div>
-        </div-->
         <hr>
-        <div id="redBtn" class="button-nottouch-main animated  shadow" onmouseup="redBtnPushed();">
+        <div id="redBtn" class="button-nottouch-main animated  shadow "  onclick="redBtnPushed();">
             <div class="button-nottouch3">
                 <div class="button-nottouch2">
                     <div class="button-nottouch">
@@ -52,10 +32,31 @@
         <br>
         <br>
         <br>
-        <br>
-        <br>
-
-        <div id="fun-with" >
+        <div id="blueBtn" class="button-touch-main mt-4 animated invisible " onclick="blueBtnPushed();">
+            <br>
+            <div class="button-touch-main">
+                <div class="button-touch3">
+                    <div class="button-touch2">
+                        <div class="button-touch">
+                            <div style="font-family:Arial, Helvetica, sans-serif; width:100px; text-align:center; position:absolute; left: 0px; top: 7px; z-index:8; color: #09568c;">
+                                <b>Исправить</b>
+                            </div>
+                            <div style="font-family:Arial, Helvetica, sans-serif; width:100px; text-align:center; position:absolute; left: 0px; top: 6px; z-index:7; color: #043455;">
+                                <b>Исправить</b>
+                            </div>
+                            <div style="font-family:Arial, Helvetica, sans-serif; width:100px; text-align:center; position:absolute; left: 0px; top: 8px; z-index:7; color: #85cdff">
+                                <b>Исправить</b>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="button-touch4"></div>
+                <div class="button-touch5"></div>
+                <div class="button-touch6"></div>
+            </div>
+        </div>
+        
+        <div id="fun-with" class="animated" >
             <h4>Archives</h4>
             <ol class="list-unstyled">
                 <li><a class='none-decored' href="#">September 2018</a></li>
@@ -77,11 +78,20 @@
     <script type="text/javascript">
         function redBtnPushed()
         {
-//            redBtn = document.getElementById('redBtn');
-//            redBtn.classList.add("rubberBand");
-//            redBtn.style.display = "none";
+            $('#fun-with').removeClass('fadeInUpBig');
+            $('#fun-with').addClass('hinge');
 
-            $('#fun-with').addClass('animated hinge');
+            $('#blueBtn').removeClass('invisible fadeOutUpBig');
+            $('#blueBtn').addClass('visible fadeInDownBig  delay-2s');
+        }
+
+        function blueBtnPushed()
+        {
+            $('#fun-with').removeClass('hinge');
+            $('#fun-with').addClass('fadeInUpBig');
+            
+            $('#blueBtn').removeClass('fadeInDownBig  delay-2s');
+            $('#blueBtn').addClass('fadeOutUpBig');
         }
     </script>
 </div>

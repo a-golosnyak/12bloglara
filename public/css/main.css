@@ -832,7 +832,13 @@ a:focus, a:hover {
 
 .button-nottouch-main{
     position: relative;
-    top: -40px;
+    top: -50px;
+    z-index: 5;
+}
+
+.button-touch-main{
+    position: relative;
+    z-index: 10;
 }
 
 .button-nottouch{
