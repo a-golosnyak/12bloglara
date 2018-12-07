@@ -82,7 +82,7 @@
             $('#fun-with').addClass('hinge');
 
             $('#blueBtn').removeClass('invisible fadeOutUpBig');
-            $('#blueBtn').addClass('visible fadeInDownBig  delay-2s');
+            $('#blueBtn').addClass('visible fadeIn  delay-4s slower');
         }
 
         function blueBtnPushed()
@@ -90,7 +90,7 @@
             $('#fun-with').removeClass('hinge');
             $('#fun-with').addClass('fadeInUpBig');
             
-            $('#blueBtn').removeClass('fadeInDownBig  delay-2s');
+            $('#blueBtn').removeClass('fadeIn  delay-4s slower');
             $('#blueBtn').addClass('fadeOutUpBig');
         }
     </script>
