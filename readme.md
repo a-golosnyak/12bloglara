@@ -36,7 +36,9 @@ sudo ln -s /etc/nginx/sites-available/example.com /etc/nginx/sites-enabled/
 
 	Common things
 
-As outlined in the Migrations guide to fix this all you have to do is edit your AppServiceProvider.php file and inside the boot method set a default string length:
+As outlined in the Migrations guide to fix this all you have to do is edit your 
+AppServiceProvider.php 
+file and inside the boot method set a default string length:
 
 use Illuminate\Support\Facades\Schema;
 
