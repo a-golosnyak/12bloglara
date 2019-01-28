@@ -10,6 +10,17 @@ use Hash;
 
 class UserController extends Controller
 {
+	/**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('checkauth', ['only' => ['getUser', 'setname', 'setemail', 'setpassword']]);
+//        $this->middleware('checkuser', ['only' => ['setname', 'setemail', 'setpassword']]);
+    }
+
 	public function getUser($id)
 	{
 		$user = User::where('id', $id)->get();

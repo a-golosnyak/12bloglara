@@ -10,8 +10,16 @@ use App\User;
 use App\Comment;
 use Illuminate\Support\Facades\Auth;
 
-class PostController extends Controller
+class PostController extends Controller 
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+    }
 
     public function contacts()
     {
