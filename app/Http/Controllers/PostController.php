@@ -164,7 +164,7 @@ class PostController extends Controller
             else
             {
                 Post::where('id', $post->id)
-                ->update(['user_id'        =>$post->user_id,
+                ->update(['user_id'     =>$post->user_id,
                         'category_id'   =>$post->category_id,
                         'title'         =>$post->title,
                         'intro'         =>$post->intro,
