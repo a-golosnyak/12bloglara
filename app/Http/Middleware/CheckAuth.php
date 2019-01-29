@@ -14,15 +14,15 @@ class CheckAuth
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next, $guard = null)
+    public function handle($request, Closure $next)
     {
-//        echo "Middleware выполняется";
+        echo "Middleware выполняется";
 
-        if (Auth::guard($guard)->check()) {
+        if (Auth::check()) {
             $response = $next($request);        // echo "Пользователь аутентифицирован";
             return $response;
         }
-
         abort(403);
     }
+
 }
