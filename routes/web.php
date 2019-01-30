@@ -45,3 +45,8 @@ Route::get ('/{id}', 				'PostController@getPost');		// last
 
 Auth::routes();
 
+//--- Social authentification ---------------------------------------------
+Route::get('auth/github', 			'Auth\LoginController@redirectToProvider');
+Route::get('auth/github/callback', 	'Auth\LoginController@handleProviderCallback');
+
+
