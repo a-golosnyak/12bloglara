@@ -10,6 +10,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use App\Category;
 use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Registered;
+use Socialite;
 
 class RegisterController extends Controller
 {
@@ -96,14 +97,51 @@ class RegisterController extends Controller
         $newFile = "images/ava/$user->email.jpeg";
 
         //--- Присваеваем новому профилю стандартную картпинку --------------------------------
-        if (copy($file, $newFile))          // Делаем копию файла        
+        if (copy($file, $newFile)) {          // Делаем копию файла
             $status = "Ok";
-        else
+        } else {
             $status = "err01";
+        }
 
         $this->guard()->login($user);
 
         return $this->registered($request, $user)
                         ?: redirect($this->redirectPath());
+    }
+
+    /**
+    * Получение информации о пользователе от GitHub.
+    *
+    * @return Response
+    */
+    public function handleProviderCallback()
+    {
+        $newUser = Socialite::driver('github')->user();
+
+        $user = new User();
+
+        $user->name = $newUser->getNickname();
+        $user->email = $newUser->getEmail();
+        $user->password = '111111';
+
+        echo "<pre>";
+        var_dump($newUser);
+        echo "</pre>";
+
+        $file="devlog.txt";
+
+        if (!$handle = fopen($file, 'a')) {
+            echo "Не могу открыть файл ($flename)";
+            exit;
+        }
+
+        $output = $user->name . "\r\n" . $user->email . "\r\n" . $user->password . "\r\n" ."\r\n";
+
+        if (fwrite($handle, $output) === false) {
+            echo "Не могу произвести запись в файл ($file)";
+            exit;
+        }
+
+//        registerSocials($user);
     }
 }

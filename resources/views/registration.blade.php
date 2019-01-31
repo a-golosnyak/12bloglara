@@ -61,7 +61,7 @@
             <br>
             <span class='pull-xs-left'>
                 <a href='https://github.com/' class='social-vk' target='_blank'>
-                <img src='/images/social/github-social-media-logo-64.png'>
+                <img src='/images/social/facebook-social-media-logo-64.png'>
                 </a>
             </span>
             <span class='pull-xs-left'>
@@ -70,11 +70,10 @@
                 </a>
             </span>
             <span class='pull-xs-left'>
-                <a href='https://github.com/' class='social-vk' target='_blank'>
-                <img src='/images/social/facebook-social-media-logo-64.png'>
+                <a href='auth/github' class='social-vk' target='_blank'>
+                <img src='/images/social/github-social-media-logo-64.png'>
                 </a>
             </span>
-
             <div class="my-5 py-5"></div>
         </div>
     </div>

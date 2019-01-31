@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Socialite;
+use App\User;
 
 class LoginController extends Controller
 {
@@ -34,7 +36,7 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest')->except('logout');
+        $this->middleware('guest')->except(['logout', 'redirectToProvider']);
     }
 
     /**
@@ -47,15 +49,5 @@ class LoginController extends Controller
         return Socialite::driver('github')->redirect();
     }
 
-    /**
-    * Получение информации о пользователе от GitHub.
-    *
-    * @return Response
-    */
-    public function handleProviderCallback()
-    {
-        $user = Socialite::driver('github')->user();
 
-    // $user->token;
-    }
 }
