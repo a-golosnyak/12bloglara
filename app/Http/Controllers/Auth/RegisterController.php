@@ -71,6 +71,8 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'auth_via' => $data['auth_via'],
+            'social_id' => $data['social_id'],
         ]);
     }
 
@@ -90,7 +92,10 @@ class RegisterController extends Controller
     public function register(Request $request)
     {
         $this->validator($request->all())->validate();
-
+        
+        /*        $user->auth_via = ;
+                $user->auth_via = ;
+        */
         event(new Registered($user = $this->create($request->all())));
 
         $file = "images/ava/Guest.jpg";
@@ -124,24 +129,54 @@ class RegisterController extends Controller
         $user->email = $newUser->getEmail();
         $user->password = '111111';
 
-        echo "<pre>";
-        var_dump($newUser);
-        echo "</pre>";
-
+        /*        echo "<pre>";
+                var_dump($newUser);
+                echo "</pre>";
+        */
         $file="devlog.txt";
-
         if (!$handle = fopen($file, 'a')) {
             echo "Не могу открыть файл ($flename)";
             exit;
         }
-
         $output = $user->name . "\r\n" . $user->email . "\r\n" . $user->password . "\r\n" ."\r\n";
-
         if (fwrite($handle, $output) === false) {
             echo "Не могу произвести запись в файл ($file)";
             exit;
         }
 
-//        registerSocials($user);
+        event(new Registered($user));
+
+        $file = "images/ava/Guest.jpg";
+        $newFile = "images/ava/$user->email.jpeg";
+
+        if (copy($file, $newFile)) {          // Делаем копию файла
+            $status = "Ok";
+        } else {
+            $status = "err01";
+        }
+
+        $data = $this->object_to_array($user);
+
+        echo "<pre>";
+        var_dump($data);
+        echo "</pre>";       
+
+        $this->guard()->login($user = $this->create($data));
+        
+//        return redirect("/")->with('message', 'asd');
+
+        echo "asddffgds";
+    }
+
+    public function object_to_array($data)
+    {
+        if (is_array($data) || is_object($data)) {
+            $result = array();
+            foreach ($data as $key => $value) {
+                $result[$key] = $this->object_to_array($value);
+            }
+            return $result;
+        }
+        return $data;
     }
 }
