@@ -48,6 +48,8 @@
                         </span>
                     @endif
                 </div>
+                <input type="hidden" name="auth_via" value = 'qwe' required>
+                <input type="hidden" name="social_id" value = 'rty' required>
                 <br>
 
                 <div>

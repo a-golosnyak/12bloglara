@@ -93,6 +93,12 @@ class RegisterController extends Controller
     {
         $this->validator($request->all())->validate();
         
+        echo "<pre>";
+        var_dump($request->all());
+        echo "</pre>";
+
+    //    while(1) {;}
+
         /*        $user->auth_via = ;
                 $user->auth_via = ;
         */
@@ -110,8 +116,8 @@ class RegisterController extends Controller
 
         $this->guard()->login($user);
 
-        return $this->registered($request, $user)
-                        ?: redirect($this->redirectPath());
+    //    return $this->registered($request, $user)
+    //                    ?: redirect($this->redirectPath());
     }
 
     /**
@@ -124,7 +130,6 @@ class RegisterController extends Controller
         $newUser = Socialite::driver('github')->user();
 
         $user = new User();
-
         $user->name = $newUser->getNickname();
         $user->email = $newUser->getEmail();
         $user->password = '111111';
@@ -155,15 +160,19 @@ class RegisterController extends Controller
             $status = "err01";
         }
 
-        $data = $this->object_to_array($user);
-
+        $userArray['name'] = $user->name;
+        $userArray['email'] = $user->email;
+        $userArray['password'] = $user->password;
+        $userArray['auth_via'] = ' ';
+        $userArray['social_id'] = ' ';
+/*
         echo "<pre>";
-        var_dump($data);
+        var_dump($newUser);
         echo "</pre>";       
-
-        $this->guard()->login($user = $this->create($data));
+*/
+        $this->guard()->login($user = $this->create($userArray));
         
-//        return redirect("/")->with('message', 'asd');
+        return redirect("/")->with('message', 'asd');
 
         echo "asddffgds";
     }
