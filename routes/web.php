@@ -49,10 +49,10 @@ Auth::routes();
 Route::get('auth/github', 			'Auth\LoginController@redirectToProvider');
 Route::get('auth/github/callback', 	'Auth\LoginController@handleProviderCallback');
 
-Route::get('auth/github', 			'Auth\LoginController@redirectToProvider');
-Route::get('auth/github/callback', 	'Auth\LoginController@handleProviderCallback');
+Route::get('auth/linkedin', 		'Auth\LoginController@redirectToLinkedIn');
+Route::get('auth/linkedin/callback','Auth\LoginController@handleLinkedInCallback');
 
-Route::get('auth/github', 			'Auth\LoginController@redirectToProvider');
-Route::get('auth/github/callback', 	'Auth\LoginController@handleProviderCallback');
+Route::get('auth/github', 			'Auth\LoginController@redirectToGithub');
+Route::get('auth/github/callback', 	'Auth\LoginController@handleGithubCallback');
 
 

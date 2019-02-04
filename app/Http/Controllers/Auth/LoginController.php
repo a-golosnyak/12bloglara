@@ -82,11 +82,21 @@ class LoginController extends Controller
     }
 
     /**
+    * Переадресация пользователя на страницу аутентификации LinkedIn.
+    *
+    * @return Response
+    */
+    public function redirectToLinkedIn()
+    {
+        return Socialite::driver('linkedin')->redirect();
+    }
+
+    /**
     * Переадресация пользователя на страницу аутентификации GitHub.
     *
     * @return Response
     */
-    public function redirectToProvider()
+    public function redirectToGithub()
     {
         return Socialite::driver('github')->redirect();
     }
@@ -96,7 +106,7 @@ class LoginController extends Controller
     *
     * @return Response
     */
-    public function handleProviderCallback(Request $request)
+    public function handleGithubCallback(Request $request)
     {
         $newUser = Socialite::driver('github')->user();
 

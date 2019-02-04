@@ -42,9 +42,9 @@ return [
     ],
 
     'linkedin' => [
-        'client_id' => '1c50d663402de25bf82d',
-        'client_secret' => '88187e480497f3a4dda28e47488ba6f727c382a7',
-        'redirect' => 'http://127.0.0.1:8000/auth/github/callback',
+        'client_id' => '77y0e7ohm7ukvr',
+        'client_secret' => 'SN3WOyKgF6ham9Xq',
+        'redirect' => 'http://127.0.0.1:8000/auth/linkedin/callback',
     ],
 
 ];
