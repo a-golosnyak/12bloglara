@@ -47,12 +47,12 @@ Auth::routes();
 
 //--- Social authentification ---------------------------------------------
 Route::get('auth/github', 			'Auth\LoginController@redirectToProvider');
-Route::get('auth/github/callback', 	'Auth\RegisterController@handleProviderCallback');
+Route::get('auth/github/callback', 	'Auth\LoginController@handleProviderCallback');
 
 Route::get('auth/github', 			'Auth\LoginController@redirectToProvider');
-Route::get('auth/github/callback', 	'Auth\RegisterController@handleProviderCallback');
+Route::get('auth/github/callback', 	'Auth\LoginController@handleProviderCallback');
 
 Route::get('auth/github', 			'Auth\LoginController@redirectToProvider');
-Route::get('auth/github/callback', 	'Auth\RegisterController@handleProviderCallback');
+Route::get('auth/github/callback', 	'Auth\LoginController@handleProviderCallback');
 
 

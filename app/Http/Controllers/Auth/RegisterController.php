@@ -70,9 +70,7 @@ class RegisterController extends Controller
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-            'auth_via' => $data['auth_via'],
-            'social_id' => $data['social_id'],
+            'password' => Hash::make($data['password'])
         ]);
     }
 
@@ -93,15 +91,10 @@ class RegisterController extends Controller
     {
         $this->validator($request->all())->validate();
         
-        echo "<pre>";
-        var_dump($request->all());
+ /*       echo "<pre>";
+        print_r($this->credentials($request));
         echo "</pre>";
-
-    //    while(1) {;}
-
-        /*        $user->auth_via = ;
-                $user->auth_via = ;
-        */
+*/
         event(new Registered($user = $this->create($request->all())));
 
         $file = "images/ava/Guest.jpg";
@@ -116,76 +109,9 @@ class RegisterController extends Controller
 
         $this->guard()->login($user);
 
-    //    return $this->registered($request, $user)
-    //                    ?: redirect($this->redirectPath());
+        return $this->registered($request, $user) ?: redirect($this->redirectPath());
     }
 
-    /**
-    * Получение информации о пользователе от GitHub.
-    *
-    * @return Response
-    */
-    public function handleProviderCallback()
-    {
-        $newUser = Socialite::driver('github')->user();
 
-        $user = new User();
-        $user->name = $newUser->getNickname();
-        $user->email = $newUser->getEmail();
-        $user->password = '111111';
 
-        /*        echo "<pre>";
-                var_dump($newUser);
-                echo "</pre>";
-        */
-        $file="devlog.txt";
-        if (!$handle = fopen($file, 'a')) {
-            echo "Не могу открыть файл ($flename)";
-            exit;
-        }
-        $output = $user->name . "\r\n" . $user->email . "\r\n" . $user->password . "\r\n" ."\r\n";
-        if (fwrite($handle, $output) === false) {
-            echo "Не могу произвести запись в файл ($file)";
-            exit;
-        }
-
-        event(new Registered($user));
-
-        $file = "images/ava/Guest.jpg";
-        $newFile = "images/ava/$user->email.jpeg";
-
-        if (copy($file, $newFile)) {          // Делаем копию файла
-            $status = "Ok";
-        } else {
-            $status = "err01";
-        }
-
-        $userArray['name'] = $user->name;
-        $userArray['email'] = $user->email;
-        $userArray['password'] = $user->password;
-        $userArray['auth_via'] = ' ';
-        $userArray['social_id'] = ' ';
-/*
-        echo "<pre>";
-        var_dump($newUser);
-        echo "</pre>";       
-*/
-        $this->guard()->login($user = $this->create($userArray));
-        
-        return redirect("/")->with('message', 'asd');
-
-        echo "asddffgds";
-    }
-
-    public function object_to_array($data)
-    {
-        if (is_array($data) || is_object($data)) {
-            $result = array();
-            foreach ($data as $key => $value) {
-                $result[$key] = $this->object_to_array($value);
-            }
-            return $result;
-        }
-        return $data;
-    }
 }

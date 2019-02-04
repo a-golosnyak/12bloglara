@@ -68,6 +68,26 @@
                             </div>
                         </form>
                         <div class='dropdown-item text-center my-0 py-0' href='#'>
+                            <div>Вход через соцсети</div>
+                            <span class='pull-xs-left'>
+
+                                <a href='https://github.com/' class='social-vk' target='_blank'>
+                                    <img src='/images/social/facebook-social-media-logo-64.png'>
+                                </a>
+                            </span>
+                            <span class='pull-xs-left'>
+                                <a href='https://github.com/' class='social-vk' target='_blank'>
+                                    <img src='/images/social/LinkedIn-social-media-logo-64.png'>
+                                </a>
+                            </span>
+                            <span class='pull-xs-left'>
+                                <a href='auth/github' class='social-vk'>
+                                    <img src='/images/social/github-social-media-logo-64.png'>
+                                </a>
+                            </span>
+                        </div>
+
+                        <div class='dropdown-item text-center my-0 py-0' href='#'>
                             <a class="link" href='{{ route('password.request') }}'>  Забыли пароль?</a>
                         </div>
 
