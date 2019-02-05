@@ -154,12 +154,21 @@ class LoginController extends Controller
     {
         $newUser = Socialite::driver('github')->user();
 
-        $user = new User();
+        $user = User::where('email',  $newUser->getEmail())->get();
+
+        echo "<pre>";
+    //        var_dump($user[0]);
+            echo $user[0]->name;
+            echo $user[0]->password;
+            echo $user[0]->email;
+        echo "</pre>";
+
+/*        $user = new User();
         $user->name = $newUser->getNickname();
         $user->email = $newUser->getEmail();
         $user->password = "github_" . $newUser->getId();
 
-        return $this->getUserLoggedIn($request, $user);
+        return $this->getUserLoggedIn($request, $user); */
     }
     /**
     * Работа по пользователю. Регистрация или вход.

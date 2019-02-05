@@ -67,12 +67,12 @@
                 </a>
             </span>
             <span class='pull-xs-left'>
-                <a href='auth/linkedin' class='social-vk'>
+                <a href='auth/linkedin' class='social-vk' target='_blank'>
                     <img src='/images/social/LinkedIn-social-media-logo-64.png'>
                 </a>
             </span>
             <span class='pull-xs-left'>
-                <a href='auth/github' class='social-vk'>
+                <a href='auth/github' class='social-vk' target='_blank'>
                     <img src='/images/social/github-social-media-logo-64.png'>
                 </a>
             </span>
