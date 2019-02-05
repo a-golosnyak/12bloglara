@@ -62,12 +62,12 @@
             </form>
             <br>
             <span class='pull-xs-left'>
-                <a href='https://github.com/' class='social-vk' target='_blank'>
+                <a href='auth/facebook' class='social-vk' target='_blank'>
                     <img src='/images/social/facebook-social-media-logo-64.png'>
                 </a>
             </span>
             <span class='pull-xs-left'>
-                <a href='https://github.com/' class='social-vk' target='_blank'>
+                <a href='auth/linkedin' class='social-vk'>
                     <img src='/images/social/LinkedIn-social-media-logo-64.png'>
                 </a>
             </span>

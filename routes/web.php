@@ -46,13 +46,13 @@ Route::get ('/{id}', 				'PostController@getPost');		// last
 Auth::routes();
 
 //--- Social authentification ---------------------------------------------
-Route::get('auth/github', 			'Auth\LoginController@redirectToProvider');
-Route::get('auth/github/callback', 	'Auth\LoginController@handleProviderCallback');
+Route::get('auth/facebook', 			'Auth\LoginController@redirectToFacebook');
+Route::get('auth/facebook/callback',	'Auth\LoginController@handleProviderCallback');
 
-Route::get('auth/linkedin', 		'Auth\LoginController@redirectToLinkedIn');
-Route::get('auth/linkedin/callback','Auth\LoginController@handleLinkedInCallback');
+Route::get('auth/linkedin', 			'Auth\LoginController@redirectToLinkedIn');
+Route::get('auth/linkedin/callback',	'Auth\LoginController@handleLinkedInCallback');
 
-Route::get('auth/github', 			'Auth\LoginController@redirectToGithub');
-Route::get('auth/github/callback', 	'Auth\LoginController@handleGithubCallback');
+Route::get('auth/github', 				'Auth\LoginController@redirectToGithub');
+Route::get('auth/github/callback', 		'Auth\LoginController@handleGithubCallback');
 
 

@@ -39,13 +39,13 @@
                     <div class="button-touch2">
                         <div class="button-touch">
                             <div style="font-family:Arial, Helvetica, sans-serif; width:100px; text-align:center; position:absolute; left: 0px; top: 7px; z-index:8; color: #09568c;">
-                                <b>Исправить</b>
+                                <b>Fix</b>
                             </div>
                             <div style="font-family:Arial, Helvetica, sans-serif; width:100px; text-align:center; position:absolute; left: 0px; top: 6px; z-index:7; color: #043455;">
-                                <b>Исправить</b>
+                                <b>Fix</b>
                             </div>
                             <div style="font-family:Arial, Helvetica, sans-serif; width:100px; text-align:center; position:absolute; left: 0px; top: 8px; z-index:7; color: #85cdff">
-                                <b>Исправить</b>
+                                <b>Fix</b>
                             </div>
                         </div>
                     </div>

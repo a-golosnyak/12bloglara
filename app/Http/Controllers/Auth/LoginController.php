@@ -81,21 +81,65 @@ class LoginController extends Controller
         ]);
     }
 
+    /****************************************************************************************
+    * Переадресация пользователя на страницу аутентификации Facebook.
+    *
+    * @return Response
+    *****************************************************************************************/
+    public function redirectToFacebook()
+    {
+        return Socialite::driver('facebook')->redirect();
+    }
+
     /**
-    * Переадресация пользователя на страницу аутентификации LinkedIn.
+    * Вход через Facebook.
     *
     * @return Response
     */
+    public function handleFacebookCallback(Request $request)
+    {
+        $newUser = Socialite::driver('facebook')->user();
+
+        $user = new User();
+        $user->name = $newUser->getNickname();
+        $user->email = $newUser->getEmail();
+        $user->password = "facebook_" . $newUser->getId();
+
+        return $this->getUserLoggedIn($request, $user);
+    }
+
+    /***************************************************************************************
+    * Переадресация пользователя на страницу аутентификации LinkedIn.
+    *
+    * @return Response
+    ****************************************************************************************/
     public function redirectToLinkedIn()
     {
         return Socialite::driver('linkedin')->redirect();
     }
 
     /**
-    * Переадресация пользователя на страницу аутентификации GitHub.
+    * Вход через LinkedIn.
     *
     * @return Response
     */
+    public function handleLinkedInCallback(Request $request)
+    {
+        $newUser = Socialite::driver('linkedin')->user();
+
+        $user = new User();
+        $user->name = $newUser->getName();
+        $user->email = $newUser->getEmail();
+        $user->password = "linkedin_" . $newUser->getId();
+
+        return $this->getUserLoggedIn($request, $user);
+    }
+
+    /****************************************************************************************
+    * Вход через GitHub.
+    *
+    * @return Response
+    ****************************************************************************************/
     public function redirectToGithub()
     {
         return Socialite::driver('github')->redirect();
@@ -115,6 +159,15 @@ class LoginController extends Controller
         $user->email = $newUser->getEmail();
         $user->password = "github_" . $newUser->getId();
 
+        return $this->getUserLoggedIn($request, $user);
+    }
+    /**
+    * Работа по пользователю. Регистрация или вход.
+    *
+    * @return Response
+    */
+    public function getUserLoggedIn(Request $request, User $user)
+    {
         $userArray['name'] = $user->name;
         $userArray['email'] = $user->email;
         $userArray['password'] = $user->password;
@@ -122,10 +175,6 @@ class LoginController extends Controller
         $this->validateLoginSocials($userArray);
         $retval = $this->guard()->attempt(['email'=>$user->email, 'password'=>$user->password], true);
         
-/*        echo "<pre>";
-            var_dump($user);
-        echo "</pre>";
-*/
         if ($retval) {
             return $this->sendLoginResponse($request);
         } else {
@@ -160,6 +209,11 @@ class LoginController extends Controller
 
 
 /*
+
+        echo "<pre>";
+            var_dump($user);
+        echo "</pre>";
+
 
             //--- Dubug -----------------------------------------------------------------
             $file="devlog.txt";
