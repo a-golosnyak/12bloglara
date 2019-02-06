@@ -8,8 +8,7 @@ use Socialite;
 use App\User;
 use Validator;
 use Illuminate\Auth\Events\Registered;
-use Hash;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -43,20 +42,6 @@ class LoginController extends Controller
         $this->middleware('guest')->except(['logout', 'redirectToProvider']);
     }
 
-    /**
-     * Validate the user login request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return void
-     */
-    protected function validateLoginSocials(array $user)
-    {
-        $validator = Validator::make($user, [
-            $this->username() => 'required|string',
-            'password' => 'required|string',
-        ]);
-    }
-
     protected function validatorSocials(array $data)
     {
         return Validator::make($data, [
@@ -82,67 +67,13 @@ class LoginController extends Controller
     }
 
     /****************************************************************************************
-    * Переадресация пользователя на страницу аутентификации Facebook.
-    *
-    * @return Response
-    *****************************************************************************************/
-    public function redirectToFacebook()
-    {
-        return Socialite::driver('facebook')->redirect();
-    }
-
-    /**
-    * Вход через Facebook.
-    *
-    * @return Response
-    */
-    public function handleFacebookCallback(Request $request)
-    {
-        $newUser = Socialite::driver('facebook')->user();
-
-        $user = new User();
-        $user->name = $newUser->getNickname();
-        $user->email = $newUser->getEmail();
-        $user->password = "facebook_" . $newUser->getId();
-
-        return $this->getUserLoggedIn($request, $user);
-    }
-
-    /***************************************************************************************
-    * Переадресация пользователя на страницу аутентификации LinkedIn.
-    *
-    * @return Response
-    ****************************************************************************************/
-    public function redirectToLinkedIn()
-    {
-        return Socialite::driver('linkedin')->redirect();
-    }
-
-    /**
-    * Вход через LinkedIn.
-    *
-    * @return Response
-    */
-    public function handleLinkedInCallback(Request $request)
-    {
-        $newUser = Socialite::driver('linkedin')->user();
-
-        $user = new User();
-        $user->name = $newUser->getName();
-        $user->email = $newUser->getEmail();
-        $user->password = "linkedin_" . $newUser->getId();
-
-        return $this->getUserLoggedIn($request, $user);
-    }
-
-    /****************************************************************************************
     * Вход через GitHub.
     *
     * @return Response
     ****************************************************************************************/
-    public function redirectToGithub()
+    public function redirectToProvider($provider)
     {
-        return Socialite::driver('github')->redirect();
+        return Socialite::driver($provider)->redirect();
     }
 
     /**
@@ -150,45 +81,19 @@ class LoginController extends Controller
     *
     * @return Response
     */
-    public function handleGithubCallback(Request $request)
+    public function handleProviderCallback($provider)
     {
-        $newUser = Socialite::driver('github')->user();
+        $user = Socialite::driver($provider)->user();
 
-        $user = User::where('email',  $newUser->getEmail())->get();
+        $authUser = User::where('email', $user->email)->first();
 
-        echo "<pre>";
-    //        var_dump($user[0]);
-            echo $user[0]->name;
-            echo $user[0]->password;
-            echo $user[0]->email;
-        echo "</pre>";
-
-/*        $user = new User();
-        $user->name = $newUser->getNickname();
-        $user->email = $newUser->getEmail();
-        $user->password = "github_" . $newUser->getId();
-
-        return $this->getUserLoggedIn($request, $user); */
-    }
-    /**
-    * Работа по пользователю. Регистрация или вход.
-    *
-    * @return Response
-    */
-    public function getUserLoggedIn(Request $request, User $user)
-    {
-        $userArray['name'] = $user->name;
-        $userArray['email'] = $user->email;
-        $userArray['password'] = $user->password;
-
-        $this->validateLoginSocials($userArray);
-        $retval = $this->guard()->attempt(['email'=>$user->email, 'password'=>$user->password], true);
-        
-        if ($retval) {
-            return $this->sendLoginResponse($request);
+        if ($authUser) {
+            $user = $authUser;
         } else {
-            $this->validatorSocials($userArray)->validate();
-            event(new Registered($user = $this->create($userArray)));
+            if ($user->name == 0) {
+                $name = preg_split("/@/", $user->email);
+                $user->name = $name[0];
+            }
 
             //--- Profile image ---------------------------------------------------------
             $file = "images/ava/Guest.jpg";
@@ -200,10 +105,17 @@ class LoginController extends Controller
                 $status = "err01";
             }
             //---------------------------------------------------------------------------
-        
-            $this->guard()->login($user);
-            return redirect($this->redirectPath());
+
+            $user = User::create([
+                'name'     => $user->name,
+                'email'    => $user->email,
+                'provider' => $provider,
+                'provider_id' => $user->id
+            ]);
         }
+
+        Auth::login($user, true);
+        return redirect($this->redirectTo);
     }
 }
 

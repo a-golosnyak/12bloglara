@@ -158,7 +158,7 @@ var initJCrop = function(imgDataUrl){
         //aspectRatio: xsize / ysize,
         //setSelect: [(w - s) / 2, (h - s) / 2, (w - s) / 2 + s, (h - s) / 2 + s]
         // setSelect: [10, 10, 50, 50]    // Начальный размер рамки выделения
-        setSelect: [0, 0, 0, 0]
+        setSelect: [0, 0, 500, 500]
         },function(){
             // Use the API to get the real image size
             var bounds = this.getBounds();

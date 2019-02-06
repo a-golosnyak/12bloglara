@@ -59,23 +59,31 @@
                     </div>
                 </div>
                 <br>
+
+                <div class=''>
+                    <a href='auth/facebook' class='social-vk mx-2' target='_blank'> <!-- target='_blank'-->
+                        <img src='/images/social/facebook-social-media-logo-64.png'>
+                    </a>
+                </span>
+                <span class='pull-xs-left'>
+                    <a href='auth/linkedin' class='social-vk mx-2' target='_blank'>
+                        <img src='/images/social/LinkedIn-social-media-logo-64.png'>
+                    </a>
+                </span>
+                <span class='pull-xs-left'>
+                    <a href='auth/github' class='social-vk mx-2' target='_blank'>
+                        <img src='/images/social/github-social-media-logo-64.png'>
+                    </a>
+                </span>
+                <span class='pull-xs-left'>
+                    <a href='auth/google' class='social-vk mx-2' target='_blank'>
+                        <img src='/images/social/google-plus-social-media-logo-64.png'>
+                    </a>
+                </span>
+
             </form>
             <br>
-            <span class='pull-xs-left'>
-                <a href='auth/facebook' class='social-vk' target='_blank'>
-                    <img src='/images/social/facebook-social-media-logo-64.png'>
-                </a>
-            </span>
-            <span class='pull-xs-left'>
-                <a href='auth/linkedin' class='social-vk' target='_blank'>
-                    <img src='/images/social/LinkedIn-social-media-logo-64.png'>
-                </a>
-            </span>
-            <span class='pull-xs-left'>
-                <a href='auth/github' class='social-vk' target='_blank'>
-                    <img src='/images/social/github-social-media-logo-64.png'>
-                </a>
-            </span>
+            
             <div class="my-5 py-5"></div>
         </div>
     </div>

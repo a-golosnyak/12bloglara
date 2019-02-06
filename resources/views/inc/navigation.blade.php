@@ -38,10 +38,10 @@
                     <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
                       aria-expanded="false">Вход</a>
                     <div class="dropdown-menu dropdown-primary dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                        <form class='form-signin' method='post' action='{{ route('login') }}'>
+                        <form class='form-signin w-100' method='post' action='{{ route('login') }}'>
                             @csrf
                             <div class='dropdown-item' href='#'>
-                                <input type='email' name='email' maxlength='20' size='20' class='form-control' placeholder='Email address' required autofocus>
+                                <input type='email' name='email' maxlength='39' size='39' class='form-control' placeholder='Email address' required autofocus>
 
                                 @if ($errors->has('email'))
                                     <span class="invalid-feedback" role="alert">
@@ -51,7 +51,7 @@
                             </div>
 
                             <div class='dropdown-item text-center' href='#'>
-                                <input type='password' name='password' class='form-control{{ $errors->has('password') ? ' is-invalid' : '' }}' size='20' placeholder='Password' required>
+                                <input type='password' name='password' class='form-control{{ $errors->has('password') ? ' is-invalid' : '' }}' size='39' placeholder='Password' required>
 
                                 @if ($errors->has('password'))
                                     <span class="invalid-feedback" role="alert">
@@ -70,18 +70,23 @@
                         <div class='dropdown-item text-center my-0 py-0' href='#'>
                             <div>Вход через соцсети</div>
                             <span class='pull-xs-left'>
-                                <a href='auth/facebook' class='social-vk' target='_blank'>
+                                <a href='auth/facebook' class='social-vk'> <!-- target='_blank'-->
                                     <img src='/images/social/facebook-social-media-logo-64.png'>
                                 </a>
                             </span>
                             <span class='pull-xs-left'>
-                                <a href='auth/linkedin' class='social-vk' target='_blank'>
+                                <a href='auth/linkedin' class='social-vk'>
                                     <img src='/images/social/LinkedIn-social-media-logo-64.png'>
                                 </a>
                             </span>
                             <span class='pull-xs-left'>
-                                <a href='auth/github' class='social-vk' target='_blank'>
+                                <a href='auth/github' class='social-vk' >
                                     <img src='/images/social/github-social-media-logo-64.png'>
+                                </a>
+                            </span>
+                            <span class='pull-xs-left'>
+                                <a href='auth/google' class='social-vk'>
+                                    <img src='/images/social/google-plus-social-media-logo-64.png'>
                                 </a>
                             </span>
                         </div>
