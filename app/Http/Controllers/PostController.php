@@ -40,9 +40,9 @@ class PostController extends Controller
         $categories = Category::pluck('name', 'id');
 
         if($id == 0)
-          	$posts = Post::orderBy('id', 'desc')->paginate(7);
+          	$posts = Post::orderBy('created_at', 'desc')->paginate(7);
         else
-            $posts = Post::where('category_id', $id)->orderBy('id', 'desc')->paginate(7);
+            $posts = Post::where('category_id', $id)->orderBy('created_at', 'desc')->paginate(7);
 
 //		echo $id;
 /*        echo "<pre>";
