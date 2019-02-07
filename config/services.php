@@ -38,22 +38,22 @@ return [
     'google' => [
         'client_id' => '724196597447-2mujg4i23gqod2g98qhb77kigsgnub03.apps.googleusercontent.com',
         'client_secret' => 'Kq__71cVPjJGtiBOa1ByWkLS',
-        'redirect' => '/auth/google/callback',
+        'redirect' => 'https://blog.exmpl.ml/auth/google/callback',
     ],
     'github' => [
         'client_id' => '1c50d663402de25bf82d',
         'client_secret' => '88187e480497f3a4dda28e47488ba6f727c382a7',
-        'redirect' => '/auth/github/callback',
+        'redirect' => 'https://blog.exmpl.ml/auth/github/callback',
     ],
     'linkedin' => [
         'client_id' => '77y0e7ohm7ukvr',
         'client_secret' => 'SN3WOyKgF6ham9Xq',
-        'redirect' => '/auth/linkedin/callback',
+        'redirect' => 'https://blog.exmpl.ml/auth/linkedin/callback',
     ],
     'facebook' => [
         'client_id' => '325872144711295',
         'client_secret' => '9535d53bbe8c75c62ef6aeeae1b7cf5e',
-        'redirect' => '/auth/facebook/callback',
+        'redirect' => 'https://blog.exmpl.ml/auth/facebook/callback',
     ],
 
 ];

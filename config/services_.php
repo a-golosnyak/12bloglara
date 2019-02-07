@@ -53,7 +53,7 @@ return [
     'facebook' => [
         'client_id' => '325872144711295',
         'client_secret' => '9535d53bbe8c75c62ef6aeeae1b7cf5e',
-        'redirect' => 'https://blog.exmpl.m/auth/facebook/callback',
+        'redirect' => 'https://blog.exmpl.ml/auth/facebook/callback',
     ],
 
 ];
