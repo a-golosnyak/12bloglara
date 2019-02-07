@@ -100,8 +100,8 @@
                         </div>
 
                         <div class='dropdown-divider'></div>
-                        <a class='none-decored w-100' href='#'>
-                            <div class='dropdown-item text-xs-center' href='/registration'>
+                        <a class='none-decored w-100' href='/registration'>
+                            <div class='dropdown-item text-xs-center' href='#'>
                                 <button class='btn btn-md btn-primary btn-block text-xs-center' type='submit'>
                                     Регистрация
                                 </button>
