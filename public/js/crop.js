@@ -17,6 +17,7 @@ var jcrop_api,
     xsize = $pcnt.width(),
     ysize = $pcnt.height();
 
+
 var cropCoords,
     file,
     uploadSize = 500,
@@ -45,7 +46,6 @@ $("input[type=file]").on("change", function(){      // Это событие, к
     });
 });
 
-//  $("button[type=submit]").on("click", function(){
     $("#PhotoSubmit").on("click", function(){       // Событие отправка формы
     $(this).text("Загрузка...").prop("disabled", true);
 
@@ -141,8 +141,9 @@ var initJCrop = function(imgDataUrl){
         cropCoords = c;
         // Пока не получилось привязать вызов этой функции к иницилизации Jcrop
         // потому вызываю здесь, события те же, что и для ф-ции storeCoords
-        updatePreview(c);     
+           
         showCoords(c);          // Для того, чтобы выводить координаты
+        updatePreview(c);  
     };
     
     var w = img.width();
@@ -151,14 +152,9 @@ var initJCrop = function(imgDataUrl){
 
     img.Jcrop({                
         onChange: storeCoords,          // Тут важна последовательность  
-//        onChange: updatePreview,
         onSelect: storeCoords,          // Сначала фмксируем координаты, потом обновляем превью.       
-//        onSelect: updatePreview, 
         aspectRatio: 1,                 // Соотношение сторон
-        //aspectRatio: xsize / ysize,
-        //setSelect: [(w - s) / 2, (h - s) / 2, (w - s) / 2 + s, (h - s) / 2 + s]
-        // setSelect: [10, 10, 50, 50]    // Начальный размер рамки выделения
-        setSelect: [0, 0, 500, 500]
+        setSelect: [0, 0, 200, 200]
         },function(){
             // Use the API to get the real image size
             var bounds = this.getBounds();
@@ -184,7 +180,6 @@ var readFile = function(file, options) {
 
         //init reader onload event handlers
         reader.onload = function(e) {
-//            var image = $('<img/>')
             var image = $('#ProfilePhoto')
             .on('load', (function() {
                 // when image is fully loaded

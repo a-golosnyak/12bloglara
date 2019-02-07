@@ -23,7 +23,11 @@
                     <a class="nav-link" href="/contacts">Контакты</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/about">О сайте</a>
+                    @guest
+                        <a class="nav-link" href="/registration">О сайте</a>
+                    @else
+                        <a class="nav-link" href="/about">О сайте</a>
+                    @endguest
                 </li>
             </ul>
         </div>
@@ -96,8 +100,8 @@
                         </div>
 
                         <div class='dropdown-divider'></div>
-                        <a class='none-decored w-100' href='/registration'>
-                            <div class='dropdown-item text-xs-center' href='#'>
+                        <a class='none-decored w-100' href='#'>
+                            <div class='dropdown-item text-xs-center' href='/registration'>
                                 <button class='btn btn-md btn-primary btn-block text-xs-center' type='submit'>
                                     Регистрация
                                 </button>

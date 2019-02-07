@@ -17,13 +17,13 @@ class CreateCategoriesTable extends Migration
             $table->increments('id');
             $table->string('name');
         });
-
+/*
         DB::update("INSERT INTO categories SET name='Микроконтроллеры STM32'");
         DB::update("INSERT INTO categories SET name='Программирование Linux'");
         DB::update("INSERT INTO categories SET name='Электроника'");
         DB::update("INSERT INTO categories SET name='WEB-разработка'");
         DB::update("INSERT INTO categories SET name='Разное'");
-        
+*/        
     }
 
     /**

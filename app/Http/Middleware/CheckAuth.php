@@ -16,7 +16,7 @@ class CheckAuth
      */
     public function handle($request, Closure $next)
     {
-        echo "Middleware выполняется";
+//        echo "Middleware выполняется";
 
         if (Auth::check()) {
             $response = $next($request);        // echo "Пользователь аутентифицирован";
