@@ -133,7 +133,6 @@ class UserController extends Controller
 
             return response('ok', 200)->header('Content-Type', 'text/plain');
         }
-        return response('error', 200)
-                      ->header('Content-Type', 'text/plain');
+        return response('error', 200)->header('Content-Type', 'text/plain');
     }
 }

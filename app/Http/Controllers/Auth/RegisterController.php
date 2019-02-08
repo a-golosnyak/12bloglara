@@ -89,12 +89,8 @@ class RegisterController extends Controller
      */
     public function register(Request $request)
     {
-        $this->validator($request->all())->validate();
+/*        $this->validator($request->all())->validate();
         
- /*       echo "<pre>";
-        print_r($this->credentials($request));
-        echo "</pre>";
-*/
         event(new Registered($user = $this->create($request->all())));
 
         $file = "images/ava/Guest.jpg";
@@ -109,9 +105,23 @@ class RegisterController extends Controller
 
         $this->guard()->login($user);
 
-        return $this->registered($request, $user) ?: redirect($this->redirectPath());
+        return $this->registered($request, $user) ?: redirect($this->redirectPath());*/
+
+//        return redirect('/register')->withInput();
+        return back()->withInput();
     }
-
-
-
 }
+
+
+
+
+
+
+
+
+
+
+/*       echo "<pre>";
+        print_r($this->credentials($request));
+        echo "</pre>";
+*/
