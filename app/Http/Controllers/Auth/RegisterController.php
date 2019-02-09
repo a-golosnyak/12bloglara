@@ -89,7 +89,7 @@ class RegisterController extends Controller
      */
     public function register(Request $request)
     {
-/*        $this->validator($request->all())->validate();
+        $this->validator($request->all())->validate();
         
         event(new Registered($user = $this->create($request->all())));
 
@@ -105,10 +105,10 @@ class RegisterController extends Controller
 
         $this->guard()->login($user);
 
-        return $this->registered($request, $user) ?: redirect($this->redirectPath());*/
+        return $this->registered($request, $user) ?: redirect($this->redirectPath());
 
 //        return redirect('/register')->withInput();
-        return back()->withInput();
+//        return back()->withInput();
     }
 }
 

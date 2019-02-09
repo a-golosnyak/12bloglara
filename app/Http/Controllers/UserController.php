@@ -24,11 +24,9 @@ class UserController extends Controller
     public function getUser($id)
     {
         $user = User::where('id', $id)->get();
-        $categories = Category::pluck('name', 'id');
 
         if (Auth::user()->email == $user[0]->email) {
-            return view('profile', [	'user'=>$user[0],
-                                    'categories' => $categories]);
+            return view('profile', ['user'=>$user[0]]);
         } else {
             abort(403);
         }
@@ -97,8 +95,8 @@ class UserController extends Controller
 
     /*
         111111 - $2y$10$q4EduJT49Qwm2WloHYB9T.4NyrJdZWMqURTmX3.axIeyz7Kl0GH4i
-    
     */
+
     public function setPassword(Request $request)
     {
         $this->validate($request, [

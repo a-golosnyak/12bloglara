@@ -23,48 +23,34 @@ class PostController extends Controller
 
     public function contacts()
     {
-        $categories = Category::pluck('name', 'id');
-
-        return view('contacts', ['categories' => $categories]);
+        return view('contacts');
     }
 
     public function aboutSite()
     {
-        $categories = Category::pluck('name', 'id');
-
-        return view('about', ['categories' => $categories]);
+        return view('about');
+//        return view('about', ['categories' => $categories]);
     }
 
     public function getPosts($id=0)
     {
-        $categories = Category::pluck('name', 'id');
-
         if($id == 0)
           	$posts = Post::orderBy('created_at', 'desc')->paginate(7);
         else
             $posts = Post::where('category_id', $id)->orderBy('created_at', 'desc')->paginate(7);
 
-//		echo $id;
-/*        echo "<pre>";
-        print_r($posts);
-        echo "</pre>";		
-*/
-        return view('home', [   'categories' => $categories,
-                                'posts' => $posts]);                             
+        return view('home', ['posts' => $posts]);                             
     }
 
     public function getPostsOfUser($id=0)
     {
-        $categories = Category::pluck('name', 'id');
         $posts = Post::where('user_id', $id)->orderBy('id', 'desc')->paginate(7);
         
-        return view('home', [   'categories' => $categories,
-                                'posts' => $posts]);                              
+        return view('home', ['posts' => $posts]);                              
     }
 
     public function getPost($id)
     {
-        $categories = Category::pluck('name', 'id');
         $posts = Post::where('id', $id)->get();
         $comments = Comment::where('post_id', $id)->where('parent_comment_id', 0)->orderBy('created_at', 'desc')->get();
         
@@ -73,18 +59,14 @@ class PostController extends Controller
             $nested_comments[$comment->id][] = Comment::where('parent_comment_id', $comment->id)->get();
         }
 
-        return view('article', [   'categories' => $categories,
-                                    'post' => $posts[0],
+        return view('article', [    'post' => $posts[0],
                                     'comments' => $comments,
                                     'nested_comments' => $nested_comments]);    
     }
 
     public function addPost()
     {
-		$categories = Category::pluck('name', 'id');	
-		
-    	return view('addpost', ['categories' => $categories,
-                                'post_id'=>'',
+    	return view('addpost', ['post_id'=>'',
                                 'action'=>'/addpost/submit',
                                 'post_title' =>'',
                                 'post_intro' =>'',
@@ -94,13 +76,11 @@ class PostController extends Controller
 
     public function editPost($id)
     { 
-        $categories = Category::pluck('name', 'id'); 
         $posts = Post::where('id', $id)->get();   
 
         if(Auth::user()->email == $posts[0]->user->email)
         {
-            return view('addpost', ['categories' => $categories,
-                                    'post_id'=>$id,
+            return view('addpost', ['post_id'=>$id,
                                     'action'=>"/addpost/update",
                                     'post_title' => $posts[0]->title,
                                     'post_intro' => $posts[0]->intro,
@@ -114,9 +94,7 @@ class PostController extends Controller
     }
 
     public function updatePost(Request $request)
-    {
-//        $categories = Category::pluck('name', 'id');                  // ???
-        
+    {       
         $this->validate($request, [
             'id'=>'required',
             'author' => 'required',
@@ -195,9 +173,7 @@ class PostController extends Controller
     }
 
     public function submit(Request $request)
-    {
-//        $categories = Category::pluck('name', 'id');    
-        
+    {       
         $this->validate($request, [
             'author' => 'required',
             'category' => 'required',
