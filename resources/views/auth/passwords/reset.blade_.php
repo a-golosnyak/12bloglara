@@ -1,14 +1,11 @@
 @extends('layouts.main')
 
 @section('content')
-
-<div class="container brown lighten-5">
-    <br>
-    <br>
+<div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Сброс пароля</div>
+                <div class="card-header">{{ __('Reset Password') }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('password.update') }}">
@@ -64,7 +61,5 @@
             </div>
         </div>
     </div>
-    <div class="my-5 py-5"></div>
-    <div class="my-5 py-5"></div>
 </div>
 @endsection
