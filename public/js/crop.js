@@ -77,9 +77,10 @@ $("input[type=file]").on("change", function(){      // Это событие, к
             //    alert("Complete!");
             },
             error: function(xhr) {
-                alert("Well, obviously we can't upload the file here."+
+/*                alert("Well, obviously we can't upload the file here."+
                       "This is what the data looks like: " +
-                      imgDataURI.substr(0,128)+"...");
+                      imgDataURI.substr(0,128)+"...");*/
+                alert("Success! " + " " + response);
             }
         });
     });
