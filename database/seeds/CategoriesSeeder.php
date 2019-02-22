@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Category;
 
 class CategoriesSeeder extends Seeder
 {
@@ -11,10 +12,15 @@ class CategoriesSeeder extends Seeder
      */
     public function run()
     {
-        DB::update("INSERT INTO categories SET name='Микроконтроллеры STM32'");
-        DB::update("INSERT INTO categories SET name='Программирование Linux'");
-        DB::update("INSERT INTO categories SET name='Электроника'");
-        DB::update("INSERT INTO categories SET name='WEB-разработка'");
-        DB::update("INSERT INTO categories SET name='Разное'");
+        $categories = Category::firstOrCreate(['id' => '1', 'name'=>'Микроконтроллеры STM32']);
+        $categories->save();
+        $categories = Category::firstOrCreate(['id' => '2', 'name'=>'Программирование Linux']);
+        $categories->save();
+        $categories = Category::firstOrCreate(['id' => '3', 'name'=>'Электроника']);
+        $categories->save();
+        $categories = Category::firstOrCreate(['id' => '4', 'name'=>'WEB-разработка']);
+        $categories->save();
+        $categories = Category::firstOrCreate(['id' => '5', 'name'=>'Разное']);
+        $categories->save();
     }
 }
