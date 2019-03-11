@@ -7,6 +7,7 @@ use App\User;
 use App\Category;
 use Illuminate\Support\Facades\Auth;
 use Hash;
+use App\Jobs\TestJob;
 
 class UserController extends Controller
 {
@@ -24,6 +25,8 @@ class UserController extends Controller
     public function getUser($id)
     {
         $user = User::where('id', $id)->get();
+
+        TestJob::dispatch()->delay(10);
 
         if (Auth::user()->email == $user[0]->email) {
             return view('profile', ['user'=>$user[0]]);
